@@ -1,0 +1,5 @@
+Looping through your statuses:<br />
+
+<% @graph_data.each do |status| %>
+<%= status["message"] %> (<i><%=status["updated_time"]%></i>)<hr>
+<% end %>
