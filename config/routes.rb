@@ -1,4 +1,8 @@
 BancoChile::Application.routes.draw do
+  resources :cards
+
+  resources :user_cards
+
   get "auth/facebook"
 
   get "static_pages/home"
