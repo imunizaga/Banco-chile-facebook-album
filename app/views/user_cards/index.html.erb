@@ -1,0 +1,24 @@
+<h1>Listing user_cards</h1>
+
+<table>
+  <tr>
+    <th>Id</th>
+    <th>User id</th>
+    <th>Card id</th>
+  </tr>
+
+<% @user_cards.each do |user_card| %>
+  <tr>
+    <td><%= user_card.id%></td> 
+    <td><%= user_card.user_id%></td> 
+    <td><%= user_card.card_id%></td> 
+    <td><%= link_to 'Show', user_card %></td>
+    <td><%= link_to 'Edit', edit_user_card_path(user_card) %></td>
+    <td><%= link_to 'Destroy', user_card, confirm: 'Are you sure?', method: :delete %></td>
+  </tr>
+<% end %>
+</table>
+
+<br />
+
+<%= link_to 'New User card', new_user_card_path %>

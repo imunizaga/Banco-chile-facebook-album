@@ -1,0 +1,23 @@
+<h1>Listing card_packs</h1>
+
+<table>
+  <tr>
+    <th>Challenge</th>
+    <th></th>
+    <th></th>
+    <th></th>
+  </tr>
+
+<% @card_packs.each do |card_pack| %>
+  <tr>
+    <td><%= card_pack.challenge_id %></td>
+    <td><%= link_to 'Show', card_pack %></td>
+    <td><%= link_to 'Edit', edit_card_pack_path(card_pack) %></td>
+    <td><%= link_to 'Destroy', card_pack, confirm: 'Are you sure?', method: :delete %></td>
+  </tr>
+<% end %>
+</table>
+
+<br />
+
+<%= link_to 'New Card pack', new_card_pack_path %>

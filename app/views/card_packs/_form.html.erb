@@ -1,0 +1,21 @@
+<%= form_for(@card_pack) do |f| %>
+  <% if @card_pack.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@card_pack.errors.count, "error") %> prohibited this card_pack from being saved:</h2>
+
+      <ul>
+      <% @card_pack.errors.full_messages.each do |msg| %>
+        <li><%= msg %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= f.label :challenge_id %><br />
+    <%= f.number_field :challenge_id %>
+  </div>
+  <div class="actions">
+    <%= f.submit %>
+  </div>
+<% end %>

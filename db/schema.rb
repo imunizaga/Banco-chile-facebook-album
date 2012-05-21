@@ -11,15 +11,51 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120519031959) do
+ActiveRecord::Schema.define(:version => 20120521000415) do
+
+  create_table "card_packs", :force => true do |t|
+    t.integer  "challenge_id"
+    t.datetime "created_at",   :null => false
+    t.datetime "updated_at",   :null => false
+  end
+
+  create_table "cards", :force => true do |t|
+    t.string   "name"
+    t.string   "source"
+    t.integer  "set"
+    t.text     "info"
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
+    t.text     "log"
+  end
+
+  create_table "challenges", :force => true do |t|
+    t.string   "name"
+    t.integer  "n_cards"
+    t.integer  "type"
+    t.text     "description"
+    t.datetime "created_at",  :null => false
+    t.datetime "updated_at",  :null => false
+  end
+
+  create_table "user_cards", :force => true do |t|
+    t.datetime "created_at",   :null => false
+    t.datetime "updated_at",   :null => false
+    t.integer  "user_id"
+    t.integer  "card_id"
+    t.integer  "card_pack_id"
+  end
 
   create_table "users", :force => true do |t|
     t.string   "name"
     t.string   "email"
-    t.integer  "id_facebook"
-    t.integer  "id_twitter"
-    t.datetime "created_at",  :null => false
-    t.datetime "updated_at",  :null => false
+    t.integer  "facebook_id"
+    t.integer  "twitter_id"
+    t.datetime "created_at",    :null => false
+    t.datetime "updated_at",    :null => false
+    t.text     "friends"
+    t.integer  "foursquare_id"
+    t.text     "referals"
   end
 
 end

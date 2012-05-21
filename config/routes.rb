@@ -1,4 +1,8 @@
 BancoChile::Application.routes.draw do
+  resources :challenges
+
+  resources :card_packs
+
   resources :cards
 
   resources :user_cards
@@ -11,9 +15,10 @@ BancoChile::Application.routes.draw do
 
   resources :users
 
-  root :to => 'auth#facebook'
+  root :to => 'static_pages#home'
 
   match 'auth/facebook/callback' => 'auth#facebook_callback'
+  match 'logout' => 'auth#logout'
   #root :to => 'ApplicationController/#index'
 
   # The priority is based upon order of creation:

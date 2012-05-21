@@ -10,15 +10,20 @@ class AuthController < ApplicationController
       end
     respond_to do |format|
       format.html {  }
-    end    
+    end
+    redirect_to @auth_url
+  end
+
+  def logout
+    session[:access_token] = nil
+    redirect_to '/'
   end
 
   def facebook_callback
     if params[:code]
-       # acknowledge code and get access token from FB
+       # acknowledge code and get access token from FB :
        session[:access_token] = authenticator.get_access_token(params[:code])
-    end		
-
+   end		
    respond_to do |format|
      format.html {   }			 
      end
