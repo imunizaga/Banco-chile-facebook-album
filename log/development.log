@@ -17138,3 +17138,554 @@ Migrating to RemoveFbappLikeFromUser (20120521000415)
   [1m[35m (0.0ms)[0m  PRAGMA index_list("challenges")
   [1m[36m (0.0ms)[0m  [1mPRAGMA index_list("user_cards")[0m
   [1m[35m (0.0ms)[0m  PRAGMA index_list("users")
+
+
+Started GET "/" for 127.0.0.1 at 2012-05-20 20:23:24 -0400
+Processing by StaticPagesController#home as HTML
+Redirected to http://localhost:3000/auth/facebook/
+Completed 302 Found in 1553ms (ActiveRecord: 0.0ms)
+
+
+Started GET "/auth/facebook/" for 127.0.0.1 at 2012-05-20 20:23:26 -0400
+Processing by AuthController#facebook as HTML
+Redirected to https://graph.facebook.com/oauth/authorize?client_id=438204562857972&redirect_uri=http%3A%2F%2F127.0.0.1%3A3000%2Fauth%2Ffacebook%2Fcallback&scope=user_likes%2Cuser_photos%2Cuser_photo_video_tags
+Completed 302 Found in 1ms (ActiveRecord: 0.0ms)
+
+
+Started GET "/auth/facebook/callback?code=AQAaSteUtVXRE14hik76LWy73bY8SbgwLe5lUfML9-y0sqKyKls8T4j0aAfQ11csTQyLRS_BQiXik6fh0xUlq4URsvol1SULE8axyR0CNMsNgQTZ2NxFGXAUYYcEm7hA2lQRnbrKnVbCHVPdAVYhUA8WmpBkHktJou_VSQbnJsTCo3wlPm3VZEhGxnPK2l8MhE8" for 127.0.0.1 at 2012-05-20 20:23:35 -0400
+Processing by AuthController#facebook_callback as HTML
+  Parameters: {"code"=>"AQAaSteUtVXRE14hik76LWy73bY8SbgwLe5lUfML9-y0sqKyKls8T4j0aAfQ11csTQyLRS_BQiXik6fh0xUlq4URsvol1SULE8axyR0CNMsNgQTZ2NxFGXAUYYcEm7hA2lQRnbrKnVbCHVPdAVYhUA8WmpBkHktJou_VSQbnJsTCo3wlPm3VZEhGxnPK2l8MhE8"}
+Redirected to http://127.0.0.1:3000/static_pages/home
+Completed 302 Found in 2975ms (ActiveRecord: 0.0ms)
+
+
+Started GET "/static_pages/home" for 127.0.0.1 at 2012-05-20 20:23:38 -0400
+Processing by StaticPagesController#home as HTML
+  Rendered static_pages/home.html.erb within layouts/application (15.1ms)
+Compiled card_packs.css  (14ms)  (pid 18070)
+Compiled challenges.css  (1ms)  (pid 18070)
+Compiled application.css  (30ms)  (pid 18070)
+Compiled card_packs.js  (145ms)  (pid 18070)
+Compiled challenges.js  (137ms)  (pid 18070)
+Compiled application.js  (318ms)  (pid 18070)
+Completed 200 OK in 2717ms (Views: 491.3ms | ActiveRecord: 0.0ms)
+
+
+Started GET "/assets/application.css?body=1" for 127.0.0.1 at 2012-05-20 20:23:40 -0400
+Served asset /application.css - 304 Not Modified (86ms)
+
+
+Started GET "/assets/auth.css?body=1" for 127.0.0.1 at 2012-05-20 20:23:41 -0400
+Served asset /auth.css - 304 Not Modified (5ms)
+
+
+Started GET "/assets/card_packs.css?body=1" for 127.0.0.1 at 2012-05-20 20:23:41 -0400
+Served asset /card_packs.css - 200 OK (5ms)
+
+
+Started GET "/assets/cards.css?body=1" for 127.0.0.1 at 2012-05-20 20:23:41 -0400
+Served asset /cards.css - 304 Not Modified (4ms)
+
+
+Started GET "/assets/challenges.css?body=1" for 127.0.0.1 at 2012-05-20 20:23:41 -0400
+Served asset /challenges.css - 200 OK (4ms)
+
+
+Started GET "/assets/scaffolds.css?body=1" for 127.0.0.1 at 2012-05-20 20:23:41 -0400
+Served asset /scaffolds.css - 304 Not Modified (6ms)
+
+
+Started GET "/assets/static_pages.css?body=1" for 127.0.0.1 at 2012-05-20 20:23:41 -0400
+Served asset /static_pages.css - 304 Not Modified (4ms)
+
+
+Started GET "/assets/user_cards.css?body=1" for 127.0.0.1 at 2012-05-20 20:23:41 -0400
+Served asset /user_cards.css - 304 Not Modified (11ms)
+
+
+Started GET "/assets/card_packs.js?body=1" for 127.0.0.1 at 2012-05-20 20:23:41 -0400
+Served asset /card_packs.js - 200 OK (5ms)
+
+
+Started GET "/assets/challenges.js?body=1" for 127.0.0.1 at 2012-05-20 20:23:41 -0400
+Served asset /challenges.js - 200 OK (6ms)
+
+
+Started GET "/assets/users.css?body=1" for 127.0.0.1 at 2012-05-20 20:23:41 -0400
+Served asset /users.css - 304 Not Modified (4ms)
+
+
+Started GET "/assets/jquery.js?body=1" for 127.0.0.1 at 2012-05-20 20:23:41 -0400
+Served asset /jquery.js - 304 Not Modified (15ms)
+
+
+Started GET "/assets/jquery_ujs.js?body=1" for 127.0.0.1 at 2012-05-20 20:23:41 -0400
+Served asset /jquery_ujs.js - 304 Not Modified (7ms)
+
+
+Started GET "/assets/auth.js?body=1" for 127.0.0.1 at 2012-05-20 20:23:41 -0400
+Served asset /auth.js - 304 Not Modified (2ms)
+
+
+Started GET "/assets/cards.js?body=1" for 127.0.0.1 at 2012-05-20 20:23:41 -0400
+Served asset /cards.js - 304 Not Modified (2ms)
+
+
+Started GET "/assets/static_pages.js?body=1" for 127.0.0.1 at 2012-05-20 20:23:41 -0400
+Served asset /static_pages.js - 304 Not Modified (2ms)
+
+
+Started GET "/assets/users.js?body=1" for 127.0.0.1 at 2012-05-20 20:23:41 -0400
+Served asset /users.js - 304 Not Modified (3ms)
+
+
+Started GET "/assets/user_cards.js?body=1" for 127.0.0.1 at 2012-05-20 20:23:41 -0400
+Served asset /user_cards.js - 304 Not Modified (3ms)
+
+
+Started GET "/assets/application.js?body=1" for 127.0.0.1 at 2012-05-20 20:23:41 -0400
+Served asset /application.js - 304 Not Modified (14ms)
+
+
+Started GET "/favicon.ico" for 127.0.0.1 at 2012-05-20 20:23:41 -0400
+
+ActionController::RoutingError (No route matches [GET] "/favicon.ico"):
+  actionpack (3.2.3) lib/action_dispatch/middleware/debug_exceptions.rb:21:in `call'
+  actionpack (3.2.3) lib/action_dispatch/middleware/show_exceptions.rb:56:in `call'
+  railties (3.2.3) lib/rails/rack/logger.rb:26:in `call_app'
+  railties (3.2.3) lib/rails/rack/logger.rb:16:in `call'
+  actionpack (3.2.3) lib/action_dispatch/middleware/request_id.rb:22:in `call'
+  rack (1.4.1) lib/rack/methodoverride.rb:21:in `call'
+  rack (1.4.1) lib/rack/runtime.rb:17:in `call'
+  activesupport (3.2.3) lib/active_support/cache/strategy/local_cache.rb:72:in `call'
+  rack (1.4.1) lib/rack/lock.rb:15:in `call'
+  actionpack (3.2.3) lib/action_dispatch/middleware/static.rb:62:in `call'
+  railties (3.2.3) lib/rails/engine.rb:479:in `call'
+  railties (3.2.3) lib/rails/application.rb:220:in `call'
+  rack (1.4.1) lib/rack/content_length.rb:14:in `call'
+  railties (3.2.3) lib/rails/rack/log_tailer.rb:14:in `call'
+  rack (1.4.1) lib/rack/handler/webrick.rb:59:in `service'
+  /usr/lib/ruby/1.9.1/webrick/httpserver.rb:111:in `service'
+  /usr/lib/ruby/1.9.1/webrick/httpserver.rb:70:in `run'
+  /usr/lib/ruby/1.9.1/webrick/server.rb:183:in `block in start_thread'
+
+
+  Rendered /var/lib/gems/1.9.1/gems/actionpack-3.2.3/lib/action_dispatch/middleware/templates/rescues/routing_error.erb within rescues/layout (0.6ms)
+
+
+Started GET "/card_pack" for 127.0.0.1 at 2012-05-20 20:30:07 -0400
+
+ActionController::RoutingError (No route matches [GET] "/card_pack"):
+  actionpack (3.2.3) lib/action_dispatch/middleware/debug_exceptions.rb:21:in `call'
+  actionpack (3.2.3) lib/action_dispatch/middleware/show_exceptions.rb:56:in `call'
+  railties (3.2.3) lib/rails/rack/logger.rb:26:in `call_app'
+  railties (3.2.3) lib/rails/rack/logger.rb:16:in `call'
+  actionpack (3.2.3) lib/action_dispatch/middleware/request_id.rb:22:in `call'
+  rack (1.4.1) lib/rack/methodoverride.rb:21:in `call'
+  rack (1.4.1) lib/rack/runtime.rb:17:in `call'
+  activesupport (3.2.3) lib/active_support/cache/strategy/local_cache.rb:72:in `call'
+  rack (1.4.1) lib/rack/lock.rb:15:in `call'
+  actionpack (3.2.3) lib/action_dispatch/middleware/static.rb:62:in `call'
+  railties (3.2.3) lib/rails/engine.rb:479:in `call'
+  railties (3.2.3) lib/rails/application.rb:220:in `call'
+  rack (1.4.1) lib/rack/content_length.rb:14:in `call'
+  railties (3.2.3) lib/rails/rack/log_tailer.rb:14:in `call'
+  rack (1.4.1) lib/rack/handler/webrick.rb:59:in `service'
+  /usr/lib/ruby/1.9.1/webrick/httpserver.rb:111:in `service'
+  /usr/lib/ruby/1.9.1/webrick/httpserver.rb:70:in `run'
+  /usr/lib/ruby/1.9.1/webrick/server.rb:183:in `block in start_thread'
+
+
+  Rendered /var/lib/gems/1.9.1/gems/actionpack-3.2.3/lib/action_dispatch/middleware/templates/rescues/routing_error.erb within rescues/layout (12.1ms)
+
+
+Started GET "/favicon.ico" for 127.0.0.1 at 2012-05-20 20:30:08 -0400
+
+ActionController::RoutingError (No route matches [GET] "/favicon.ico"):
+  actionpack (3.2.3) lib/action_dispatch/middleware/debug_exceptions.rb:21:in `call'
+  actionpack (3.2.3) lib/action_dispatch/middleware/show_exceptions.rb:56:in `call'
+  railties (3.2.3) lib/rails/rack/logger.rb:26:in `call_app'
+  railties (3.2.3) lib/rails/rack/logger.rb:16:in `call'
+  actionpack (3.2.3) lib/action_dispatch/middleware/request_id.rb:22:in `call'
+  rack (1.4.1) lib/rack/methodoverride.rb:21:in `call'
+  rack (1.4.1) lib/rack/runtime.rb:17:in `call'
+  activesupport (3.2.3) lib/active_support/cache/strategy/local_cache.rb:72:in `call'
+  rack (1.4.1) lib/rack/lock.rb:15:in `call'
+  actionpack (3.2.3) lib/action_dispatch/middleware/static.rb:62:in `call'
+  railties (3.2.3) lib/rails/engine.rb:479:in `call'
+  railties (3.2.3) lib/rails/application.rb:220:in `call'
+  rack (1.4.1) lib/rack/content_length.rb:14:in `call'
+  railties (3.2.3) lib/rails/rack/log_tailer.rb:14:in `call'
+  rack (1.4.1) lib/rack/handler/webrick.rb:59:in `service'
+  /usr/lib/ruby/1.9.1/webrick/httpserver.rb:111:in `service'
+  /usr/lib/ruby/1.9.1/webrick/httpserver.rb:70:in `run'
+  /usr/lib/ruby/1.9.1/webrick/server.rb:183:in `block in start_thread'
+
+
+  Rendered /var/lib/gems/1.9.1/gems/actionpack-3.2.3/lib/action_dispatch/middleware/templates/rescues/routing_error.erb within rescues/layout (0.6ms)
+
+
+Started GET "/card_packs" for 127.0.0.1 at 2012-05-20 20:30:13 -0400
+
+SyntaxError (/home/nolim/sandbox/facebook/bancochilealbum/app/models/card_pack.rb:4: syntax error, unexpected ':', expecting keyword_end
+  belongs_to : users
+              ^):
+  app/controllers/card_packs_controller.rb:1:in `<top (required)>'
+
+
+  Rendered /var/lib/gems/1.9.1/gems/actionpack-3.2.3/lib/action_dispatch/middleware/templates/rescues/_trace.erb (3.4ms)
+  Rendered /var/lib/gems/1.9.1/gems/actionpack-3.2.3/lib/action_dispatch/middleware/templates/rescues/_request_and_response.erb (43.3ms)
+  Rendered /var/lib/gems/1.9.1/gems/actionpack-3.2.3/lib/action_dispatch/middleware/templates/rescues/diagnostics.erb within rescues/layout (53.4ms)
+
+
+Started GET "/favicon.ico" for 127.0.0.1 at 2012-05-20 20:30:13 -0400
+
+ActionController::RoutingError (No route matches [GET] "/favicon.ico"):
+  actionpack (3.2.3) lib/action_dispatch/middleware/debug_exceptions.rb:21:in `call'
+  actionpack (3.2.3) lib/action_dispatch/middleware/show_exceptions.rb:56:in `call'
+  railties (3.2.3) lib/rails/rack/logger.rb:26:in `call_app'
+  railties (3.2.3) lib/rails/rack/logger.rb:16:in `call'
+  actionpack (3.2.3) lib/action_dispatch/middleware/request_id.rb:22:in `call'
+  rack (1.4.1) lib/rack/methodoverride.rb:21:in `call'
+  rack (1.4.1) lib/rack/runtime.rb:17:in `call'
+  activesupport (3.2.3) lib/active_support/cache/strategy/local_cache.rb:72:in `call'
+  rack (1.4.1) lib/rack/lock.rb:15:in `call'
+  actionpack (3.2.3) lib/action_dispatch/middleware/static.rb:62:in `call'
+  railties (3.2.3) lib/rails/engine.rb:479:in `call'
+  railties (3.2.3) lib/rails/application.rb:220:in `call'
+  rack (1.4.1) lib/rack/content_length.rb:14:in `call'
+  railties (3.2.3) lib/rails/rack/log_tailer.rb:14:in `call'
+  rack (1.4.1) lib/rack/handler/webrick.rb:59:in `service'
+  /usr/lib/ruby/1.9.1/webrick/httpserver.rb:111:in `service'
+  /usr/lib/ruby/1.9.1/webrick/httpserver.rb:70:in `run'
+  /usr/lib/ruby/1.9.1/webrick/server.rb:183:in `block in start_thread'
+
+
+  Rendered /var/lib/gems/1.9.1/gems/actionpack-3.2.3/lib/action_dispatch/middleware/templates/rescues/routing_error.erb within rescues/layout (0.7ms)
+
+
+Started GET "/card_packs" for 127.0.0.1 at 2012-05-20 20:32:13 -0400
+Processing by CardPacksController#index as HTML
+  [1m[36mCardPack Load (0.1ms)[0m  [1mSELECT "card_packs".* FROM "card_packs" [0m
+  Rendered card_packs/index.html.erb within layouts/application (1.1ms)
+Completed 200 OK in 138ms (Views: 77.0ms | ActiveRecord: 8.3ms)
+
+
+Started GET "/assets/application.css?body=1" for 127.0.0.1 at 2012-05-20 20:32:13 -0400
+Served asset /application.css - 304 Not Modified (26ms)
+
+
+Started GET "/assets/auth.css?body=1" for 127.0.0.1 at 2012-05-20 20:32:13 -0400
+Served asset /auth.css - 304 Not Modified (3ms)
+
+
+Started GET "/assets/card_packs.css?body=1" for 127.0.0.1 at 2012-05-20 20:32:13 -0400
+Served asset /card_packs.css - 304 Not Modified (2ms)
+
+
+Started GET "/assets/scaffolds.css?body=1" for 127.0.0.1 at 2012-05-20 20:32:13 -0400
+Served asset /scaffolds.css - 304 Not Modified (2ms)
+
+
+Started GET "/assets/challenges.css?body=1" for 127.0.0.1 at 2012-05-20 20:32:13 -0400
+Served asset /challenges.css - 304 Not Modified (6ms)
+
+
+Started GET "/assets/cards.css?body=1" for 127.0.0.1 at 2012-05-20 20:32:13 -0400
+Served asset /cards.css - 304 Not Modified (3ms)
+
+
+Started GET "/assets/static_pages.css?body=1" for 127.0.0.1 at 2012-05-20 20:32:13 -0400
+Served asset /static_pages.css - 304 Not Modified (4ms)
+
+
+Started GET "/assets/user_cards.css?body=1" for 127.0.0.1 at 2012-05-20 20:32:13 -0400
+Served asset /user_cards.css - 304 Not Modified (6ms)
+
+
+Started GET "/assets/users.css?body=1" for 127.0.0.1 at 2012-05-20 20:32:13 -0400
+Served asset /users.css - 304 Not Modified (8ms)
+
+
+Started GET "/assets/jquery.js?body=1" for 127.0.0.1 at 2012-05-20 20:32:13 -0400
+Served asset /jquery.js - 304 Not Modified (7ms)
+
+
+Started GET "/assets/jquery_ujs.js?body=1" for 127.0.0.1 at 2012-05-20 20:32:13 -0400
+Served asset /jquery_ujs.js - 304 Not Modified (4ms)
+
+
+Started GET "/assets/auth.js?body=1" for 127.0.0.1 at 2012-05-20 20:32:13 -0400
+Served asset /auth.js - 304 Not Modified (5ms)
+
+
+Started GET "/assets/card_packs.js?body=1" for 127.0.0.1 at 2012-05-20 20:32:13 -0400
+Served asset /card_packs.js - 304 Not Modified (2ms)
+
+
+Started GET "/assets/cards.js?body=1" for 127.0.0.1 at 2012-05-20 20:32:13 -0400
+Served asset /cards.js - 304 Not Modified (2ms)
+
+
+Started GET "/assets/challenges.js?body=1" for 127.0.0.1 at 2012-05-20 20:32:13 -0400
+Served asset /challenges.js - 304 Not Modified (1ms)
+
+
+Started GET "/assets/static_pages.js?body=1" for 127.0.0.1 at 2012-05-20 20:32:13 -0400
+Served asset /static_pages.js - 304 Not Modified (2ms)
+
+
+Started GET "/assets/user_cards.js?body=1" for 127.0.0.1 at 2012-05-20 20:32:13 -0400
+Served asset /user_cards.js - 304 Not Modified (3ms)
+
+
+Started GET "/assets/users.js?body=1" for 127.0.0.1 at 2012-05-20 20:32:13 -0400
+Served asset /users.js - 304 Not Modified (2ms)
+
+
+Started GET "/assets/application.js?body=1" for 127.0.0.1 at 2012-05-20 20:32:13 -0400
+Served asset /application.js - 304 Not Modified (22ms)
+
+
+Started GET "/favicon.ico" for 127.0.0.1 at 2012-05-20 20:32:13 -0400
+
+ActionController::RoutingError (No route matches [GET] "/favicon.ico"):
+  actionpack (3.2.3) lib/action_dispatch/middleware/debug_exceptions.rb:21:in `call'
+  actionpack (3.2.3) lib/action_dispatch/middleware/show_exceptions.rb:56:in `call'
+  railties (3.2.3) lib/rails/rack/logger.rb:26:in `call_app'
+  railties (3.2.3) lib/rails/rack/logger.rb:16:in `call'
+  actionpack (3.2.3) lib/action_dispatch/middleware/request_id.rb:22:in `call'
+  rack (1.4.1) lib/rack/methodoverride.rb:21:in `call'
+  rack (1.4.1) lib/rack/runtime.rb:17:in `call'
+  activesupport (3.2.3) lib/active_support/cache/strategy/local_cache.rb:72:in `call'
+  rack (1.4.1) lib/rack/lock.rb:15:in `call'
+  actionpack (3.2.3) lib/action_dispatch/middleware/static.rb:62:in `call'
+  railties (3.2.3) lib/rails/engine.rb:479:in `call'
+  railties (3.2.3) lib/rails/application.rb:220:in `call'
+  rack (1.4.1) lib/rack/content_length.rb:14:in `call'
+  railties (3.2.3) lib/rails/rack/log_tailer.rb:14:in `call'
+  rack (1.4.1) lib/rack/handler/webrick.rb:59:in `service'
+  /usr/lib/ruby/1.9.1/webrick/httpserver.rb:111:in `service'
+  /usr/lib/ruby/1.9.1/webrick/httpserver.rb:70:in `run'
+  /usr/lib/ruby/1.9.1/webrick/server.rb:183:in `block in start_thread'
+
+
+  Rendered /var/lib/gems/1.9.1/gems/actionpack-3.2.3/lib/action_dispatch/middleware/templates/rescues/routing_error.erb within rescues/layout (0.9ms)
+
+
+Started GET "/card_packs/new" for 127.0.0.1 at 2012-05-20 20:32:17 -0400
+Processing by CardPacksController#new as HTML
+  Rendered card_packs/_form.html.erb (8.7ms)
+  Rendered card_packs/new.html.erb within layouts/application (30.4ms)
+Completed 200 OK in 54ms (Views: 47.9ms | ActiveRecord: 0.0ms)
+
+
+Started GET "/assets/application.css?body=1" for 127.0.0.1 at 2012-05-20 20:32:17 -0400
+Served asset /application.css - 304 Not Modified (12ms)
+
+
+Started GET "/assets/card_packs.css?body=1" for 127.0.0.1 at 2012-05-20 20:32:17 -0400
+Served asset /card_packs.css - 304 Not Modified (0ms)
+
+
+Started GET "/assets/auth.css?body=1" for 127.0.0.1 at 2012-05-20 20:32:17 -0400
+Served asset /auth.css - 304 Not Modified (0ms)
+
+
+Started GET "/assets/scaffolds.css?body=1" for 127.0.0.1 at 2012-05-20 20:32:17 -0400
+Served asset /scaffolds.css - 304 Not Modified (0ms)
+
+
+Started GET "/assets/challenges.css?body=1" for 127.0.0.1 at 2012-05-20 20:32:17 -0400
+Served asset /challenges.css - 304 Not Modified (0ms)
+
+
+Started GET "/assets/cards.css?body=1" for 127.0.0.1 at 2012-05-20 20:32:17 -0400
+Served asset /cards.css - 304 Not Modified (0ms)
+
+
+Started GET "/assets/static_pages.css?body=1" for 127.0.0.1 at 2012-05-20 20:32:17 -0400
+Served asset /static_pages.css - 304 Not Modified (0ms)
+
+
+Started GET "/assets/user_cards.css?body=1" for 127.0.0.1 at 2012-05-20 20:32:17 -0400
+Served asset /user_cards.css - 304 Not Modified (0ms)
+
+
+Started GET "/assets/users.css?body=1" for 127.0.0.1 at 2012-05-20 20:32:17 -0400
+Served asset /users.css - 304 Not Modified (0ms)
+
+
+Started GET "/assets/jquery.js?body=1" for 127.0.0.1 at 2012-05-20 20:32:17 -0400
+Served asset /jquery.js - 304 Not Modified (0ms)
+
+
+Started GET "/assets/jquery_ujs.js?body=1" for 127.0.0.1 at 2012-05-20 20:32:17 -0400
+Served asset /jquery_ujs.js - 304 Not Modified (5ms)
+
+
+Started GET "/assets/auth.js?body=1" for 127.0.0.1 at 2012-05-20 20:32:17 -0400
+Served asset /auth.js - 304 Not Modified (0ms)
+
+
+Started GET "/assets/card_packs.js?body=1" for 127.0.0.1 at 2012-05-20 20:32:17 -0400
+Served asset /card_packs.js - 304 Not Modified (0ms)
+
+
+Started GET "/assets/cards.js?body=1" for 127.0.0.1 at 2012-05-20 20:32:17 -0400
+Served asset /cards.js - 304 Not Modified (0ms)
+
+
+Started GET "/assets/static_pages.js?body=1" for 127.0.0.1 at 2012-05-20 20:32:17 -0400
+Served asset /static_pages.js - 304 Not Modified (0ms)
+
+
+Started GET "/assets/challenges.js?body=1" for 127.0.0.1 at 2012-05-20 20:32:17 -0400
+Served asset /challenges.js - 304 Not Modified (0ms)
+
+
+Started GET "/assets/user_cards.js?body=1" for 127.0.0.1 at 2012-05-20 20:32:17 -0400
+Served asset /user_cards.js - 304 Not Modified (0ms)
+
+
+Started GET "/assets/users.js?body=1" for 127.0.0.1 at 2012-05-20 20:32:17 -0400
+Served asset /users.js - 304 Not Modified (0ms)
+
+
+Started GET "/assets/application.js?body=1" for 127.0.0.1 at 2012-05-20 20:32:17 -0400
+Served asset /application.js - 304 Not Modified (5ms)
+
+
+Started GET "/favicon.ico" for 127.0.0.1 at 2012-05-20 20:32:17 -0400
+
+ActionController::RoutingError (No route matches [GET] "/favicon.ico"):
+  actionpack (3.2.3) lib/action_dispatch/middleware/debug_exceptions.rb:21:in `call'
+  actionpack (3.2.3) lib/action_dispatch/middleware/show_exceptions.rb:56:in `call'
+  railties (3.2.3) lib/rails/rack/logger.rb:26:in `call_app'
+  railties (3.2.3) lib/rails/rack/logger.rb:16:in `call'
+  actionpack (3.2.3) lib/action_dispatch/middleware/request_id.rb:22:in `call'
+  rack (1.4.1) lib/rack/methodoverride.rb:21:in `call'
+  rack (1.4.1) lib/rack/runtime.rb:17:in `call'
+  activesupport (3.2.3) lib/active_support/cache/strategy/local_cache.rb:72:in `call'
+  rack (1.4.1) lib/rack/lock.rb:15:in `call'
+  actionpack (3.2.3) lib/action_dispatch/middleware/static.rb:62:in `call'
+  railties (3.2.3) lib/rails/engine.rb:479:in `call'
+  railties (3.2.3) lib/rails/application.rb:220:in `call'
+  rack (1.4.1) lib/rack/content_length.rb:14:in `call'
+  railties (3.2.3) lib/rails/rack/log_tailer.rb:14:in `call'
+  rack (1.4.1) lib/rack/handler/webrick.rb:59:in `service'
+  /usr/lib/ruby/1.9.1/webrick/httpserver.rb:111:in `service'
+  /usr/lib/ruby/1.9.1/webrick/httpserver.rb:70:in `run'
+  /usr/lib/ruby/1.9.1/webrick/server.rb:183:in `block in start_thread'
+
+
+  Rendered /var/lib/gems/1.9.1/gems/actionpack-3.2.3/lib/action_dispatch/middleware/templates/rescues/routing_error.erb within rescues/layout (1.0ms)
+
+
+Started GET "/card_packs" for 127.0.0.1 at 2012-05-20 20:32:18 -0400
+Processing by CardPacksController#index as HTML
+  [1m[35mCardPack Load (0.3ms)[0m  SELECT "card_packs".* FROM "card_packs" 
+  Rendered card_packs/index.html.erb within layouts/application (0.7ms)
+Completed 200 OK in 17ms (Views: 15.5ms | ActiveRecord: 0.3ms)
+
+
+Started GET "/assets/application.css?body=1" for 127.0.0.1 at 2012-05-20 20:32:19 -0400
+Served asset /application.css - 304 Not Modified (60ms)
+
+
+Started GET "/assets/cards.css?body=1" for 127.0.0.1 at 2012-05-20 20:32:19 -0400
+Served asset /cards.css - 304 Not Modified (0ms)
+
+
+Started GET "/assets/scaffolds.css?body=1" for 127.0.0.1 at 2012-05-20 20:32:19 -0400
+Served asset /scaffolds.css - 304 Not Modified (0ms)
+
+
+Started GET "/assets/card_packs.css?body=1" for 127.0.0.1 at 2012-05-20 20:32:19 -0400
+Served asset /card_packs.css - 304 Not Modified (0ms)
+
+
+Started GET "/assets/challenges.css?body=1" for 127.0.0.1 at 2012-05-20 20:32:19 -0400
+Served asset /challenges.css - 304 Not Modified (0ms)
+
+
+Started GET "/assets/auth.css?body=1" for 127.0.0.1 at 2012-05-20 20:32:19 -0400
+Served asset /auth.css - 304 Not Modified (0ms)
+
+
+Started GET "/assets/static_pages.css?body=1" for 127.0.0.1 at 2012-05-20 20:32:19 -0400
+Served asset /static_pages.css - 304 Not Modified (0ms)
+
+
+Started GET "/assets/user_cards.css?body=1" for 127.0.0.1 at 2012-05-20 20:32:19 -0400
+Served asset /user_cards.css - 304 Not Modified (0ms)
+
+
+Started GET "/assets/users.css?body=1" for 127.0.0.1 at 2012-05-20 20:32:19 -0400
+Served asset /users.css - 304 Not Modified (2ms)
+
+
+Started GET "/assets/jquery.js?body=1" for 127.0.0.1 at 2012-05-20 20:32:19 -0400
+Served asset /jquery.js - 304 Not Modified (1ms)
+
+
+Started GET "/assets/jquery_ujs.js?body=1" for 127.0.0.1 at 2012-05-20 20:32:19 -0400
+Served asset /jquery_ujs.js - 304 Not Modified (0ms)
+
+
+Started GET "/assets/auth.js?body=1" for 127.0.0.1 at 2012-05-20 20:32:19 -0400
+Served asset /auth.js - 304 Not Modified (0ms)
+
+
+Started GET "/assets/card_packs.js?body=1" for 127.0.0.1 at 2012-05-20 20:32:19 -0400
+Served asset /card_packs.js - 304 Not Modified (0ms)
+
+
+Started GET "/assets/cards.js?body=1" for 127.0.0.1 at 2012-05-20 20:32:19 -0400
+Served asset /cards.js - 304 Not Modified (0ms)
+
+
+Started GET "/assets/static_pages.js?body=1" for 127.0.0.1 at 2012-05-20 20:32:19 -0400
+Served asset /static_pages.js - 304 Not Modified (0ms)
+
+
+Started GET "/assets/challenges.js?body=1" for 127.0.0.1 at 2012-05-20 20:32:19 -0400
+Served asset /challenges.js - 304 Not Modified (0ms)
+
+
+Started GET "/assets/user_cards.js?body=1" for 127.0.0.1 at 2012-05-20 20:32:19 -0400
+Served asset /user_cards.js - 304 Not Modified (0ms)
+
+
+Started GET "/assets/users.js?body=1" for 127.0.0.1 at 2012-05-20 20:32:19 -0400
+Served asset /users.js - 304 Not Modified (0ms)
+
+
+Started GET "/assets/application.js?body=1" for 127.0.0.1 at 2012-05-20 20:32:19 -0400
+Served asset /application.js - 304 Not Modified (3ms)
+
+
+Started GET "/favicon.ico" for 127.0.0.1 at 2012-05-20 20:32:19 -0400
+
+ActionController::RoutingError (No route matches [GET] "/favicon.ico"):
+  actionpack (3.2.3) lib/action_dispatch/middleware/debug_exceptions.rb:21:in `call'
+  actionpack (3.2.3) lib/action_dispatch/middleware/show_exceptions.rb:56:in `call'
+  railties (3.2.3) lib/rails/rack/logger.rb:26:in `call_app'
+  railties (3.2.3) lib/rails/rack/logger.rb:16:in `call'
+  actionpack (3.2.3) lib/action_dispatch/middleware/request_id.rb:22:in `call'
+  rack (1.4.1) lib/rack/methodoverride.rb:21:in `call'
+  rack (1.4.1) lib/rack/runtime.rb:17:in `call'
+  activesupport (3.2.3) lib/active_support/cache/strategy/local_cache.rb:72:in `call'
+  rack (1.4.1) lib/rack/lock.rb:15:in `call'
+  actionpack (3.2.3) lib/action_dispatch/middleware/static.rb:62:in `call'
+  railties (3.2.3) lib/rails/engine.rb:479:in `call'
+  railties (3.2.3) lib/rails/application.rb:220:in `call'
+  rack (1.4.1) lib/rack/content_length.rb:14:in `call'
+  railties (3.2.3) lib/rails/rack/log_tailer.rb:14:in `call'
+  rack (1.4.1) lib/rack/handler/webrick.rb:59:in `service'
+  /usr/lib/ruby/1.9.1/webrick/httpserver.rb:111:in `service'
+  /usr/lib/ruby/1.9.1/webrick/httpserver.rb:70:in `run'
+  /usr/lib/ruby/1.9.1/webrick/server.rb:183:in `block in start_thread'
+
+
+  Rendered /var/lib/gems/1.9.1/gems/actionpack-3.2.3/lib/action_dispatch/middleware/templates/rescues/routing_error.erb within rescues/layout (0.7ms)
