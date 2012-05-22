@@ -5,7 +5,7 @@ class StaticPagesController < ApplicationController
       redirect_to '/auth/facebook/'
     end
     begin
-      @graph_data = @api.get_object("/me/statuses", "fields"=>"message")
+      @user = @api.get_object("me")
       rescue Exception=>ex
       puts ex.message
     end

@@ -1,10 +1,9 @@
-FACEBOOK_SCOPE = 'user_likes,user_photos,user_photo_video_tags'
-
+FACEBOOK_SCOPE = 'client_credentials'
 class AuthController < ApplicationController
   protect_from_forgery
   def facebook
     session[:access_token] = nil
-    @auth_url =  authenticator.url_for_oauth_code(:permissions=>FACEBOOK_SCOPE)
+    @auth_url =  authenticator.url_for_oauth_code(:permissions=>'')
     if @auth_url['localhost']
       @auth_url['localhost']='127.0.0.1'
       end

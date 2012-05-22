@@ -7,3 +7,8 @@ else
   APP_SECRET='0305f7cb7bf84888cc313e9f163ab118'
   SITE_URL = 'bancochilealbum.herokuapp.com'
 end
+
+BCHFB_ID='57173152417'
+BCHTW_ID='bancoodechile'
+BJFB_ID=''
+BJTW_ID='bancajoven'
