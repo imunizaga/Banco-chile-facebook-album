@@ -6,6 +6,7 @@ class StaticPagesController < ApplicationController
     end
     begin
       @user = @api.get_object("me")
+      @user['img'] = 'https://graph.facebook.com/' + @user['id'] + '/picture?type=square'
       @friends = @api.get_connections('me', 'friends').first(10)
       @friends_using_app = @api.fql_query("
         SELECT uid, name, is_app_user, pic_square 
