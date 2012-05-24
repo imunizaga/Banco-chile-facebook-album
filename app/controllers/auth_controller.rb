@@ -3,7 +3,7 @@ class AuthController < ApplicationController
   protect_from_forgery
   def facebook
     session[:access_token] = nil
-    @auth_url =  authenticator.url_for_oauth_code(:permissions=>'')
+    @auth_url =  authenticator.url_for_oauth_code(:permissions=>params[:permissions])
     if @auth_url['localhost']
       @auth_url['localhost']='127.0.0.1'
       end
@@ -26,7 +26,7 @@ class AuthController < ApplicationController
    respond_to do |format|
      format.html {   }			 
      end
-   redirect_to "/static_pages/home"
+   redirect_to '/'
    end
 
   def host
