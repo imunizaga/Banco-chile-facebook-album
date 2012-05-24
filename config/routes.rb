@@ -1,4 +1,6 @@
 BancoChile::Application.routes.draw do
+  get "album/home"
+
   resources :challenges
 
   resources :card_packs
