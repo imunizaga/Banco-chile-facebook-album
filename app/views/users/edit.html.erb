@@ -1,6 +1,9 @@
-<h1>Editing user</h1>
+<div id="users"></div>
 
-<%= render 'form' %>
-
-<%= link_to 'Show', @user %> |
-<%= link_to 'Back', users_path %>
+<script type="text/javascript">
+  $(function() {
+    // BancoChile is the app name
+    window.router = new BancoChile.Routers.UsersRouter({users: <%= @users.to_json.html_safe -%>});
+    Backbone.history.start();
+  });
+</script>

@@ -1,25 +1,9 @@
-<p id="notice"><%= notice %></p>
+<div id="users"></div>
 
-<p>
-  <b>Name:</b>
-  <%= @user.name %>
-</p>
-
-<p>
-  <b>Email:</b>
-  <%= @user.email %>
-</p>
-
-<p>
-  <b>Id facebook:</b>
-  <%= @user.facebook_id %>
-</p>
-
-<p>
-  <b>Id twitter:</b>
-  <%= @user.twitter_id %>
-</p>
-
-
-<%= link_to 'Edit', edit_user_path(@user) %> |
-<%= link_to 'Back', users_path %>
+<script type="text/javascript">
+  $(function() {
+    // BancoChile is the app name
+    window.router = new BancoChile.Routers.UsersRouter({users: <%= @users.to_json.html_safe -%>});
+    Backbone.history.start();
+  });
+</script>
