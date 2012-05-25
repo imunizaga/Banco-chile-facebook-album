@@ -1,6 +1,9 @@
-<h1>Editing card</h1>
+<div id="cards"></div>
 
-<%= render 'form' %>
-
-<%= link_to 'Show', @card %> |
-<%= link_to 'Back', cards_path %>
+<script type="text/javascript">
+  $(function() {
+    // BancoChile is the app name
+    window.router = new BancoChile.Routers.CardsRouter({cards: <%= @cards.to_json.html_safe -%>});
+    Backbone.history.start();
+  });
+</script>
