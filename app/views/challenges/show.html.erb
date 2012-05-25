@@ -1,25 +1,9 @@
-<p id="notice"><%= notice %></p>
+<div id="challenges"></div>
 
-<p>
-  <b>Name:</b>
-  <%= @challenge.name %>
-</p>
-
-<p>
-  <b>N cards:</b>
-  <%= @challenge.n_cards %>
-</p>
-
-<p>
-  <b>Type:</b>
-  <%= @challenge.type %>
-</p>
-
-<p>
-  <b>Description:</b>
-  <%= @challenge.description %>
-</p>
-
-
-<%= link_to 'Edit', edit_challenge_path(@challenge) %> |
-<%= link_to 'Back', challenges_path %>
+<script type="text/javascript">
+  $(function() {
+    // BancoChile is the app name
+    window.router = new BancoChile.Routers.ChallengesRouter({challenges: <%= @challenges.to_json.html_safe -%>});
+    Backbone.history.start();
+  });
+</script>
