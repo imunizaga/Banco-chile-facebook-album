@@ -1,10 +1,11 @@
 class StaticPagesController < ApplicationController
   def home         
     if session[:callback_return]  != nil
-       puts session[:callback_return] + '<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<'
-        redirect_to session[:callback_return]  and  session[:callback_return] = nil and return
-      end
-    if session[:access_token]==nil
+        redirect=session[:callback_return]
+        session[:callback_return] = nil
+        redirect_to redirect and return
+    end
+    if session[:access_token] == nil or session['id'] == nil
       redirect_to '/auth/facebook' and return
     end
     @api = Koala::Facebook::API.new(session[:access_token])

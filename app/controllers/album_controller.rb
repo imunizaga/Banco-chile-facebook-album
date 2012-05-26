@@ -1,6 +1,7 @@
 class AlbumController < ApplicationController
   def home
     @api = Koala::Facebook::API.new(session[:access_token])
+    session['return'] = '/album/home'
     if session[:callback_return]  == nil
       session[:callback_return] = '/album/home'
       redirect_to '/auth/facebook?permissions=user_about_me' and return
@@ -15,8 +16,11 @@ class AlbumController < ApplicationController
           WHERE uid1 = me()) 
           AND is_app_user = 1"
         )
-    @user=User.find(2)
+    if session['id'] == nil
+      session['id_return'] ='/album/home'
+      redirect_to :root and return
+    end 
+    @user=User.find(session['id'])
     @cards=@user.user_cards
-    puts @cards
   end
 end

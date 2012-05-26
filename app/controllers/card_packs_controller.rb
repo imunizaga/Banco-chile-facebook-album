@@ -3,7 +3,7 @@ class CardPacksController < ApplicationController
   # GET /card_packs.json
   def index
     @card_packs = CardPack.all
-
+    
     respond_to do |format|
       format.html # index.html.erb
       format.json { render json: @card_packs }
@@ -25,7 +25,6 @@ class CardPacksController < ApplicationController
   # GET /card_packs/new.json
   def new
     @card_pack = CardPack.new
-
     respond_to do |format|
       format.html # new.html.erb
       format.json { render json: @card_pack }
@@ -42,6 +41,15 @@ class CardPacksController < ApplicationController
   def create
     @card_pack = CardPack.new(params[:card_pack])
 
+    if @card_pack.challenge != nil
+      @card_pack.challenge.n_cards.times do 
+        @user_card = UserCard.create(:user_id=>session['id'], :card_pack_id=>@card_pack.id)
+        #if @user_card.save == nil
+        #  format.html { render action: "new" }
+        #  format.json { render json: @card_pack.errors, status: :unprocessable_entity }
+        #end
+      end
+    end
     respond_to do |format|
       if @card_pack.save
         format.html { redirect_to @card_pack, notice: 'Card pack was successfully created.' }

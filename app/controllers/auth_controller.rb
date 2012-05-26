@@ -20,14 +20,34 @@ class AuthController < ApplicationController
 
   def facebook_callback
     if params[:code]
-       # acknowledge code and get access token from FB :
-       session[:access_token] = authenticator.get_access_token(params[:code])
-   end		
-   respond_to do |format|
-     format.html {   }			 
-     end
-   redirect_to '/'
-   end
+      # acknowledge code and get access token from FB :
+      session[:access_token] = authenticator.get_access_token(params[:code])
+      @api = Koala::Facebook::API.new(session[:access_token])
+      @user = @api.get_object("me")
+      if  saved_user = User.find_by_facebook_id(@user['id'])
+        session['id'] = saved_user.id
+      else
+        newUser=User.create(name:@user['name'],facebook_id:@user['id'])
+        session['id'] = newUser.id
+      end
+      if session['return']
+        redirect=session['return']
+        session['return'] = nil
+        redirect_to redirect and return
+      end
+    end		
+    respond_to do |format|
+      format.html {   }			 
+    end
+
+    if session['return'] == nil
+      redirect_to '/' and return
+    else
+      red = session['return']
+      session['return'] = nil
+      redirect_to red and return
+    end
+  end
 
   def host
     request.env['HTTP_HOST']

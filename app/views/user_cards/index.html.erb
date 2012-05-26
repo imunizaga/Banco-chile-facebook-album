@@ -3,8 +3,9 @@
 <table>
   <tr>
     <th>Id</th>
-    <th>User id</th>
-    <th>Card id</th>
+    <th>User</th>
+    <th>Card</th>
+    <th>CardPack</th>
   </tr>
 
 <% @user_cards.each do |user_card| %>
@@ -12,6 +13,7 @@
     <td><%= user_card.id%></td> 
     <td><%= user_card.user_id%></td> 
     <td><%= user_card.card_id%></td> 
+    <td><%= user_card.card_pack_id%></td> 
     <td><%= link_to 'Show', user_card %></td>
     <td><%= link_to 'Edit', edit_user_card_path(user_card) %></td>
     <td><%= link_to 'Destroy', user_card, confirm: 'Are you sure?', method: :delete %></td>

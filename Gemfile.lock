@@ -29,6 +29,7 @@ GEM
       i18n (~> 0.6)
       multi_json (~> 1.0)
     addressable (2.2.8)
+    archive-tar-minitar (0.5.2)
     arel (3.0.2)
     builder (3.0.0)
     capybara (1.1.2)
@@ -47,6 +48,7 @@ GEM
       coffee-script-source
       execjs
     coffee-script-source (1.3.3)
+    columnize (0.3.6)
     diff-lcs (1.1.3)
     erubis (2.7.0)
     execjs (1.3.2)
@@ -56,8 +58,13 @@ GEM
       multipart-post (~> 1.1)
       rack (~> 1.1)
     ffi (1.0.11)
+    foreigner (1.1.6)
+      activerecord (>= 3.0.0)
     hike (1.2.1)
     i18n (0.6.0)
+    immigrant (0.1.1)
+      activerecord (>= 3.0)
+      foreigner (>= 1.1.3)
     journey (1.0.3)
     jquery-rails (2.0.2)
       railties (>= 3.2.0, < 5.0)
@@ -68,6 +75,8 @@ GEM
       multi_json (~> 1.3.0)
     libwebsocket (0.1.3)
       addressable
+    linecache19 (0.5.12)
+      ruby_core_source (>= 0.1.4)
     mail (2.4.4)
       i18n (>= 0.4.0)
       mime-types (~> 1.16)
@@ -120,7 +129,17 @@ GEM
       activesupport (>= 3.0)
       railties (>= 3.0)
       rspec (~> 2.9.0)
+    ruby-debug-base19 (0.11.25)
+      columnize (>= 0.3.1)
+      linecache19 (>= 0.5.11)
+      ruby_core_source (>= 0.1.4)
+    ruby-debug19 (0.11.6)
+      columnize (>= 0.3.1)
+      linecache19 (>= 0.5.11)
+      ruby-debug-base19 (>= 0.11.19)
     ruby-graphviz (0.9.21)
+    ruby_core_source (0.1.5)
+      archive-tar-minitar (>= 0.5.2)
     rubyzip (0.9.8)
     sass (3.1.18)
     sass-rails (3.2.5)
@@ -149,6 +168,7 @@ GEM
       multi_json (>= 1.0.2)
     xpath (0.1.4)
       nokogiri (~> 1.3)
+    yaml_db (0.2.3)
 
 PLATFORMS
   ruby
@@ -156,12 +176,16 @@ PLATFORMS
 DEPENDENCIES
   capybara (= 1.1.2)
   coffee-rails (~> 3.2.2)
+  foreigner
+  immigrant
   jquery-rails
   koala
   pg (= 0.12.2)
   rails (= 3.2.3)
   rails-erd
   rspec-rails (= 2.9.0)
+  ruby-debug19
   sass-rails (~> 3.2.4)
   sqlite3 (= 1.3.5)
   uglifier (>= 1.2.3)
+  yaml_db
