@@ -1,29 +1,9 @@
-<h1>Listing challenges</h1>
+<div id="challenges"></div>
 
-<table>
-  <tr>
-    <th>Name</th>
-    <th>N cards</th>
-    <th>Set</th>
-    <th>Description</th>
-    <th></th>
-    <th></th>
-    <th></th>
-  </tr>
-
-<% @challenges.each do |challenge| %>
-  <tr>
-    <td><%= challenge.name %></td>
-    <td><%= challenge.n_cards %></td>
-    <td><%= challenge.set%></td>
-    <td><%= challenge.description %></td>
-    <td><%= link_to 'Show', challenge %></td>
-    <td><%= link_to 'Edit', edit_challenge_path(challenge) %></td>
-    <td><%= link_to 'Destroy', challenge, confirm: 'Are you sure?', method: :delete %></td>
-  </tr>
-<% end %>
-</table>
-
-<br />
-
-<%= link_to 'New Challenge', new_challenge_path %>
+<script type="text/javascript">
+  $(function() {
+    // BancoChile is the app name
+    window.router = new BancoChile.Routers.ChallengesRouter({challenges: <%= @challenges.to_json.html_safe -%>});
+    Backbone.history.start();
+  });
+</script>

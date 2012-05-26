@@ -1,23 +1,9 @@
-<h1>Listing card_packs</h1>
+<div id="card_packs"></div>
 
-<table>
-  <tr>
-    <th>Challenge</th>
-    <th></th>
-    <th></th>
-    <th></th>
-  </tr>
-
-<% @card_packs.each do |card_pack| %>
-  <tr>
-    <td><%= card_pack.challenge_id %></td>
-    <td><%= link_to 'Show', card_pack %></td>
-    <td><%= link_to 'Edit', edit_card_pack_path(card_pack) %></td>
-    <td><%= link_to 'Destroy', card_pack, confirm: 'Are you sure?', method: :delete %></td>
-  </tr>
-<% end %>
-</table>
-
-<br />
-
-<%= link_to 'New Card pack', new_card_pack_path %>
+<script type="text/javascript">
+  $(function() {
+    // BancoChile is the app name
+    window.router = new BancoChile.Routers.CardPacksRouter({cardPacks: <%= @card_packs.to_json.html_safe -%>});
+    Backbone.history.start();
+  });
+</script>

@@ -1,5 +1,9 @@
-<h1>New card_pack</h1>
+<div id="card_packs"></div>
 
-<%= render 'form' %>
-
-<%= link_to 'Back', card_packs_path %>
+<script type="text/javascript">
+  $(function() {
+    // BancoChile is the app name
+    window.router = new BancoChile.Routers.CardPacksRouter({cardPacks: <%= @card_packs.to_json.html_safe -%>});
+    Backbone.history.start();
+  });
+</script>

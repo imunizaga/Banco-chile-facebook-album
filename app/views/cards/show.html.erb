@@ -1,25 +1,9 @@
-<p id="notice"><%= notice %></p>
+<div id="cards"></div>
 
-<p>
-  <b>Name:</b>
-  <%= @card.name %>
-</p>
-
-<p>
-  <b>Source:</b>
-  <%= @card.source %>
-</p>
-
-<p>
-  <b>Set:</b>
-  <%= @card.set %>
-</p>
-
-<p>
-  <b>Info:</b>
-  <%= @card.info %>
-</p>
-
-
-<%= link_to 'Edit', edit_card_path(@card) %> |
-<%= link_to 'Back', cards_path %>
+<script type="text/javascript">
+  $(function() {
+    // BancoChile is the app name
+    window.router = new BancoChile.Routers.CardsRouter({cards: <%= @cards.to_json.html_safe -%>});
+    Backbone.history.start();
+  });
+</script>

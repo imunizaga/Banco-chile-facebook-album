@@ -1,29 +1,9 @@
-<h1>Listing cards</h1>
+<div id="cards"></div>
 
-<table>
-  <tr>
-    <th>Name</th>
-    <th>Source</th>
-    <th>Set</th>
-    <th>Info</th>
-    <th></th>
-    <th></th>
-    <th></th>
-  </tr>
-
-<% @cards.each do |card| %>
-  <tr>
-    <td><%= card.name %></td>
-    <td><%= card.source %></td>
-    <td><%= card.set %></td>
-    <td><%= card.info %></td>
-    <td><%= link_to 'Show', card %></td>
-    <td><%= link_to 'Edit', edit_card_path(card) %></td>
-    <td><%= link_to 'Destroy', card, confirm: 'Are you sure?', method: :delete %></td>
-  </tr>
-<% end %>
-</table>
-
-<br />
-
-<%= link_to 'New Card', new_card_path %>
+<script type="text/javascript">
+  $(function() {
+    // BancoChile is the app name
+    window.router = new BancoChile.Routers.CardsRouter({cards: <%= @cards.to_json.html_safe -%>});
+    Backbone.history.start();
+  });
+</script>
