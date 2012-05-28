@@ -1,8 +1,7 @@
 class AlbumController < ApplicationController
   def home
     @api = Koala::Facebook::API.new(session[:access_token])
-    session['return'] = '/album/home'
-    if session[:callback_return]  == nil
+    if @api == nil
       session[:callback_return] = '/album/home'
       redirect_to '/auth/facebook?permissions=user_about_me' and return
     end

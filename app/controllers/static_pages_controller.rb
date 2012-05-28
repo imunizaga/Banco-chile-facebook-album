@@ -6,6 +6,7 @@ class StaticPagesController < ApplicationController
         redirect_to redirect and return
     end
     if session[:access_token] == nil or session['id'] == nil
+      session[:return] = '/static_pages/home'
       redirect_to '/auth/facebook' and return
     end
     @api = Koala::Facebook::API.new(session[:access_token])

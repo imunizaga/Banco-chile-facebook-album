@@ -25,14 +25,14 @@ class AuthController < ApplicationController
       @api = Koala::Facebook::API.new(session[:access_token])
       @user = @api.get_object("me")
       if  saved_user = User.find_by_facebook_id(@user['id'])
-        session['id'] = saved_user.id
+        session[:id] = saved_user.id
       else
         newUser=User.create(name:@user['name'],facebook_id:@user['id'])
-        session['id'] = newUser.id
+        session[:id] = newUser.id
       end
-      if session['return']
-        redirect=session['return']
-        session['return'] = nil
+      if session[:return]
+        redirect=session[:return]
+        session[:return] = nil
         redirect_to redirect and return
       end
     end		
