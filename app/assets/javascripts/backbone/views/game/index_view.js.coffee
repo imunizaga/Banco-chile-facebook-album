@@ -4,9 +4,22 @@ class BancoChile.Views.Game.IndexView extends Backbone.View
   template: JST["backbone/templates/game/index"]
 
   initialize: () ->
-    @options.user.bind('change', @render)
+    @user = @options.user
+    @user.bind('change', @render)
 
   render: =>
-    $(@el).html(@template(user: @options.user.toJSON() ))
+    $(@el).html(@template(user: @user.toJSON() ))
+
+    albumView = new BancoChile.Views.Cards.AlbumView(cards: @user.cards)
+    $(@.el).find('.album').append(albumView.render().el)
+
+    rankingView = new BancoChile.Views.Users.RankingView(user: @user)
+    $(@.el).find('.ranking-list').append(rankingView.render().el)
+
+    tabsView = new BancoChile.Views.Game.TabsView(user: @user)
+    $tabs = $(@.el).find('#tabs')
+
+    $tabs.append(tabsView.render().el)
+    $tabs.tabs(event: "mouseover")
 
     return this

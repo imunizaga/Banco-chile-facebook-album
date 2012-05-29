@@ -109,7 +109,7 @@ h2.rank {
 	height:90px;
 	top:0;
 	left:0;
-	background: url(../img/flechita.png) left center no-repeat;
+	background: url(/assets/flechita.png) left center no-repeat;
 }
 .ranking a.next {
 	position: absolute;
@@ -118,7 +118,7 @@ h2.rank {
 	height:90px;
 	top:0;
 	right:0;
-	background: url(../img/flechita.png) right center no-repeat;
+	background: url(/assets/flechita.png) right center no-repeat;
 }
 /*.ranking a.prev:hover, .ranking a.next:hover {
 	background-color:#ccc;
