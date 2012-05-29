@@ -24,7 +24,9 @@
               xfbml      : true  // parse XFBML
             });
 
-            FB.Event.subscribe('auth.statusChange', function(response) {
+            console.log("subscribing");
+            FB.getLoginStatus(function(response) {
+                console.log("reponse status: " + response.status);
                 window.app.user.set('loginStatus', response.status);
             });
           };
