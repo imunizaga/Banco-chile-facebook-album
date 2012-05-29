@@ -67,7 +67,7 @@ class CardPacksController < ApplicationController
     @card_pack = CardPack.find(params[:id])
 
     respond_to do |format|
-      if @card_pack.update_attributes(params[:card_pack])
+      if @card_pack.update_attributes(params[:card_pack].except(:id, :created_at, :updated_at))
         format.html { redirect_to @card_pack, notice: 'Card pack was successfully updated.' }
         format.json { head :no_content }
       else
