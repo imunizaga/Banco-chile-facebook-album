@@ -1,6 +1,6 @@
 class BancoChile.Routers.AppRouter extends Backbone.Router
   initialize: (options) ->
-    @user = new BancoChile.Models.User()
+    @user = new BancoChile.Models.User(options.user)
     @cards = new BancoChile.Collections.CardsCollection(options.cards)
 
   routes:
