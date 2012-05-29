@@ -1,2 +1,7 @@
-Hola <%= @user["first_name"]%> 
-<%= link_to 'Ver a tus amigos usando la app', '/album/home' %>
+<script type="text/javascript">
+  $(function() {
+    // BancoChile is the app name
+    window.app = new BancoChile.Routers.AppRouter({cards: <%= @cards.to_json.html_safe -%>});
+    Backbone.history.start();
+  });
+</script>
