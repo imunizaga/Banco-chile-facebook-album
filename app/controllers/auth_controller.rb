@@ -15,6 +15,7 @@ class AuthController < ApplicationController
 
   def logout
     session[:access_token] = nil
+    session[:id] = nil
     redirect_to '/'
   end
 
@@ -24,27 +25,18 @@ class AuthController < ApplicationController
       session[:access_token] = authenticator.get_access_token(params[:code])
       @api = Koala::Facebook::API.new(session[:access_token])
       @user = @api.get_object("me")
-      if  saved_user = User.find_by_facebook_id(@user['id'])
-        session[:id] = saved_user.id
-      else
-        newUser=User.create(name:@user['name'],facebook_id:@user['id'])
-        session[:id] = newUser.id
+      this_user = User.where(facebook_id:@user['id']).first_or_create(name:@user['name'])
+      session[:id] = this_user.id
       end
-      if session[:return]
-        redirect=session[:return]
-        session[:return] = nil
-        redirect_to redirect and return
-      end
-    end		
     respond_to do |format|
       format.html {   }			 
     end
 
-    if session['return'] == nil
+    if session[:return] == nil
       redirect_to '/' and return
     else
-      red = session['return']
-      session['return'] = nil
+      red = session[:return]
+      session[:return] = nil
       redirect_to red and return
     end
   end
