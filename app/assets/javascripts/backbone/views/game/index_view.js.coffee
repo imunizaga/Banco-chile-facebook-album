@@ -5,12 +5,13 @@ class BancoChile.Views.Game.IndexView extends Backbone.View
 
   initialize: () ->
     @user = @options.user
+    @cards = @options.cards
     @user.bind('change', @render)
 
   render: =>
     $(@el).html(@template(user: @user.toJSON() ))
 
-    albumView = new BancoChile.Views.Cards.AlbumView(cards: @user.cards)
+    albumView = new BancoChile.Views.Cards.AlbumView(user: @user, cards: @cards)
     $(@.el).find('.album').append(albumView.render().el)
 
     rankingView = new BancoChile.Views.Users.RankingView(user: @user)

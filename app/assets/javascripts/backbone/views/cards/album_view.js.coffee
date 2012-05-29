@@ -5,9 +5,15 @@ class BancoChile.Views.Cards.AlbumView extends Backbone.View
 
   initialize: () ->
     @cards = @options.cards
-    @cards.bind('reset', @render)
+    @user = @options.user
+    @user.bind('change', @render)
 
   render: =>
-    $(@el).html(@template(cards: @cards.toJSON() ))
+    $el = $(@el)
+    $el.html(@template({}))
+    $laminas = $el.find('.laminas')
+    for card in @cards.models
+      cardItemView = new BancoChile.Views.Cards.CardItemView(model: card)
+      $laminas.append(cardItemView.render().el)
 
     return this

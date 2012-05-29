@@ -20,6 +20,6 @@ class AlbumController < ApplicationController
       redirect_to :root and return
     end 
     @user=User.find(session['id'])
-    @cards=@user.user_cards
+    @cards = Card.all
   end
 end

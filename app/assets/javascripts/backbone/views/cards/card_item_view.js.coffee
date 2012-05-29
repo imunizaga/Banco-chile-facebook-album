@@ -5,6 +5,13 @@ class BancoChile.Views.Cards.CardItemView extends Backbone.View
 
   tagName: "li"
 
+  initialize: () ->
+    debugger
+    @model = @options.model
+    @model.bind('change', @render)
+
   render: ->
-    $(@el).html(@template(@model.toJSON() ))
+    debugger
+    #<li class="laTengo">
+    $(@el).html(@template(card: @model.toJSON() ))
     return this

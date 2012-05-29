@@ -1,6 +1,7 @@
 class BancoChile.Routers.AppRouter extends Backbone.Router
   initialize: (options) ->
     @user = new BancoChile.Models.User()
+    @cards = new BancoChile.Collections.CardsCollection(options.cards)
 
   routes:
     ""      : "index"
@@ -12,10 +13,6 @@ class BancoChile.Routers.AppRouter extends Backbone.Router
     $container.html(@view.render().el)
 
   game: ->
-    @view = new BancoChile.Views.Game.IndexView(user: @user)
+    @view = new BancoChile.Views.Game.IndexView(user: @user, cards: @cards)
     $container = $("#container")
     $container.html(@view.render().el)
-
-$ ->
-  window.App = new BancoChile.Routers.AppRouter()
-  Backbone.history.start()
