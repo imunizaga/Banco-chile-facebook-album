@@ -49,10 +49,10 @@ ActiveRecord::Schema.define(:version => 20120529054009) do
   create_table "users", :force => true do |t|
     t.string   "name"
     t.string   "email"
-    t.integer  "facebook_id"
+    t.integer  "facebook_id",   :limit => 8
     t.integer  "twitter_id"
-    t.datetime "created_at",    :null => false
-    t.datetime "updated_at",    :null => false
+    t.datetime "created_at",                 :null => false
+    t.datetime "updated_at",                 :null => false
     t.text     "friends"
     t.integer  "foursquare_id"
     t.text     "referals"
