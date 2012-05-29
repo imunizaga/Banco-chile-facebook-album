@@ -4,6 +4,7 @@ class BancoChile.Models.UserCard extends Backbone.Model
   defaults:
     user_id: null
     card_id: null
+    card_pack_id: null
 
 class BancoChile.Collections.UserCardsCollection extends Backbone.Collection
   model: BancoChile.Models.UserCard

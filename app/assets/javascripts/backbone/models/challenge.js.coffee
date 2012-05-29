@@ -5,7 +5,7 @@ class BancoChile.Models.Challenge extends Backbone.Model
     description: null
     n_cards: null
     name: null
-    type: null
+    set: null
 
 class BancoChile.Collections.ChallengesCollection extends Backbone.Collection
   model: BancoChile.Models.Challenge
