@@ -59,7 +59,7 @@ class UserCardsController < ApplicationController
     @user_card = UserCard.find(params[:id])
 
     respond_to do |format|
-      if @user_card.update_attributes(params[:user_card])
+      if @user_card.update_attributes(params[:user_card].except(:id, :created_at, :updated_at))
         format.html { redirect_to @user_card, notice: 'User card was successfully updated.' }
         format.json { head :no_content }
       else

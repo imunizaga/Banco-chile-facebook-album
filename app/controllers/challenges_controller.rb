@@ -59,7 +59,7 @@ class ChallengesController < ApplicationController
     @challenge = Challenge.find(params[:id])
 
     respond_to do |format|
-      if @challenge.update_attributes(params[:challenge])
+      if @challenge.update_attributes(params[:challenge].except(:id, :created_at, :updated_at))
         format.html { redirect_to @challenge, notice: 'Challenge was successfully updated.' }
         format.json { head :no_content }
       else
