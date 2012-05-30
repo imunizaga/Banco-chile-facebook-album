@@ -21,5 +21,6 @@ class AlbumController < ApplicationController
     end 
     @user=User.find(session['id'])
     @cards = Card.all
+    @user_cards = [1, 2, 0, 1, 2]
   end
 end

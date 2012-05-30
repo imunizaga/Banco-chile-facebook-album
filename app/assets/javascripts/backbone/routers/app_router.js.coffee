@@ -1,6 +1,7 @@
 class BancoChile.Routers.AppRouter extends Backbone.Router
   initialize: (options) ->
     @user = new BancoChile.Models.User(options.user)
+    @user.set('cards', options.user_cards)
     @cards = new BancoChile.Collections.CardsCollection(options.cards)
 
   routes:
@@ -13,6 +14,9 @@ class BancoChile.Routers.AppRouter extends Backbone.Router
     $container.html(@view.render().el)
 
   game: ->
-    @view = new BancoChile.Views.Game.IndexView(user: @user, cards: @cards)
-    $container = $("#container")
-    $container.html(@view.render().el)
+    if not @user.is_authenticated()
+      @navigate('', trigger: true)
+    else
+      @view = new BancoChile.Views.Game.IndexView(user: @user, cards: @cards)
+      $container = $("#container")
+      $container.html(@view.render().el)

@@ -10,6 +10,13 @@ class BancoChile.Models.User extends Backbone.Model
   initialize: () ->
     @cards = new BancoChile.Collections.CardsCollection()
 
+  is_authenticated:() ->
+    loginStatus = @get('loginStatus')
+
+    if loginStatus is 'connected'
+      return true
+    return false
+
 class BancoChile.Collections.UsersCollection extends Backbone.Collection
   model: BancoChile.Models.User
   url: '/users'
