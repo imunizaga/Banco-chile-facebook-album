@@ -10,7 +10,16 @@ class BancoChile.Models.User extends Backbone.Model
   initialize: () ->
     @cards = new BancoChile.Collections.CardsCollection()
 
-  is_authenticated:() ->
+  updateUniqueCardCount: () ->
+    uniqueCardsCount = 0
+    cardsCount = @get('cardsCount')
+    for cardCount in cardsCount
+      if cardCount
+        uniqueCardsCount++
+
+    @set('uniqueCardsCount', uniqueCardsCount)
+
+  isAuthenticated:() ->
     loginStatus = @get('loginStatus')
 
     if loginStatus is 'connected'

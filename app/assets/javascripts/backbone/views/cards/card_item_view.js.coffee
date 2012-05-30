@@ -10,6 +10,5 @@ class BancoChile.Views.Cards.CardItemView extends Backbone.View
     @model.bind('change', @render)
 
   render: ->
-    debugger
     $(@el).html(@template(card: @model.toJSON(), count: @options.count or 0))
     return this
