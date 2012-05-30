@@ -1,5 +1,6 @@
 class StaticPagesController < ApplicationController
-  def home         
+  def home
+    @cards = Card.all
   end
 
   def help

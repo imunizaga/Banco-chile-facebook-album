@@ -14,13 +14,13 @@ class BancoChile.Views.Home.IndexView extends Backbone.View
 
     loginStatus = @user.get('loginStatus')
 
-    if loginStatus is 'not_authorized'
-      $(@.el).find('#mainContainer').append(@notLoggedTemplate())
-    else if loginStatus
+    if loginStatus is 'connected'
       $(@.el).find('#mainContainer').append(@loggedTemplate(
         user: @user.toJSON()
       ))
       rankingView = new BancoChile.Views.Users.RankingView(user: @user)
       $(@.el).find('.ranking-list').append(rankingView.render().el)
+    else if loginStatus
+      $(@.el).find('#mainContainer').append(@notLoggedTemplate())
 
     return this
