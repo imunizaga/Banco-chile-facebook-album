@@ -1,8 +1,9 @@
 class BancoChile.Routers.AppRouter extends Backbone.Router
   initialize: (options) ->
     @user = new BancoChile.Models.User(options.user)
-    @user.set('cards', options.user_cards)
     @cards = new BancoChile.Collections.CardsCollection(options.cards)
+    options.user_cards ||= new Array(options.cards.length)
+    @user.set('cards', options.user_cards)
 
   routes:
     ""      : "index"
