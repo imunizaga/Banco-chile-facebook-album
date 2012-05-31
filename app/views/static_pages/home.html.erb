@@ -1,7 +1,7 @@
 <script type="text/javascript">
   $(function() {
     // BancoChile is the app name
-    window.app = new BancoChile.Routers.AppRouter({cards: <%= @cards.to_json.html_safe -%>});
+    window.app = new BancoChile.Routers.AppRouter({cards: <%= @cards.to_json.html_safe -%>, ranking: <%= @ranking.to_json.html_safe -%>});
     Backbone.history.start();
   });
 </script>

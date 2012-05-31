@@ -7,6 +7,7 @@ class BancoChile.Views.Home.IndexView extends Backbone.View
 
   initialize: () ->
     @user = @options.user
+    @ranking = @options.ranking
     @user.bind('change', @render)
 
   render: =>
@@ -15,12 +16,15 @@ class BancoChile.Views.Home.IndexView extends Backbone.View
     loginStatus = @user.get('loginStatus')
 
     if loginStatus is 'connected'
-      $(@.el).find('#mainContainer').append(@loggedTemplate(
+      $(@el).find('#mainContainer').append(@loggedTemplate(
         user: @user.toJSON()
       ))
-      rankingView = new BancoChile.Views.Users.RankingView(user: @user)
-      $(@.el).find('.ranking-list').append(rankingView.render().el)
+      rankingView = new BancoChile.Views.Users.RankingView(
+        user: @user
+        ranking: @ranking
+      )
+      $(@el).find('.ranking-list').append(rankingView.render().el)
     else if loginStatus
-      $(@.el).find('#mainContainer').append(@notLoggedTemplate())
+      $(@el).find('#mainContainer').append(@notLoggedTemplate())
 
     return this
