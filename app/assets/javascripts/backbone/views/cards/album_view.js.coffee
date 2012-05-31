@@ -14,7 +14,6 @@ class BancoChile.Views.Cards.AlbumView extends Backbone.View
     $el = $(@el)
 
     #renders the main album template
-    debugger
     $el.html(@template(user: @user.toJSON(), cards: @cards.toJSON()))
 
     # obtains the 'laminas' div object
