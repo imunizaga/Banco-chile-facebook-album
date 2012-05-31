@@ -2,6 +2,7 @@ class BancoChile.Routers.AppRouter extends Backbone.Router
   initialize: (options) ->
     @user = new BancoChile.Models.User(options.user)
     @cards = new BancoChile.Collections.CardsCollection(options.cards)
+    @ranking = options.ranking
     options.user_cards ||= new Array(options.cards.length)
     @user.set('cardsCount', options.user_cards)
     @user.updateUniqueCardCount()

@@ -6,6 +6,7 @@ class BancoChile.Views.Game.IndexView extends Backbone.View
   initialize: () ->
     @user = @options.user
     @cards = @options.cards
+    @ranking = @options.ranking
     @user.bind('change', @render)
 
   render: =>
@@ -14,8 +15,9 @@ class BancoChile.Views.Game.IndexView extends Backbone.View
     albumView = new BancoChile.Views.Cards.AlbumView(user: @user, cards: @cards)
     $(@.el).find('.album').append(albumView.render().el)
 
-    rankingView = new BancoChile.Views.Users.RankingView(user: @user)
+    rankingView = new BancoChile.Views.Users.RankingView(user: @user, ranking: @ranking)
     $(@.el).find('.ranking-list').append(rankingView.render().el)
+    
 
     tabsView = new BancoChile.Views.Game.TabsView(user: @user)
     $tabs = $(@.el).find('#tabs')

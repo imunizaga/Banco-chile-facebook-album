@@ -1,0 +1,7 @@
+<li class="<%= user.class %>">
+    <a href="#"><img src="<%= user.img %>" alt="<%= user.name %>" /></a>
+    <% if (typeof(user.rank) != "undefined") { %>
+    <h4><%= user.rank %></h4>
+    <% } %>
+    <p><%= user.n_cards %> lám.</p>
+</li>
