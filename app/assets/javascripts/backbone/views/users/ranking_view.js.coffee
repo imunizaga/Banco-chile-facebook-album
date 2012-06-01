@@ -9,12 +9,11 @@ class BancoChile.Views.Users.RankingView extends Backbone.View
     $el = $(@el)
     $el.html(@template({}))
     $ranking = $el.find('.ranking')
-    for user in @ranking
-      user.img = user.img or "/assets/faceUser.jpg"
-      user.class = user.class or ""
-      user.n_cards = user.n_cards or 0
-
-      rankingItem = new BancoChile.Views.Users.RankingItemView('user': user)
+    for user in @ranking.models
+      rankingItem = new BancoChile.Views.Users.RankingItemView(
+        user: user
+        class: 'primero'
+      )
       $ranking.append(rankingItem.render().el)
 
     return this

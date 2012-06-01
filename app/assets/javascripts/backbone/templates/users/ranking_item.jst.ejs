@@ -1,7 +1,5 @@
-<li class="<%= user.class %>">
-    <a href="#"><img src="<%= user.profileImage %>" alt="<%= user.name %>" /></a>
-    <% if (typeof(user.rank) != "undefined") { %>
-    <h4><%= user.rank %></h4>
-    <% } %>
-    <p><%= user.n_cards %> lám.</p>
-</li>
+<a href="#"><img src="<%= user.profile_image %>" alt="<%= user.name %>" /></a>
+<% if (typeof(user.rank) != "undefined") { %>
+<h4><%= user.rank %></h4>
+<% } %>
+<p><%= user.unique_cards_count %> lám.</p>

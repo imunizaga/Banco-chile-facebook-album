@@ -13,7 +13,7 @@ class BancoChile.Views.Home.IndexView extends Backbone.View
   render: =>
     $(@el).html(@template(user: @user.toJSON()))
 
-    loginStatus = @user.get('loginStatus')
+    loginStatus = @user.get('login_status')
 
     if loginStatus is 'connected'
       $(@el).find('#mainContainer').append(@loggedTemplate(

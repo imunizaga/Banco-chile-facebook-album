@@ -41,7 +41,7 @@ class User < ActiveRecord::Base
       hsh = {
         :rank => i+1,
         :user_id => raw_ranking[i][0],
-        :n_cards => raw_ranking[i][1]
+        :unique_cards_count => raw_ranking[i][1]
       }
       ranking.append(hsh)
     end

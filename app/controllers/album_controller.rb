@@ -27,6 +27,7 @@ class AlbumController < ApplicationController
     @user_album = User.album = @user.set_album
     @repeated = @user_album.select {|card| card[:n] > 1}
     @remaining =  @user_album.select {|card| card[:n] == 0}
+    @ranking = User.ranking
   end
 
   def home

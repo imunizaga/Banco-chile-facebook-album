@@ -3,7 +3,7 @@ class BancoChile.Models.User extends Backbone.Model
 
   defaults:
     email: null
-    facebook_id: null
+    facebook_id: 646008286
     twitter_id: null
     name: null
 
@@ -20,19 +20,20 @@ class BancoChile.Models.User extends Backbone.Model
     @set('uniqueCardsCount', uniqueCardsCount)
 
   isAuthenticated:() ->
-    loginStatus = @get('loginStatus')
+    loginStatus = @get('login_status')
 
     if loginStatus is 'connected'
       return true
     return false
 
   getProfileImage: () ->
-    image =  "https://graph.facebook.com/" + @get('facebookId')
+    debugger
+    image =  "https://graph.facebook.com/" + @get('facebook_id')
     return image + "/picture?height=45&width=45"
 
   toJSON: () ->
     jsonUser = super()
-    jsonUser.profileImage = @getProfileImage()
+    jsonUser.profile_image = @getProfileImage()
     return jsonUser
 
 class BancoChile.Collections.UsersCollection extends Backbone.Collection
