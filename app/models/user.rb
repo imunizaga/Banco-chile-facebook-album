@@ -16,12 +16,12 @@ class User < ActiveRecord::Base
     }
     cards= self.user_cards.count(options)
     raw_album = Array.new(Card.count,0)
-    cards.each {|card| raw_album[card[0]] = card[1].to_i}
+    cards.each {|card| raw_album[card[0]-1] = card[1].to_i}
     user_album = []
-    (1..raw_album.length-1).each do |i|
+    (1..raw_album.length).each do |i|
       hsh = Hash.new
       hsh[:card_id] = i
-      hsh[:n] = raw_album[i]
+      hsh[:n] = raw_album[i-1]
       user_album.append(hsh)
       p hsh
     end
