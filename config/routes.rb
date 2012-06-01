@@ -1,4 +1,6 @@
 BancoChile::Application.routes.draw do
+  get "facebook/login"
+
   get "album/home"
 
   resources :challenges
