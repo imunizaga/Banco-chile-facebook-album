@@ -4,7 +4,9 @@
     window.app = new BancoChile.Routers.AppRouter({
       cards: <%= @cards.to_json.html_safe -%>, 
       ranking: <%= @ranking.to_json.html_safe -%>,
-      user: <%= @user.to_json.html_safe -%>
+      user: <%= @user.to_json.html_safe -%>,
+      APP_ID: <%= APP_ID -%>,
+      APP_SECRET: '<%= APP_SECRET -%>'
     });
     Backbone.history.start();
   });
