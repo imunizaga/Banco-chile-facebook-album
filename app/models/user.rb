@@ -36,12 +36,15 @@ class User < ActiveRecord::Base
       :order => '1 DESC',
     }
     raw_ranking = User.count(options).entries[0..n-1]
+    q_users= User.select('id, facebook_id, name').where(:id => raw_ranking.transpose[0])
     ranking=[]
     (0..raw_ranking.length-1).each do |i|
       hsh = {
         :rank => i+1,
         :user_id => raw_ranking[i][0],
-        :unique_cards_count => raw_ranking[i][1]
+        :unique_cards_count => raw_ranking[i][1],
+        :name => q_users.find_by_id(raw_ranking[i][0]).name,
+        :facebook_id => q_users.find_by_id(raw_ranking[i][0]).facebook_id
       }
       ranking.append(hsh)
     end
