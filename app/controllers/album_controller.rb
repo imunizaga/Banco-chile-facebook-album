@@ -1,5 +1,7 @@
 class AlbumController < ApplicationController
-  def home
+  before_filter :set_user_stats
+
+  def set_user_stats
     @api = Koala::Facebook::API.new(session[:access_token])
     if @api == nil
       session[:callback_return] = '/album/home'
@@ -21,6 +23,12 @@ class AlbumController < ApplicationController
     end 
     @user=User.find(session['id'])
     @cards = Card.all
-    @user_cards = [1, 2, 0, 1, 2]
+    @user_cards = @user.cards
+    @user_album = User.album = @user.set_album
+    @repeated = @user_album.select {|card| card[:n] > 1}
+    @remaining =  @user_album.select {|card| card[:n] == 0}
+  end
+
+  def home
   end
 end
