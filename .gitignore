@@ -1,6 +1,9 @@
 # Ignore bundler config
 .bundle
 
+#compiled assets
+public/assets
+
 # default .gitignore rails 3
 db/*.sqlite3
 log/*.log
