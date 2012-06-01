@@ -17,7 +17,7 @@ class BancoChile.Models.User extends Backbone.Model
       if cardCount
         uniqueCardsCount++
 
-    @set('uniqueCardsCount', uniqueCardsCount)
+    @set('unique_cards_count', uniqueCardsCount)
 
   isAuthenticated:() ->
     loginStatus = @get('login_status')
@@ -27,7 +27,6 @@ class BancoChile.Models.User extends Backbone.Model
     return false
 
   getProfileImage: () ->
-    debugger
     image =  "https://graph.facebook.com/" + @get('facebook_id')
     return image + "/picture?height=45&width=45"
 
