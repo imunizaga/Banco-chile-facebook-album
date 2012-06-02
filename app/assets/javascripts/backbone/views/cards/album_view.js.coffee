@@ -19,13 +19,9 @@ class BancoChile.Views.Cards.AlbumView extends Backbone.View
     # obtains the 'laminas' div object
     $laminas = $el.find('.laminas')
 
-    # obtains the count of the cards that the user has
-    cardsCount = @user.get('cardsCount')
-
     # render each card that will go in the album
     for card, i  in @cards.models
-      cardItemView = new BancoChile.Views.Cards.CardItemView(
-        model: card, count: cardsCount[i])
+      cardItemView = new BancoChile.Views.Cards.CardItemView(model: card)
       $laminas.append(cardItemView.render().el)
 
     return this

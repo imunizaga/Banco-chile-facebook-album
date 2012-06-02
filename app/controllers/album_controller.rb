@@ -22,8 +22,7 @@ class AlbumController < ApplicationController
       redirect_to :root and return
     end 
     @user=User.find(session['id'])
-    @cards = Card.all
-    @user_cards = @user.cards
+    @user['login_status'] = 'connected'
     @user_album = User.album = @user.set_album
     @repeated = @user_album.select {|card| card[:n] > 1}
     @remaining =  @user_album.select {|card| card[:n] == 0}

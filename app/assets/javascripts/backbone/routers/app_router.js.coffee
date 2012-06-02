@@ -2,11 +2,8 @@ class BancoChile.Routers.AppRouter extends Backbone.Router
   initialize: (options) ->
     @options = options
     @user = new BancoChile.Models.User(options.user)
-    @cards = new BancoChile.Collections.CardsCollection(options.cards)
+    @user.get('cards').reset(options.cards)
     @ranking = new BancoChile.Collections.UsersCollection(options.ranking)
-    options.user_cards ||= new Array(options.cards.length)
-    @user.set('cardsCount', options.user_cards)
-    @user.updateUniqueCardCount()
 
   routes:
     ""      : "index"
@@ -30,7 +27,6 @@ class BancoChile.Routers.AppRouter extends Backbone.Router
     else
       @view = new BancoChile.Views.Game.IndexView(
         user: @user
-        cards: @cards
         ranking: @ranking
       )
       $container = $("#container")

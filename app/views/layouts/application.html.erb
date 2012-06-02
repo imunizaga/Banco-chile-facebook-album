@@ -27,9 +27,13 @@
             console.log("subscribing");
             FB.getLoginStatus(function(response) {
                 console.log("reponse status: " + response.status);
-                var user = window.app.user
-                user.set('login_status', response.status);
-                user.set('facebook_id', response.authResponse.userID);
+                if(window.app){
+                    var user = window.app.user
+                    user.set('login_status', response.status);
+                    if(response.authResponse){
+                        user.set('facebook_id', response.authResponse.userID);
+                    }
+                }
             });
           };
 

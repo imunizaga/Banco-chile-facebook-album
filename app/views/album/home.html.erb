@@ -1,34 +1,9 @@
-Amigos usando app:
-<% if @friends_using_app %>
-  <ul>
-  <% @friends_using_app.each do |friend| %>
-    <li>
-      <a href="http://www.facebook.com/<%= friend['uid']%>" onclick="window.open('http://www.facebook.com/<%= friend['uid'] %>')">
-      <img src="<%= friend['pic_square'] %>" alt="<%= friend['name'] %>">
-      <%= friend['name'] %>
-      </a>
-    </li>
-  <% end %>
-  </ul>
-<% end %>
-<%=@user['name']%>, tus laminas:<hr>
-<% if @cards %>
-  <ul>
-  <% @cards.each do |card| %>
-    <ul>
-    Lamina (<i><%=card['card_id']%></i>)<hr>
-    </ul>
-  <% end %>
-  </ul>
-<% end %>
-
 <script type="text/javascript">
   $(function() {
     // BancoChile is the app name
     window.app = new BancoChile.Routers.AppRouter({
         cards: <%= @cards.to_json.html_safe -%>,
         user: <%= @user.to_json.html_safe -%>,
-        user_cards: <%= @user_cards.to_json.html_safe -%>,
         ranking: <%= @ranking.to_json.html_safe -%>,
         APP_ID: <%= APP_ID -%>,
         APP_SECRET: '<%= APP_SECRET -%>'

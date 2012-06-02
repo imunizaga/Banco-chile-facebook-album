@@ -5,7 +5,7 @@ class BancoChile.Views.Game.IndexView extends Backbone.View
 
   initialize: () ->
     @user = @options.user
-    @cards = @options.cards
+    @cards = @user.get('cards')
     @ranking = @options.ranking
     @user.bind('change', @render)
 

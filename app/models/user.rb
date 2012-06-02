@@ -21,7 +21,7 @@ class User < ActiveRecord::Base
     (1..raw_album.length).each do |i|
       hsh = Hash.new
       hsh[:card_id] = i
-      hsh[:n] = raw_album[i-1]
+      hsh[:count] = raw_album[i-1]
       user_album.append(hsh)
       p hsh
     end

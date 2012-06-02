@@ -8,13 +8,15 @@ class BancoChile.Models.User extends Backbone.Model
     name: null
 
   initialize: () ->
-    @cards = new BancoChile.Collections.CardsCollection()
+    cards = new BancoChile.Collections.CardsCollection()
+    @set('cards', cards)
+    cards.bind('reset', @updateUniqueCardCount, this)
 
   updateUniqueCardCount: () ->
     uniqueCardsCount = 0
-    cardsCount = @get('cardsCount')
-    for cardCount in cardsCount
-      if cardCount
+    cards = @get('cards')
+    for card in cards.models
+      if card.get('count')
         uniqueCardsCount++
 
     @set('unique_cards_count', uniqueCardsCount)
