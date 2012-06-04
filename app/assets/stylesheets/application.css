@@ -538,6 +538,7 @@ ul.links li {
     float: left;
     width: 555px;
     padding-bottom:10px;
+    text-align: left;
 }
 .light .imagen {
     float: left;
