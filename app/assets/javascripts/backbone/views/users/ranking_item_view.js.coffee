@@ -4,8 +4,9 @@ class BancoChile.Views.Users.RankingItemView extends Backbone.View
 
   initialize: () ->
     @user = @options.user
-    @class = @options.class
+    @className = @options.class
 
   render: =>
     $(@el).html(@template(user: @user.toJSON()))
+    $(@el).addClass(@className)
     return this
