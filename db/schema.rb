@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120529054009) do
+ActiveRecord::Schema.define(:version => 20120602081611) do
 
   create_table "card_packs", :force => true do |t|
     t.integer  "challenge_id"
@@ -51,11 +51,12 @@ ActiveRecord::Schema.define(:version => 20120529054009) do
     t.string   "email"
     t.integer  "facebook_id",   :limit => 8
     t.integer  "twitter_id"
-    t.datetime "created_at",                 :null => false
-    t.datetime "updated_at",                 :null => false
+    t.datetime "created_at",                                :null => false
+    t.datetime "updated_at",                                :null => false
     t.text     "friends"
     t.integer  "foursquare_id"
     t.text     "referals"
+    t.integer  "cards_count",                :default => 0
   end
 
 end

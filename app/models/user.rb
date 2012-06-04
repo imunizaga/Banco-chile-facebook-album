@@ -25,6 +25,8 @@ class User < ActiveRecord::Base
       user_album.append(hsh)
       p hsh
     end
+    self.album = user_album
+    self.save
     return user_album
   end
 
