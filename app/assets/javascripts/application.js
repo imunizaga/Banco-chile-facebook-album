@@ -18,5 +18,5 @@
 //= require backbone_rails_sync
 //= require backbone_datalink
 //= require backbone/banco_chile
-//= require fancybox/jquery.fancybox-1.3.4
+//= require fancybox
 //= require_tree .

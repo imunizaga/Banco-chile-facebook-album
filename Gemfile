@@ -12,6 +12,7 @@ group :development, :test do
   gem 'foreigner'
   gem 'yaml_db'
   gem 'ruby-debug19'
+  gem 'thin'
 end
 
 group :assets do
@@ -29,5 +30,5 @@ group :production do
 end
 
 gem 'jquery-rails'
-
+gem 'fancybox-rails'
 gem 'rails-backbone'
