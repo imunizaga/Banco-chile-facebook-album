@@ -1,3 +1,5 @@
+BancoChile.Views.Users ||= {}
+
 class BancoChile.Views.Users.RankingItemView extends Backbone.View
   template: JST["backbone/templates/users/ranking_item"]
   tagName: "li"

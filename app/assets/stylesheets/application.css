@@ -639,7 +639,7 @@ ul.links li {
     list-style:none;
     padding:0;
 }
-.light .amigos .listFriend li a, .light .amigos .listFriend li a img {
+.light .amigos .listFriend li img {
     float: left;
     width:25px;
     height:22px;
