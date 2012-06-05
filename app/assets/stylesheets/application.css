@@ -1,6 +1,7 @@
 /* ...
 *= require_self
 *= require fancybox
+*= require jquery.ui.tabs
 *= require_tree .
 */
 @charset "utf-8";
