@@ -12,7 +12,6 @@ group :development, :test do
   gem 'foreigner'
   gem 'yaml_db'
   gem 'ruby-debug19'
-  gem 'thin'
 end
 
 group :assets do
