@@ -8,5 +8,5 @@ class BancoChile.Views.Notifications.NotificationView extends Backbone.View
     @notification = @options.notification
 
   render: =>
-    $(@el).html(@template(user: @user.toJSON() ))
+    $(@el).html(@template(notification: @notification.toJSON() ))
     return this

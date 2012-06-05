@@ -6,7 +6,7 @@ class BancoChile.Routers.AppRouter extends Backbone.Router
     @ranking = new BancoChile.Collections.UsersCollection(options.ranking)
 
     # Test data - remove!
-    @notifications = [
+    notification_test_data = [
       description: 'Juan te ha propuesto un cambio de láminas'
       details: 'Lámina 15 por lámina 5'
       title: 'Cambio de láminas'
@@ -15,6 +15,9 @@ class BancoChile.Routers.AppRouter extends Backbone.Router
       details: 'Ahora es tuya la lámina 2'
       title: 'Ganaste una lámina'
     ]
+
+    @notifications = new BancoChile.Collections.NotificationsCollection(
+      notification_test_data)
 
   routes:
     ""      : "index"

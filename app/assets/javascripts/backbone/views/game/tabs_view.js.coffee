@@ -11,7 +11,7 @@ class BancoChile.Views.Game.TabsView extends Backbone.View
   render: =>
     $(@el).html(@template(user: @user.toJSON()))
     
-    for notification in @notifications
+    for notification in @notifications.models
       notificationView = new BancoChile.Views.Notifications.NotificationView(
         'notification': notification
       )
