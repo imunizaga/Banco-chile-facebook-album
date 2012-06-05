@@ -23,7 +23,7 @@
               xfbml      : true  // parse XFBML
             });
 
-            console.log("subscribing");
+            console.log("Getting facebook login status");
             FB.getLoginStatus(function(response) {
                 console.log("reponse status: " + response.status);
                 if(window.app){
