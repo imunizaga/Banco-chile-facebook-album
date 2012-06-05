@@ -1,6 +1,5 @@
 class StaticPagesController < ApplicationController
   def home
-    @cards = Card.all
     @ranking = User.ranking
     puts "id: #{session[:id]}"
     if session[:id] != nil
@@ -8,8 +7,8 @@ class StaticPagesController < ApplicationController
       @user['login_status'] = 'connected'
       @user_album = @user.album
     else
-      @user = {}
-      @user_album = {}
+      @user = []
+      @user_album = []
     end
   end
 

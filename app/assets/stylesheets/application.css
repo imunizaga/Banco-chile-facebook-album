@@ -644,6 +644,7 @@ ul.links li {
     width:25px;
     height:22px;
     margin:0;
+    cursor: pointer;
 }
 .light .laminas {
     float: left;
