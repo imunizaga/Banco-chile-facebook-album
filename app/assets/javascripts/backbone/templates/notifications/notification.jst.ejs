@@ -1,0 +1,8 @@
+<img src="/assets/faceUser.jpg" alt="name user" />
+<h4><%= notification.title %></h4>
+<p><span><%= notification.name %></span><%= notification.description %></p>
+<p class="laminas"><%= notification.details %></p>
+<% if (typeof(notification.action) != "undefined") { %>
+<a class="accion" href="#">Aceptar</a>
+<a class="accion2" href="#">Rechazar</a>
+<% } %>

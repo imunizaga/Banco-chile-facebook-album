@@ -7,6 +7,7 @@ class BancoChile.Views.Game.IndexView extends Backbone.View
     @user = @options.user
     @cards = @user.get('cards')
     @ranking = @options.ranking
+    @notifications = @options.notifications
     @user.bind('change', @render)
 
   render: =>
@@ -21,7 +22,10 @@ class BancoChile.Views.Game.IndexView extends Backbone.View
     )
     $(@.el).find('.ranking-list').append(rankingView.render().el)
 
-    tabsView = new BancoChile.Views.Game.TabsView(user: @user)
+    tabsView = new BancoChile.Views.Game.TabsView(
+      user: @user,
+      notifications: @notifications
+    )
     $tabs = $(@.el).find('#tabs')
 
     $tabs.append(tabsView.render().el)
