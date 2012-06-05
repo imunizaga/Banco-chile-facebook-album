@@ -28,9 +28,16 @@
                 console.log("reponse status: " + response.status);
                 if(window.app){
                     var user = window.app.user
-                    user.set('login_status', response.status);
-                    if(response.authResponse){
-                        user.set('facebook_id', response.authResponse.userID);
+                    if(response.status == 'connected'){
+                        if(user.get('login_status') != 'connected'){
+                            window.location = "/facebook/login"
+                        }
+                        else{
+                            user.set('facebook_id', response.authResponse.userID);
+                        }
+                    }
+                    else{
+                        user.set('login_status', response.status);
                     }
                 }
             });

@@ -7,7 +7,7 @@ class StaticPagesController < ApplicationController
       @user['login_status'] = 'connected'
       @user_album = @user.album
     else
-      @user = []
+      @user = {}
       @user_album = []
     end
   end
