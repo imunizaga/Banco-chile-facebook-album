@@ -32,10 +32,21 @@ class BancoChile.Models.User extends Backbone.Model
     image =  "https://graph.facebook.com/" + @get('facebook_id')
     return image + "/picture?height=45&width=45"
 
+  getSmallProfileImage: () ->
+    image =  "https://graph.facebook.com/" + @get('facebook_id')
+    return image + "/picture?height=25&width=25"
+
   toJSON: () ->
     jsonUser = super()
     jsonUser.profile_image = @getProfileImage()
+    jsonUser.small_profile_image = @getSmallProfileImage()
     return jsonUser
+
+  friendsWithCard: (card) ->
+    return window.app.ranking
+
+  friendsWithoutCard: (card) ->
+    return window.app.ranking
 
 class BancoChile.Collections.UsersCollection extends Backbone.Collection
   model: BancoChile.Models.User

@@ -8,7 +8,10 @@ class BancoChile.Views.Cards.CardItemView extends Backbone.View
   initialize: () ->
     @model = @options.model
     @model.bind('change', @render)
+    @href = @options.href
 
   render: ->
     $(@el).html(@template(card: @model.toJSON()))
+    $(@el).attr('href', @href)
+
     return this
