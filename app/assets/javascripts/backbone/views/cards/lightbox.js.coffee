@@ -7,16 +7,24 @@ class BancoChile.Views.Cards.LightboxView extends Backbone.View
 
   initialize: () ->
     @card = @options.card
+    @user = @options.user
     @lightboxId = @options.lightboxId
 
   render: ->
     $(@el).html(@template(card: @card.toJSON()))
     $(@el).find('.js-lightbox-container').attr('id', @lightboxId)
+
+    params =
+      card: @card
+      user: @user
+
     if @card.get('count') == 0
-      contentTemplate = JST["backbone/templates/cards/lightbox-got-none"]
+      contentView = new BancoChile.Views.Cards.LightboxGotNoneView(params)
     else if @card.get('count') == 1
-      contentTemplate = JST["backbone/templates/cards/lightbox-got-one"]
+      contentView = new BancoChile.Views.Cards.LightboxGotOneView(params)
     else
-      contentTemplate = JST["backbone/templates/cards/lightbox-got-many"]
-    $(@el).find('.js-lightbox-container').append(contentTemplate({}))
+      contentView = new BancoChile.Views.Cards.LightboxGotManyView(params)
+
+    $(@el).find('.js-lightbox-container').append(contentView.render().el)
+
     return this

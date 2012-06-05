@@ -1,7 +1,7 @@
 BancoChile.Views.Users ||= {}
 
-class BancoChile.Views.Users.RankingView extends Backbone.View
-  template: JST["backbone/templates/users/ranking"]
+class BancoChile.Views.Users.SmallRankingView extends Backbone.View
+  template: JST["backbone/templates/users/small_ranking"]
 
   initialize: () ->
     @ranking = @options.ranking
@@ -12,7 +12,7 @@ class BancoChile.Views.Users.RankingView extends Backbone.View
     $el.html(@template({}))
     $ranking = $el.find('.ranking')
     for user in @ranking.models
-      rankingItem = new BancoChile.Views.Users.RankingItemView(
+      rankingItem = new BancoChile.Views.Users.SmallRankingItemView(
         user: user
         class: 'primero'
       )

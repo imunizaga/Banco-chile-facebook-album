@@ -37,6 +37,7 @@ class BancoChile.Views.Cards.AlbumView extends Backbone.View
       # render the lightboxView
       lightboxView = new BancoChile.Views.Cards.LightboxView(
         card: card
+        user: @user
         lightboxId: lightboxId
       )
       $lightboxes.append(lightboxView.render().el)
