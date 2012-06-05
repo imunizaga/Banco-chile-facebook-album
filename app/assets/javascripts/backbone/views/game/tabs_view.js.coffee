@@ -15,6 +15,6 @@ class BancoChile.Views.Game.TabsView extends Backbone.View
       notificationView = new BancoChile.Views.Notifications.NotificationView(
         'notification': notification
       )
-      $(@el).find('#tabs-1').append(notificationView.render().el)
+      $(@el).find('#tabs-1 ul').append(notificationView.render().el)
 
     return this
