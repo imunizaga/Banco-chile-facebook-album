@@ -23,7 +23,7 @@ class AlbumController < ApplicationController
     end 
     @user=User.find(session['id'])
     @user['login_status'] = 'connected'
-    @user_album = @user.set_album
+    @user_album = @user.set_album.to_ary
     @repeated = @user_album.select {|card| card[:n] > 1}
     @remaining =  @user_album.select {|card| card[:n] == 0}
     @ranking = User.ranking

@@ -10,13 +10,16 @@ class UserCard < ActiveRecord::Base
       begin
         owner = self.user
         cards_count = owner.cards_count
-        if owner.album[self.card_id - 1][:count] == 0
-          owner.cards_count = owner.cards_count + 1
+        card = owner.album[self.card_id - 1]
+        if card[:count] == 0 or card[:count] == nil
+          owner.cards_count += 1
+          owner.album[self.card_id - 1][:count] = 1
+        else
+          owner.album[self.card_id - 1][:count] += 1
         end
-        owner.album[self.card_id - 1][:count] += 1
         owner.save
         rescue Exception=>ex
-          puts 'Can\'t update user counts. ', ex.message
+          puts 'Can\'t update user counts. ', owner.id, '--',owner.album,Card.count, ex.message
       end
     end
 end

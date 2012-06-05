@@ -22,8 +22,8 @@ card_seeds =[
   ['carlos caszely',      100003281187419]
 ]
 
-user_seeds.each {|user| User.create(name: user[0], facebook_id: user[1])}
 card_seeds.each {|card| Card.create(name: card[0], source: card[1])}
+user_seeds.each {|user| User.create(name: user[0], facebook_id: user[1])}
 
 Challenge.create(n_cards:1, name: 'mail')
 Challenge.create(n_cards:3, name: 'invite')

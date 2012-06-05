@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120602081611) do
+ActiveRecord::Schema.define(:version => 20120604072356) do
 
   create_table "card_packs", :force => true do |t|
     t.integer  "challenge_id"
@@ -57,6 +57,7 @@ ActiveRecord::Schema.define(:version => 20120602081611) do
     t.integer  "foursquare_id"
     t.text     "referals"
     t.integer  "cards_count",                :default => 0
+    t.text     "album"
   end
 
 end

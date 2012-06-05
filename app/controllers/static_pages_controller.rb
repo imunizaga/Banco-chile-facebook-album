@@ -6,7 +6,7 @@ class StaticPagesController < ApplicationController
     if session[:id] != nil
       @user = User.find_by_id(session[:id])
       @user['login_status'] = 'connected'
-      @user_album = User.album = @user.set_album
+      @user_album = @user.album
     else
       @user = {}
       @user_album = {}

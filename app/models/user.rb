@@ -1,13 +1,10 @@
 class User < ActiveRecord::Base
   attr_accessible :email, :facebook_id, :twitter_id, :name, :foursquare_id, :friends, :referals
+  serialize :album, Array
   has_many :user_cards
   has_many :cards, :through => :user_cards, :uniq => true
-
-  cattr_accessor :album, :repeated_cards, :remaining_cards 
-
-  def n_cards
-    self.cards.count
-  end
+  before_create :set_empty_album
+  cattr_accessor :repeated_cards, :remaining_cards 
 
   def set_album
     options = {
@@ -52,4 +49,8 @@ class User < ActiveRecord::Base
     end
     return ranking
   end
+
+    def set_empty_album
+      self.album = (1..Card.count).map { |i| {:card_id=>i, :count=>0 }}
+    end
 end
