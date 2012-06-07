@@ -28,7 +28,6 @@
                     console.log("reponse status: " + response.status);
                     if(window.app){
                         var user = window.app.user;
-                        debugger;
                         if(response.status == 'connected'){
                             if(user.get('login_status') != 'connected'){
                                 window.location = "/facebook/login"
