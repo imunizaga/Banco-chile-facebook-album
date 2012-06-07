@@ -7,8 +7,21 @@
 </div>
 <div id="tabs-2">
     <ul class="pruebas">
+    <p><span id="login-twitter"></span></p>
     <p><a href="https://twitter.com/intent/tweet?text=dummy">Tweet</a></p>
     <p><a href="https://twitter.com/intent/user?screen_name=twitterapi">Follow</a></p>
     <p><a href="https://twitter.com/intent/retweet?tweet_id=89088788592214016">Retweet</a></p>
+
+<script type="text/javascript">
+  twttr.anywhere.config({ callbackURL: "http://127.0.0.1:3000/auth/twitter/callback" });
+ 
+  twttr.anywhere(function (T) {
+    T("#login-twitter").connectButton();
+  });
+ 
+</script>
+
+
+
     </ul>
 </div>
