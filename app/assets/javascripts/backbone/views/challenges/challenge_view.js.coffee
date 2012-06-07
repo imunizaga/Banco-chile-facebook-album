@@ -5,8 +5,8 @@ class BancoChile.Views.Challenges.ChallengeView extends Backbone.View
   tagName: "li"
 
   initialize: () ->
-    @user = @options.user
+    @challenge = @options.challenge
 
   render: ->
-    $(@el).html(@template(@model.toJSON() ))
+    $(@el).html(@template(challenge: @challenge.toJSON() ))
     return this

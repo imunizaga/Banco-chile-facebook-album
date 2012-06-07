@@ -6,7 +6,6 @@ class BancoChile.Views.Cards.AlbumView extends Backbone.View
   initialize: () ->
     @cards = @options.cards
     @user = @options.user
-    @user.bind('change', @render)
 
   render: =>
     # removes the DOM element

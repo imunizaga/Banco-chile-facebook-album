@@ -6,7 +6,7 @@ class BancoChile.Views.Game.TabsView extends Backbone.View
   initialize: () ->
     @user = @options.user
     @notifications = @options.notifications
-    @user.bind('change', @render)
+    @challenges = @options.challenges
 
   render: =>
     $(@el).html(@template(user: @user.toJSON()))
@@ -16,5 +16,13 @@ class BancoChile.Views.Game.TabsView extends Backbone.View
         'notification': notification
       )
       $(@el).find('#tabs-1 ul').append(notificationView.render().el)
+
+    for challenge in @challenges.models
+      challengeView = new BancoChile.Views.Challenges.ChallengeView(
+        'challenge': challenge
+      )
+      $(@el).find('#tabs-2 ul').append(challengeView.render().el)
+
+
 
     return this

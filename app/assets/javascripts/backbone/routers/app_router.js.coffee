@@ -16,8 +16,20 @@ class BancoChile.Routers.AppRouter extends Backbone.Router
       title: 'Ganaste una lámina'
     ]
 
+    challenge_test_data = [
+      title: 'Title1'
+      description: 'Description1'
+      action: 'Action1'
+    ,
+      title: 'Title2'
+      description: 'Description2'
+      action: 'Action2'
+    ]
+
     @notifications = new BancoChile.Collections.NotificationsCollection(
       notification_test_data)
+    @challenges = new BancoChile.Collections.ChallengesCollection(
+      challenge_test_data)
 
   routes:
     ""      : "index"
@@ -43,6 +55,7 @@ class BancoChile.Routers.AppRouter extends Backbone.Router
         user: @user
         ranking: @ranking
         notifications: @notifications
+        challenges: @challenges
       )
       $container = $("#container")
       $container.html(@view.render().el)
