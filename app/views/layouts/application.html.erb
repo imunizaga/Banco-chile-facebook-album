@@ -67,13 +67,17 @@
                 console.log("In twttr ready");
                 // Now bind our custom intent events
                 twttr.events.bind('tweet', function(event) {
-                    var tweet_succesfull = true;
-                    console.log("tweeted!");
+                    var tweet_id = event.data.source_tweet_id;
+                    console.log("tweeted!: " + tweet_id);
                 });
                 twttr.events.bind('follow', function(event) {
                     var followed_user_id = event.data.user_id;
                     var followed_screen_name = event.data.screen_name;
-                    console.log("followed!");
+                    console.log("followed!: " + followed_screen_nae);
+                });
+                twttr.events.bind('retweet', function(event) {
+                    var retweeted_tweet_id = event.data.source_tweet_id;
+                    console.log("re-tweeted!: " + tweet_id);
                 });
             });
 
