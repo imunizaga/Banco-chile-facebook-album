@@ -27,13 +27,15 @@
                 FB.getLoginStatus(function(response) {
                     console.log("reponse status: " + response.status);
                     if(window.app){
-                        var user = window.app.user
+                        var user = window.app.user;
+                        debugger;
                         if(response.status == 'connected'){
                             if(user.get('login_status') != 'connected'){
                                 window.location = "/facebook/login"
                             }
                             else{
-                                user.set('facebook_id', response.authResponse.userID);
+                                facebookId = parseInt(response.authResponse.userID)
+                                user.set('facebook_id', facebookId);
                             }
                         }
                         else{
