@@ -1,13 +1,25 @@
-<h3>Ésta lámina la tienes repetida.</h3>
-<p>Puedes intercambiarla!</p>
-<div class="repeticiones">
-  <p class="numero">x<%= card.count %></p>
-  <p class="titulo">Repeticiones</p>
-  <p class="bajada">Puedes intercambiarla!</p>
+<div class="js-trade-friends">
+    <h3>Ésta lámina la tienes repetida.</h3>
+    <p>Puedes intercambiarla!</p>
+    <div class="repeticiones">
+      <p class="numero">x<%= card.count %></p>
+      <p class="titulo">Repeticiones</p>
+      <p class="bajada">Puedes intercambiarla!</p>
+    </div>
+    <div class="amigos">
+      <p class="titulo">Amigos que no la tienen</p>
+      <p class="bajada">Ellos tienen láminas que te faltan!</p>
+      <ul class="listFriend js-friend-list">
+      </ul>
+    </div>
 </div>
-<div class="amigos">
-  <p class="titulo">Amigos que no la tienen</p>
-  <p class="bajada">Ellos tienen láminas que te faltan!</p>
-  <ul class="listFriend js-friend-list">
-  </ul>
+<div class="laminas hidden js-trade-cards">
+    <p class="titulo">¿Cuál lámina quiero?</p>
+    <p class="bajada">
+        Haz click sobre la lámina que quieras solicitar a tu amigo.
+    </p>
+    <ul class="listCards js-trade-card-list">
+    </ul>
+    <div class="confirmar">Confirmar</div>
+    <div class="error hidden">Debes escoger la pámina que quieres</div>
 </div>

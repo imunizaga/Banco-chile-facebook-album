@@ -7,7 +7,6 @@ class BancoChile.Views.Cards.CardItemView extends Backbone.View
 
   initialize: () ->
     @model = @options.model
-    @model.bind('change', @render)
     @href = @options.href
 
   render: ->
