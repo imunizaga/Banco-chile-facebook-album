@@ -1,0 +1,49 @@
+$border-color: white;
+$font-color: white;
+$background-color: black;
+
+@mixin toast-element{
+    border-width: 1px;
+    border-style: solid;
+    border-color: transparent;
+    z-index:1000;
+    opacity: 0;
+}
+
+.toast-element{
+    @include toast-element;
+}
+
+.toast-background{
+
+    @include toast-element;
+
+    color: $background-color;
+    background-color: $background-color;
+    border-color: $border-color;
+    position: absolute;
+    opacity: 0.8;
+}
+
+.toast-text{
+    @include toast-element;
+
+    color: $font-color;
+}
+
+.toast-background, .toast-text{
+    padding: 3px;
+}
+
+.toast-text{
+    border-radius: 8px;
+}
+
+.toast-background-user, .toast-text-user{
+    padding: 10px;
+    z-index: 10000;
+}
+
+.toast-text-user{
+    border: 2px solid black;
+}

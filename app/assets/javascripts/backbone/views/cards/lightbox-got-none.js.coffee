@@ -7,18 +7,24 @@ class BancoChile.Views.Cards.LightboxGotNoneView extends BancoChile.Views.Cards.
     $(@el).find(".js-trade-cards").show()
     $(@el).find(".js-trade-friends").hide()
 
-  cardSelected: (card)->
-    @cardToGive = card
+  cardSelected: (selectedSmallCardItemView)->
+    @cardToGive = selectedSmallCardItemView.model
     @cardToReceive = @card
-    console.log("trade " + @cardToGive.get('card_id') + " for " + @cardToReceive.get('card_id'))
+    super(selectedSmallCardItemView)
 
   render: ->
     super()
     $cardList = $(@el).find(".js-trade-card-list")
+
+    @smallCardItemViewList = []
     for card in @user.get('cards').models
+      # if we don't have a repeated card to trade
+      if card.get('count') < 2
+        continue
       smallCardItemView = new BancoChile.Views.Cards.SmallCardItemView(
         model: card
       )
+      @smallCardItemViewList.push(smallCardItemView)
       $cardList.append(smallCardItemView.render().el)
       smallCardItemView.bind("smallCardItemViewClicked", @cardSelected, this)
     return this
