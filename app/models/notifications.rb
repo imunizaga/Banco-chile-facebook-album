@@ -1,3 +1,4 @@
 class Notification < ActiveRecord::Base
-  attr_accessible :title, :description, :details, :n_cards
+  attr_accessible :title, :description, :details, :user_id
+  belongs_to :user
 end
