@@ -3,6 +3,8 @@ BancoChile::Application.routes.draw do
 
   get "album/home"
 
+  resources :notifications
+
   resources :challenges
 
   resources :card_packs

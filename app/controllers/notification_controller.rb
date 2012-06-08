@@ -1,4 +1,4 @@
-class notificationsController < ApplicationController
+class NotificationsController < ApplicationController
   # GET /notifications
   # GET /notifications.json
   def index
