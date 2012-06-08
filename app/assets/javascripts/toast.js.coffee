@@ -12,9 +12,6 @@ TIME = {
 }
 
 window.toast = (msg, type='debug') ->
-  if not Settings.DEBUG and type =='debug'
-    return
-
   slot = -1
   for i in [0..(toastSlots.length-1)]
     k = (i + lastSlot) % toastSlots.length
