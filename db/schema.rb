@@ -43,6 +43,7 @@ ActiveRecord::Schema.define(:version => 20120607235653) do
     t.text     "details",     :limit => 255
     t.datetime "created_at",                 :null => false
     t.datetime "updated_at",                 :null => false
+    t.integer  "user_id"
     t.integer  "receiver_id"
     t.integer  "sender_id"
     t.text     "cards_in"
