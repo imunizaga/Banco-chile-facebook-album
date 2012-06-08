@@ -27,6 +27,7 @@ user_seeds.each {|user| User.create(name: user[0], facebook_id: user[1])}
 
 Challenge.create(n_cards:1, name: 'mail')
 Challenge.create(n_cards:3, name: 'invite')
+Challenge.create(n_cards:5, name: 'invite')
 
 CardPack.create(challenge_id:1)
 UserCard.create(card_pack_id:1, card_id:1, user_id:1)
@@ -37,8 +38,12 @@ UserCard.create(card_pack_id:2, card_id:2, user_id:1)
 CardPack.create(challenge_id:1)
 UserCard.create(card_pack_id:3, card_id:3, user_id:2)
 
-CardPack.create(challenge_id:1)
+CardPack.create(challenge_id:3)
 UserCard.create(card_pack_id:4, card_id:1, user_id:3)
+UserCard.create(card_pack_id:4, card_id:2, user_id:3)
+UserCard.create(card_pack_id:4, card_id:2, user_id:3)
+UserCard.create(card_pack_id:4, card_id:3, user_id:3)
+UserCard.create(card_pack_id:4, card_id:3, user_id:3)
 
 CardPack.create(challenge_id:2)
 UserCard.create(card_pack_id:5, card_id:3, user_id:4)

@@ -18,4 +18,4 @@ class BancoChile.Views.Cards.SmallCardItemView extends Backbone.View
 
   clicked: () ->
     console.log('small Card Item Clicked')
-    @trigger('smallCardItemViewClicked', @model)
+    @trigger('smallCardItemViewClicked', this)

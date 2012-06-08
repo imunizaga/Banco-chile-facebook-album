@@ -21,10 +21,20 @@ class BancoChile.Views.Cards.LightboxContent extends Backbone.View
       $(@el).find('.js-friend-list').append(smallRankingItemView.render().el)
     return this
 
+  cardSelected: (selectedSmallCardItemView)->
+    # de-select all cards
+    for smallCardItemView in @smallCardItemViewList
+      $(smallCardItemView.el).removeClass('selected')
+
+    # select the clicked card
+    $(selectedSmallCardItemView.el).addClass('selected')
+
+    console.log("trade " + @cardToGive.get('card_id') + " for " + @cardToReceive.get('card_id'))
+
   confirm: () ->
     $(@el).find('.js-confirm-error').hide()
     if @cardToGive and @cardToReceive
-      console.log('submitting trade')
+      toast('submitting trade', 'user')
     else
       $(@el).find('.js-confirm-error').show()
 
