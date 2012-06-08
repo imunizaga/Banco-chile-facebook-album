@@ -22,6 +22,7 @@ BancoChile::Application.routes.draw do
   root :to => 'static_pages#home'
 
   match 'auth/facebook/callback' => 'auth#facebook_callback'
+  match 'auth/twitter/callback' => 'auth#twitter_callback'
   match 'logout' => 'auth#logout'
   #root :to => 'ApplicationController/#index'
 

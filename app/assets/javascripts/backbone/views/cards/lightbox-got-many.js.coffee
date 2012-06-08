@@ -2,3 +2,27 @@ BancoChile.Views.Cards ||= {}
 
 class BancoChile.Views.Cards.LightboxGotManyView extends BancoChile.Views.Cards.LightboxContent
   template: JST["backbone/templates/cards/lightbox-got-many"]
+
+  cardSelected: (card)->
+    @cardToGive = @card
+    @cardToReceive = card
+    console.log("trade " + @cardToGive.get('card_id') + " for " + @cardToReceive.get('card_id'))
+
+    for smallCardItemView in @smallCardItemViewList
+      $(smallCardItemView.el).removeClass('selected')
+
+    $(smallCardItemView.el).addClass('selected')
+
+  userSelected: (user)->
+    $(@el).find(".js-trade-cards").show()
+    $(@el).find(".js-trade-friends").hide()
+    $cardList = $(@el).find(".js-trade-card-list")
+    @smallCardItemViewList = []
+    for card in user.get('cards').models
+      smallCardItemView = new BancoChile.Views.Cards.SmallCardItemView(
+        model: card
+      )
+      @smallCardItemViewList.push(smallCardItemView)
+      $cardList.append(smallCardItemView.render().el)
+      smallCardItemView.bind("smallCardItemViewClicked", @cardSelected, this)
+    return this
