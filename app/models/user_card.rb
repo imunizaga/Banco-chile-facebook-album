@@ -19,7 +19,7 @@ class UserCard < ActiveRecord::Base
         end
         owner.save
         rescue Exception=>ex
-          puts 'Can\'t update user counts. ', owner.id, '--',owner.album,Card.count, ex.message
+          puts 'Can\'t update user counts. Id:', owner.id, ex.message
       end
     end
 end

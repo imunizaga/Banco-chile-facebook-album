@@ -3,8 +3,8 @@ class User < ActiveRecord::Base
   serialize :album, Array
   has_many :user_cards
   has_many :cards, :through => :user_cards, :uniq => true
+  has_many :notifications
   before_create :set_empty_album
-  cattr_accessor :repeated_cards, :remaining_cards 
 
   def set_album
     options = {
@@ -49,8 +49,21 @@ class User < ActiveRecord::Base
     end
     return ranking
   end
+  
+  def self.sort_by_rank top
+    User.order('-cards_count').limit(top)
+  end
 
-    def set_empty_album
-      self.album = (1..Card.count).map { |i| {:card_id=>i, :count=>0 }}
-    end
+  def repeated_cards
+    self.album.select{|card| card[:count]>1}
+  end
+
+  def remaining_cards
+    self.album.select{|card| card[:count]==0}
+  end
+
+  def set_empty_album
+    self.album = (1..Card.count).map { |i| {:card_id=>i, :count=>0 }}
+  end
+
 end

@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120605142938) do
+ActiveRecord::Schema.define(:version => 20120607235653) do
 
   create_table "card_packs", :force => true do |t|
     t.integer  "challenge_id"
@@ -38,12 +38,17 @@ ActiveRecord::Schema.define(:version => 20120605142938) do
   end
 
   create_table "notifications", :force => true do |t|
-    t.string   "title"
-    t.string   "description"
-    t.string   "details"
-    t.integer  "n_cards"
-    t.datetime "created_at",  :null => false
-    t.datetime "updated_at",  :null => false
+    t.text     "title",       :limit => 255
+    t.text     "description", :limit => 255
+    t.text     "details",     :limit => 255
+    t.datetime "created_at",                 :null => false
+    t.datetime "updated_at",                 :null => false
+    t.integer  "receiver_id"
+    t.integer  "sender_id"
+    t.text     "cards_in"
+    t.text     "cards_out"
+    t.integer  "status"
+    t.date     "renewal"
   end
 
   create_table "user_cards", :force => true do |t|
