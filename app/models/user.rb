@@ -50,6 +50,56 @@ class User < ActiveRecord::Base
     return ranking
   end
   
+  def find_trades friends = User.where(Arel::Table.new(:users)[:id].not_in self.id)
+    friends = friends.includes(:cards,:user_cards)
+    self.album.each do |card|
+      self.album[card[:card_id]-1][:trades] = []
+      count = card[:count]
+      trades = []
+      case 
+        when count == 0 then 
+          print self.name, " doesn\'t have card ", card[:card_id],"\n"
+          friends.each do |friend|
+            if friend.album[card[:card_id]-1][:count] > 1
+              self.album[card[:card_id]-1][:trades].append(friend.id) 
+              print "\t", friend.name, " has card ", card[:card_id],  " repeated" ,"\n"
+            end
+          end
+        when count > 1 then
+          print self.name, " has card ", card[:card_id], " repeated", "\n"  
+          friends.each do |friend|
+            if card[:card_id].in? friend.remaining_cards.map {
+              |friend_card| friend_card[:card_id] }
+              self.album[card[:card_id]-1][:trades].append(friend.id) 
+              print "\t", friend.name, " doesn\'t have card ", card[:card_id],  "\n"
+            end
+          end
+        else
+          print self.name, " has card ", card[:card_id], "\n"
+          friends.each do |friend|
+            if card[:card_id].in? friend.cards.map { |friend_card| friend_card[:id]}
+              print "\t", friend.name, " also has this card \n"
+              self.album[card[:card_id]-1][:trades].append(friend.id) 
+            end
+          end
+      end
+    end
+    self.save
+  end    
+#    if self.repeated_cards.length <=  self.remaining_cards.length
+#      self.remaining_cards.each do |card|
+#        puts 'looking for card ', card[:card_id]
+#        friends.each do |friend|
+#          if card[:card_id].in? friend.repeated_cards.map {|card| card[:card_id] }
+#            puts 'friend has this card repeated. Id: ', friend.id
+#          end
+#        end
+#      end
+#    else
+#      p 'TODO: self.repeated_cards.length > self.remaining_cards.length'
+#    end
+#  end
+
   def self.sort_by_rank top
     User.order('-cards_count').limit(top)
   end
