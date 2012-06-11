@@ -86,19 +86,6 @@ class User < ActiveRecord::Base
     end
     self.save
   end    
-#    if self.repeated_cards.length <=  self.remaining_cards.length
-#      self.remaining_cards.each do |card|
-#        puts 'looking for card ', card[:card_id]
-#        friends.each do |friend|
-#          if card[:card_id].in? friend.repeated_cards.map {|card| card[:card_id] }
-#            puts 'friend has this card repeated. Id: ', friend.id
-#          end
-#        end
-#      end
-#    else
-#      p 'TODO: self.repeated_cards.length > self.remaining_cards.length'
-#    end
-#  end
 
   def self.sort_by_rank top
     User.order('-cards_count').limit(top)
