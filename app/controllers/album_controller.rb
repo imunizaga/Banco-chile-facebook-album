@@ -21,11 +21,8 @@ class AlbumController < ApplicationController
       session['id_return'] ='/album/home'
       redirect_to :root and return
     end 
-    friends = []
-    for fb_friend in friends_using_app
-        friend = User.where(facebook_id: fb_friend['uid']).first()
-        friends << friend
-    end
+    friends_fids = friends_using_app.map {|fb_friend| fb_friend['uid'] }
+    friends = User.where(facebook_id: friends_fids) 
     @user=User.find(session['id'])
     @user['friends'] = friends
     @user['login_status'] = 'connected'
