@@ -13,6 +13,7 @@ class BancoChile.Views.Cards.LightboxGotNoneView extends BancoChile.Views.Cards.
     super(selectedSmallCardItemView)
 
   render: ->
+    @friends = @user.friendsWithRepeatedCard(@card)
     super()
     $cardList = $(@el).find(".js-trade-card-list")
 

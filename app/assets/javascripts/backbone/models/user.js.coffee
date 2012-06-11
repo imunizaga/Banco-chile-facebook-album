@@ -7,10 +7,25 @@ class BancoChile.Models.User extends Backbone.Model
     twitter_id: null
     name: null
 
-  initialize: () ->
-    cards = new BancoChile.Collections.CardsCollection()
+  initialize: (@options) ->
+    cards = new BancoChile.Collections.CardsCollection(@options['album'])
     @set('cards', cards)
     cards.bind('reset', @updateUniqueCardCount, this)
+
+    friends = new BancoChile.Collections.UsersCollection(@options['friends'])
+    @set('friends', friends)
+
+  hasCard: (card) ->
+    card_id = card.get('card_id')
+    _.find(@get('cards').models, (card)->
+      return card.get('card_id') == card_id
+    )
+
+  hasCardRepeated: (card) ->
+    card_id = card.get('card_id')
+    _.find(@get('cards').models, (card)->
+      return card.get('card_id') == card_id and card.get('count') > 1
+    )
 
   updateUniqueCardCount: () ->
     uniqueCardsCount = 0
@@ -34,6 +49,7 @@ class BancoChile.Models.User extends Backbone.Model
 
   getSmallProfileImage: () ->
     image =  "https://graph.facebook.com/" + @get('facebook_id')
+
     return image + "/picture?height=25&width=25"
 
   toJSON: () ->
@@ -43,10 +59,25 @@ class BancoChile.Models.User extends Backbone.Model
     return jsonUser
 
   friendsWithCard: (card) ->
-    return window.app.ranking
+    friendsWithCard = []
+    for friend in @get('friends').models
+      if friend.hasCard(card)
+        friendsWithCard.push(friend)
+    return friendsWithCard
+
+  friendsWithRepeatedCard: (card) ->
+    friendsWithRepeatedCard = []
+    for friend in @get('friends').models
+      if friend.hasCardRepeated(card)
+        friendsWithRepeatedCard.push(friend)
+    return friendsWithRepeatedCard
 
   friendsWithoutCard: (card) ->
-    return window.app.ranking
+    friendsWithoutCard = []
+    for friend in @get('friends').models
+      if not friend.hasCard(card)
+        friendsWithoutCard.push(friend)
+    return friendsWithoutCard
 
 class BancoChile.Collections.UsersCollection extends Backbone.Collection
   model: BancoChile.Models.User
