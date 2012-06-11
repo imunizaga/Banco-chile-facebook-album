@@ -7,7 +7,7 @@ class AlbumController < ApplicationController
       session[:callback_return] = '/album/home'
       redirect_to '/auth/facebook?permissions=user_about_me' and return
     end
-    @friends_using_app = @api.fql_query("
+    friends_using_app = @api.fql_query("
         SELECT uid, name, is_app_user, pic_square 
         FROM user 
         WHERE uid 
@@ -21,11 +21,17 @@ class AlbumController < ApplicationController
       session['id_return'] ='/album/home'
       redirect_to :root and return
     end 
+    friends = []
+    for fb_friend in friends_using_app
+        friend = User.where(facebook_id: fb_friend['uid']).first()
+        friends << friend
+    end
     @user=User.find(session['id'])
+    @user['friends'] = friends
     @user['login_status'] = 'connected'
     @user_album = @user.set_album.to_ary
-    @repeated = @user_album.select {|card| card[:n] > 1}
-    @remaining =  @user_album.select {|card| card[:n] == 0}
+    #@repeated = @user_album.select {|card| card[:n] > 1}
+    #@remaining =  @user_album.select {|card| card[:n] == 0}
     @ranking = User.ranking
   end
 
