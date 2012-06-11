@@ -15,17 +15,18 @@ class BancoChile.Models.User extends Backbone.Model
     friends = new BancoChile.Collections.UsersCollection(@options['friends'])
     @set('friends', friends)
 
-  hasCard: (card) ->
-    card_id = card.get('card_id')
-    _.find(@get('cards').models, (card)->
+  getCard: (card_id) ->
+    return _.find(@get('cards').models, (card)->
       return card.get('card_id') == card_id
     )
 
+  hasCard: (card) ->
+    card = @getCard(card.get('card_id'))
+    return card.get('count') == 1
+
   hasCardRepeated: (card) ->
-    card_id = card.get('card_id')
-    _.find(@get('cards').models, (card)->
-      return card.get('card_id') == card_id and card.get('count') > 1
-    )
+    card = @getCard(card.get('card_id'))
+    return card.get('count') > 1
 
   updateUniqueCardCount: () ->
     uniqueCardsCount = 0
