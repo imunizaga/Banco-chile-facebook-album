@@ -10,10 +10,8 @@ class BancoChile.Views.Cards.LightboxContent extends Backbone.View
 
   render: ->
     $(@el).html(@template(card: @card.toJSON()))
-    friendsWithCard = @user.friendsWithCard(@card)
 
-
-    for friend in friendsWithCard.models
+    for friend in @friends
       smallRankingItemView = new BancoChile.Views.Users.SmallRankingItemView(
         user: friend
       )

@@ -2,7 +2,6 @@ class BancoChile.Routers.AppRouter extends Backbone.Router
   initialize: (options) ->
     @options = options
     @user = new BancoChile.Models.User(options.user)
-    @user.get('cards').reset(options.cards)
     @ranking = new BancoChile.Collections.UsersCollection(options.ranking)
 
     # Test data - remove!
