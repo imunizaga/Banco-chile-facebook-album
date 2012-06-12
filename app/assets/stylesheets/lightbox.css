@@ -27,7 +27,7 @@ ul.links li {
 .light .imagen img {
     float: left;
     width:200px;
-    height:auto;
+    height: 250px;
     margin:0;
 }
 .light h2, .light h3, .light p {

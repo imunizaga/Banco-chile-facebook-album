@@ -26,10 +26,8 @@ class AlbumController < ApplicationController
     @user=User.find(session['id'])
     @user['friends'] = friends
     @user['login_status'] = 'connected'
-    @user_album = @user.set_album.to_ary
-    #@repeated = @user_album.select {|card| card[:n] > 1}
-    #@remaining =  @user_album.select {|card| card[:n] == 0}
     @ranking = User.ranking
+    @cards = Card.all
   end
 
   def home

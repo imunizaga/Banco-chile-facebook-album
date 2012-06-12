@@ -3,6 +3,9 @@ BancoChile.Views.Cards ||= {}
 class BancoChile.Views.Cards.CardItemView extends Backbone.View
   template: JST["backbone/templates/cards/item"]
 
+  events:
+    "click": "clicked"
+
   tagName: "li"
 
   initialize: () ->
@@ -14,3 +17,6 @@ class BancoChile.Views.Cards.CardItemView extends Backbone.View
     $(@el).attr('href', @href)
 
     return this
+
+  clicked: ->
+    @trigger('cardItemClicked')

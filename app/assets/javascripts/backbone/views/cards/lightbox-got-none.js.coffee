@@ -6,6 +6,7 @@ class BancoChile.Views.Cards.LightboxGotNoneView extends BancoChile.Views.Cards.
   userSelected: (user)->
     $(@el).find(".js-trade-cards").show()
     $(@el).find(".js-trade-friends").hide()
+    @selectedUser = user
 
   cardSelected: (selectedSmallCardItemView)->
     @cardToGive = selectedSmallCardItemView.model

@@ -1,13 +1,15 @@
 class BancoChile.Models.Notification extends Backbone.Model
+  url: '/notifications'
+
   paramRoot: 'notification'
 
   defaults:
-    action: null
+    title: null
     description: null
     details: null
-    name: null
-    title: null
+    user_id: null
 
 class BancoChile.Collections.NotificationsCollection extends Backbone.Collection
   model: BancoChile.Models.Notification
+
   url: '/notifications'

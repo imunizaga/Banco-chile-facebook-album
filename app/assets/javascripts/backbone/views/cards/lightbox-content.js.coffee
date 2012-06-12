@@ -17,6 +17,7 @@ class BancoChile.Views.Cards.LightboxContent extends Backbone.View
       )
       smallRankingItemView.bind("smallRankingUserClicked", @userSelected, this)
       $(@el).find('.js-friend-list').append(smallRankingItemView.render().el)
+
     return this
 
   cardSelected: (selectedSmallCardItemView)->
@@ -30,9 +31,21 @@ class BancoChile.Views.Cards.LightboxContent extends Backbone.View
     console.log("trade " + @cardToGive.get('card_id') + " for " + @cardToReceive.get('card_id'))
 
   confirm: () ->
-    $(@el).find('.js-confirm-error').hide()
-    if @cardToGive and @cardToReceive
+    $error = $(@el).find('.js-confirm-error')
+    $error.hide()
+    if @cardToGive and @cardToReceive and @selectedUser
+      notification = new BancoChile.Models.Notification(
+        user_id: @selectedUser.get('id')
+        cards_in: [@cardToGive.get('card_id')]
+        cards_out: [@cardToReceive.get('card_id')]
+      )
+
+      notification.save()
       toast('submitting trade', 'user')
     else
+      if not @selectedUser
+        $error.html(BancoChile.UIMessages['TRADE_ERROR_NO_USER'])
+      else
+        $error.html(BancoChile.UIMessages['TRADE_ERROR_NO_CARD'])
       $(@el).find('.js-confirm-error').show()
 
