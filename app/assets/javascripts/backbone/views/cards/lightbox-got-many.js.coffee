@@ -5,7 +5,7 @@ class BancoChile.Views.Cards.LightboxGotManyView extends BancoChile.Views.Cards.
 
   render: ->
     @friends = @user.friendsWithoutCard(@card)
-    super()
+    return super()
 
   cardSelected: (selectedSmallCardItemView)->
     @cardToGive = @card
@@ -13,6 +13,7 @@ class BancoChile.Views.Cards.LightboxGotManyView extends BancoChile.Views.Cards.
     super(selectedSmallCardItemView)
 
   userSelected: (user)->
+    @selectedUser = user
     $(@el).find(".js-trade-cards").show()
     $(@el).find(".js-trade-friends").hide()
     $cardList = $(@el).find(".js-trade-card-list")

@@ -7,26 +7,35 @@ class BancoChile.Models.User extends Backbone.Model
     twitter_id: null
     name: null
 
+  # as an optional parameter, the user can receive cards, thats
+  # the collection of generic cards
   initialize: (@options) ->
-    cards = new BancoChile.Collections.CardsCollection(@options['album'])
-    @set('cards', cards)
-    cards.bind('reset', @updateUniqueCardCount, this)
+    if @options['album']
+      #create a duplicate of the cards
+      myCards = new BancoChile.Collections.CardsCollection(
+        window.db.cards.toJSON())
+
+      # fill the cards with my own data
+      for myCardData in @options['album']
+        myCard = myCards.filter(myCardData['card_id'])
+        myCard.set(myCardData)
+
+      @set('cards', myCards)
+      myCards.bind('reset', @updateUniqueCardCount, this)
 
     friends = new BancoChile.Collections.UsersCollection(@options['friends'])
     @set('friends', friends)
 
   getCard: (card_id) ->
-    return _.find(@get('cards').models, (card)->
-      return card.get('card_id') == card_id
-    )
+    return @get('cards').filter(card_id)
 
   hasCard: (card) ->
-    card = @getCard(card.get('card_id'))
-    return card.get('count') == 1
+    myCard = @getCard(card.get('card_id'))
+    return myCard.get('count') == 1
 
   hasCardRepeated: (card) ->
-    card = @getCard(card.get('card_id'))
-    return card.get('count') > 1
+    myCard = @getCard(card.get('card_id'))
+    return myCard.get('count') > 1
 
   updateUniqueCardCount: () ->
     uniqueCardsCount = 0

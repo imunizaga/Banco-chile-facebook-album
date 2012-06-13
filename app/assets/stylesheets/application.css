@@ -276,6 +276,15 @@ h2.rank {
     margin:0px 5px 5px 0;
     background:#ddd;
 }
+.izq ul li img{
+    width: 40px;
+    height: 60px;
+}
+
+.izq ul li .count{
+    font-weight: bold;
+}
+
 .izq ul li.laTengo {
     background:#999;
 }

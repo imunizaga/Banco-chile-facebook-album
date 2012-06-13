@@ -5,4 +5,4 @@ class BancoChile.Views.Cards.LightboxGotOneView extends BancoChile.Views.Cards.L
 
   render: ->
     @friends = @user.friendsWithCard(@card)
-    super()
+    return super()

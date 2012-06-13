@@ -1,8 +1,9 @@
 class BancoChile.Routers.AppRouter extends Backbone.Router
-  initialize: (options) ->
-    @options = options
-    @user = new BancoChile.Models.User(options.user)
-    @ranking = new BancoChile.Collections.UsersCollection(options.ranking)
+  initialize: (@options) ->
+    window.db =
+      cards: new BancoChile.Collections.CardsCollection(@options.cards)
+    @user = new BancoChile.Models.User(@options.user)
+    @ranking = new BancoChile.Collections.UsersCollection(@options.ranking)
 
     # Test data - remove!
     notification_test_data = [

@@ -1,0 +1,9 @@
+<div id="users"></div>
+
+<script type="text/javascript">
+  $(function() {
+    // BancoChile is the app name
+    window.router = new BancoChile.Routers.NotificationsRouter({notifications: <%= @notifications.to_json.html_safe -%>});
+    Backbone.history.start();
+  });
+</script>

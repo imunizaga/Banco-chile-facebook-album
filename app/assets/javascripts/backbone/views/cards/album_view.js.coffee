@@ -44,4 +44,6 @@ class BancoChile.Views.Cards.AlbumView extends Backbone.View
       # set the cardItem to open the fancy box on click
       $(@el).find("." + cardItemClassName).fancybox()
 
+      cardItemView.bind("cardItemClicked", lightboxView.render, lightboxView)
+
     return this
