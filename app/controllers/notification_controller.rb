@@ -5,7 +5,6 @@ class NotificationsController < ApplicationController
     @notifications = Notification.all
 
     respond_to do |format|
-      format.html # index.html.erb
       format.json { render json: @notifications }
     end
   end
@@ -16,7 +15,6 @@ class NotificationsController < ApplicationController
     @notification = Notification.find(params[:id])
 
     respond_to do |format|
-      format.html # show.html.erb
       format.json { render json: @notification }
     end
   end
@@ -27,7 +25,6 @@ class NotificationsController < ApplicationController
     @notification = Notification.new
 
     respond_to do |format|
-      format.html # new.html.erb
       format.json { render json: @notification }
     end
   end
@@ -60,10 +57,8 @@ class NotificationsController < ApplicationController
 
     respond_to do |format|
       if @notification.update_attributes(params[:notification].except(:id, :created_at, :updated_at))
-        format.html { redirect_to @notification, notice: 'notification was successfully updated.' }
         format.json { head :no_content }
       else
-        format.html { render action: "edit" }
         format.json { render json: @notification.errors, status: :unprocessable_entity }
       end
     end
@@ -76,7 +71,6 @@ class NotificationsController < ApplicationController
     @notification.destroy
 
     respond_to do |format|
-      format.html { redirect_to notifications_url }
       format.json { head :no_content }
     end
   end
