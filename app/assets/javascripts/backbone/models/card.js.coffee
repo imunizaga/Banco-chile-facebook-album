@@ -6,6 +6,7 @@ class BancoChile.Models.Card extends Backbone.Model
     name: null
     set: null
     source: null
+    count: 0
 
   initialize: (@options) ->
     if @options['id']

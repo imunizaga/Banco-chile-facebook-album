@@ -25,6 +25,7 @@ class AlbumController < ApplicationController
     friends = User.where(facebook_id: friends_fids) 
     @user=User.find(session['id'])
     @user['friends'] = friends
+    @user['notifications'] = @user.notifications
     @user['login_status'] = 'connected'
     @ranking = User.ranking
     @cards = Card.all

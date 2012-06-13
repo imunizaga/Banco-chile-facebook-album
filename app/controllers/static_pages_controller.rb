@@ -4,6 +4,7 @@ class StaticPagesController < ApplicationController
     puts "id: #{session[:id]}"
     if session[:id] != nil
       @user = User.find_by_id(session[:id])
+      @user['notifications'] = @user.notifications
       @user['login_status'] = 'connected'
 
       # obtain the facebook friends
