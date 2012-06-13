@@ -7,6 +7,10 @@ class BancoChile.Models.Card extends Backbone.Model
     set: null
     source: null
 
+  initialize: (@options) ->
+    if @options['id']
+      @set('card_id', @options['id'])
+
   getImage: (size) ->
     image =  "https://graph.facebook.com/" + @get('source')
     return image + "/picture?type=" + size

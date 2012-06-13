@@ -9,7 +9,7 @@ class BancoChile.Models.User extends Backbone.Model
 
   # as an optional parameter, the user can receive cards, thats
   # the collection of generic cards
-  initialize: (@options, cards) ->
+  initialize: (@options) ->
     if @options['album']
       #create a duplicate of the cards
       myCards = new BancoChile.Collections.CardsCollection(
@@ -30,12 +30,12 @@ class BancoChile.Models.User extends Backbone.Model
     return @get('cards').filter(card_id)
 
   hasCard: (card) ->
-    card = @getCard(card.get('card_id'))
-    return card.get('count') == 1
+    myCard = @getCard(card.get('card_id'))
+    return myCard.get('count') == 1
 
   hasCardRepeated: (card) ->
-    card = @getCard(card.get('card_id'))
-    return card.get('count') > 1
+    myCard = @getCard(card.get('card_id'))
+    return myCard.get('count') > 1
 
   updateUniqueCardCount: () ->
     uniqueCardsCount = 0
