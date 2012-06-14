@@ -5,15 +5,14 @@ class BancoChile.Views.Game.TabsView extends Backbone.View
 
   initialize: () ->
     @user = @options.user
-    @notifications = @options.notifications
     @challenges = @options.challenges
 
   render: =>
     $(@el).html(@template(user: @user.toJSON()))
     
-    for notification in @notifications.models
+    for notification in @user.get('notifications').models
       notificationView = new BancoChile.Views.Notifications.NotificationView(
-        'notification': notification
+        'model': notification
       )
       $(@el).find('#tabs-1 ul').append(notificationView.render().el)
 

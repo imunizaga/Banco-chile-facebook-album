@@ -7,7 +7,6 @@ class BancoChile.Views.Game.IndexView extends Backbone.View
     @user = @options.user
     @cards = @user.get('cards')
     @ranking = @options.ranking
-    @notifications = @options.notifications
     @challenges = @options.challenges
     @user.bind('change', @render)
 
@@ -25,12 +24,11 @@ class BancoChile.Views.Game.IndexView extends Backbone.View
 
     tabsView = new BancoChile.Views.Game.TabsView(
       user: @user,
-      notifications: @notifications,
       challenges: @challenges
     )
     $tabs = $(@.el).find('#tabs')
 
     $tabs.append(tabsView.render().el)
-    $tabs.tabs(event: "mouseover")
+    $tabs.tabs(event: "click")
 
     return this

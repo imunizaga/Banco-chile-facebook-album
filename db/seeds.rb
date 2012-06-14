@@ -46,9 +46,9 @@ UserCard.create(card_pack_id:4, card_id:3, user_id:3)
 UserCard.create(card_pack_id:4, card_id:3, user_id:3)
 
 CardPack.create(challenge_id:2)
-UserCard.create(card_pack_id:5, card_id:3, user_id:4)
-UserCard.create(card_pack_id:5, card_id:3, user_id:4)
-UserCard.create(card_pack_id:5, card_id:3, user_id:4)
+UserCard.create(card_pack_id:5, card_id:4, user_id:4)
+UserCard.create(card_pack_id:5, card_id:4, user_id:4)
+UserCard.create(card_pack_id:5, card_id:4, user_id:4)
 
 CardPack.create(challenge_id:2)
 UserCard.create(card_pack_id:6, card_id:2, user_id:5)
@@ -60,3 +60,5 @@ UserCard.create(card_pack_id:7, card_id:5, user_id:5)
 UserCard.create(card_pack_id:7, card_id:5, user_id:5)
 UserCard.create(card_pack_id:7, card_id:5, user_id:5)
 
+Notification.create(user_id:3, sender_id:4, cards_in:'[4]', cards_out:'[2]')
+Notification.create(user_id:3, description:'retweet', cards_in:'[4]')

@@ -10,6 +10,11 @@ class BancoChile.Models.User extends Backbone.Model
   # as an optional parameter, the user can receive cards, thats
   # the collection of generic cards
   initialize: (@options) ->
+    if @options['notifications']
+      notifications = new BancoChile.Collections.NotificationsCollection(
+        @options['notifications'])
+      @set('notifications', notifications)
+
     if @options['album']
       #create a duplicate of the cards
       myCards = new BancoChile.Collections.CardsCollection(

@@ -1,21 +1,18 @@
 class BancoChile.Routers.AppRouter extends Backbone.Router
   initialize: (@options) ->
     window.db =
-      cards: new BancoChile.Collections.CardsCollection(@options.cards)
+      cards: new BancoChile.Collections.CardsCollection()
+      users: new BancoChile.Collections.UsersCollection()
+
+    window.db.cards.reset(@options.cards)
+    window.db.users.reset(@options.user.friends)
+
     @user = new BancoChile.Models.User(@options.user)
+    window.db.users.add(@user)
+
     @ranking = new BancoChile.Collections.UsersCollection(@options.ranking)
 
     # Test data - remove!
-    notification_test_data = [
-      description: 'Juan te ha propuesto un cambio de láminas'
-      details: 'Lámina 15 por lámina 5'
-      title: 'Cambio de láminas'
-    ,
-      description: 'Ganaste una lámina por retweet'
-      details: 'Ahora es tuya la lámina 2'
-      title: 'Ganaste una lámina'
-    ]
-
     challenge_test_data = [
       title: 'Title1'
       description: 'Description1'
@@ -26,10 +23,10 @@ class BancoChile.Routers.AppRouter extends Backbone.Router
       action: 'Action2'
     ]
 
-    @notifications = new BancoChile.Collections.NotificationsCollection(
-      notification_test_data)
     @challenges = new BancoChile.Collections.ChallengesCollection(
       challenge_test_data)
+    
+    window.db.fetch = true
 
   routes:
     ""      : "index"
@@ -54,7 +51,6 @@ class BancoChile.Routers.AppRouter extends Backbone.Router
       @view = new BancoChile.Views.Game.IndexView(
         user: @user
         ranking: @ranking
-        notifications: @notifications
         challenges: @challenges
       )
       $container = $("#container")

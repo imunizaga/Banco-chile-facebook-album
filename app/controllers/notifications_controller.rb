@@ -53,18 +53,20 @@ class NotificationsController < ApplicationController
     end
   end
 
-  # PUT /notifications/1
   # PUT /notifications/1.json
   def update
+    # one can only modify the status
     @notification = Notification.find(params[:id])
 
     respond_to do |format|
-      if @notification.update_attributes(params[:notification].except(:id, :created_at, :updated_at))
-        format.html { redirect_to @notification, notice: 'notification was successfully updated.' }
+      if @notification['status']
         format.json { head :no_content }
-      else
-        format.html { render action: "edit" }
-        format.json { render json: @notification.errors, status: :unprocessable_entity }
+      elsif @notification['user_id'] == session['id']
+        format.json { head :no_content }
+      else params[:status]
+        #here goes the trade logic if corresponds
+        @notification.update_attributes(params[:notification].only(:status))
+        format.json { head :no_content }
       end
     end
   end

@@ -1,19 +1,37 @@
 BancoChile.Views.Notifications ||= {}
 
 class BancoChile.Views.Notifications.NotificationView extends Backbone.View
-  template: JST["backbone/templates/notifications/notification"]
+  tagName: "li"
 
   events:
-    "click .destroy" : "destroy"
+    'click .js-notification-accept-btn': "acceptBtnClicked"
+    'click .js-notification-deny-btn': "denyBtnClicked"
 
-  tagName: "tr"
+  initialize: () ->
+    @model = @options.model
+    @user = window.db.users.get(@model.get('user_id'))
 
-  destroy: () ->
-    @model.destroy()
-    this.remove()
+    if @model.get('sender_id')
+      @template = JST["backbone/templates/notifications/trade"]
+      @sender = window.db.users.get(@model.get('sender_id'))
+    else
+      @template = JST["backbone/templates/notifications/receive"]
 
-    return false
+  render: =>
+    params = 
+      notification: @model.toJSON()
+      user: @user.toJSON()
+    if @sender
+      params['sender'] = @sender.toJSON()
 
-  render: ->
-    $(@el).html(@template(@model.toJSON() ))
+    $(@el).html(@template(params))
     return this
+
+  acceptBtnClicked: ->
+    @model.set('status', 1)
+    @model.save {},
+      success: =>
+        toast("accepted", "user")
+
+  denyBtnClicked: ->
+    toast("denied", "user")

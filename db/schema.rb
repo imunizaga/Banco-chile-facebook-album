@@ -38,11 +38,11 @@ ActiveRecord::Schema.define(:version => 20120613002132) do
   end
 
   create_table "notifications", :force => true do |t|
-    t.text     "title",       :limit => 255
-    t.text     "description", :limit => 255
-    t.text     "details",     :limit => 255
-    t.datetime "created_at",                 :null => false
-    t.datetime "updated_at",                 :null => false
+    t.text     "title"
+    t.text     "description"
+    t.text     "details"
+    t.datetime "created_at",  :null => false
+    t.datetime "updated_at",  :null => false
     t.integer  "user_id"
     t.text     "cards_in"
     t.text     "cards_out"

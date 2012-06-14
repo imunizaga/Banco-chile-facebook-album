@@ -36,8 +36,8 @@ class BancoChile.Views.Cards.LightboxContent extends Backbone.View
     if @cardToGive and @cardToReceive and @selectedUser
       notification = new BancoChile.Models.Notification(
         user_id: @selectedUser.get('id')
-        cards_in: [@cardToGive.get('card_id')]
-        cards_out: [@cardToReceive.get('card_id')]
+        cards_in: JSON.stringify([@cardToGive.get('card_id')])
+        cards_out: JSON.stringify([@cardToReceive.get('card_id')])
       )
 
       notification.save()
