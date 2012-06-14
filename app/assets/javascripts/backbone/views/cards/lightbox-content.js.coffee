@@ -18,7 +18,9 @@ class BancoChile.Views.Cards.LightboxContent extends Backbone.View
       smallRankingItemView = new BancoChile.Views.Users.SmallRankingItemView(
         user: friend
       )
-      smallRankingItemView.bind("smallRankingUserClicked", @userSelected, this)
+      if @card.get('count') != 1
+        smallRankingItemView.bind("smallRankingUserClicked", @userSelected, this)
+        smallRankingItemView.className = 'clickable'
       $(@el).find('.js-friend-list').append(smallRankingItemView.render().el)
 
     return this

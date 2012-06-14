@@ -12,6 +12,8 @@ class BancoChile.Views.Users.SmallRankingItemView extends Backbone.View
 
   render: =>
     $(@el).html(@template(user: @user.toJSON()))
+    if @className
+      $(@el).addClass(@className)
     return this
 
   clicked: () ->
