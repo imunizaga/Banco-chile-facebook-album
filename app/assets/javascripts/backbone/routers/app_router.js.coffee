@@ -11,6 +11,7 @@ class BancoChile.Routers.AppRouter extends Backbone.Router
     window.db.users.add(@user)
 
     @ranking = new BancoChile.Collections.UsersCollection(@options.ranking)
+    @site_url = @options['SITE_URL']
 
     # Test data - remove!
     challenge_test_data = [

@@ -29,6 +29,15 @@ class BancoChile.Views.Game.IndexView extends Backbone.View
     $tabs = $(@.el).find('#tabs')
 
     $tabs.append(tabsView.render().el)
+
     $tabs.tabs(event: "click")
+
+    twttr.anywhere.config(
+      callbackURL: window.app.site_url + "/auth/twitter/callback"
+    )
+
+    twttr.anywhere((T) ->
+      T("#login-twitter").connectButton()
+    )
 
     return this

@@ -21,7 +21,4 @@ class BancoChile.Views.Game.TabsView extends Backbone.View
         'challenge': challenge
       )
       $(@el).find('#tabs-2 ul').append(challengeView.render().el)
-
-
-
     return this
