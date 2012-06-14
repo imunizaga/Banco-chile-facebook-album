@@ -26,7 +26,9 @@ class BancoChile.Models.User extends Backbone.Model
         myCard.set(myCardData)
 
       @set('cards', myCards)
+      @updateUniqueCardCount()
       myCards.bind('reset', @updateUniqueCardCount, this)
+      myCards.bind('change', @updateUniqueCardCount, this)
 
     friends = new BancoChile.Collections.UsersCollection(@options['friends'])
     @set('friends', friends)
