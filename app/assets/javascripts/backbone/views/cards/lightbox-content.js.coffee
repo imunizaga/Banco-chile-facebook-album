@@ -9,6 +9,9 @@ class BancoChile.Views.Cards.LightboxContent extends Backbone.View
     "click .js-confirm": "confirm"
 
   render: ->
+    @cardToGive = false
+    @cardToReceive = false
+    @selectedUser = false
     $(@el).html(@template(card: @card.toJSON()))
 
     for friend in @friends
@@ -40,8 +43,12 @@ class BancoChile.Views.Cards.LightboxContent extends Backbone.View
         cards_out: JSON.stringify([@cardToReceive.get('card_id')])
       )
 
-      notification.save()
-      toast('submitting trade', 'user')
+      notification.save({}
+        success:=>
+          @cardToGive.set('count', @cardToGive.get('count') - 1)
+          toast(BancoChile.UIMessages.TRADE_SUCCESS, 'user')
+          @render()
+      )
     else
       if not @selectedUser
         $error.html(BancoChile.UIMessages['TRADE_ERROR_NO_USER'])
