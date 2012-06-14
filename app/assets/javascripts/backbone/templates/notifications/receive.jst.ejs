@@ -6,4 +6,6 @@
 <p class="laminas">
     Ahora es tuya la lámina <%= notification.cards_in %>
 </p>
-<div class="accion js-notification-accept-btn">Ok</div>
+<% if (!notification.status){ %>
+    <div class="accion js-notification-accept-btn">Ok</div>
+<% } %>

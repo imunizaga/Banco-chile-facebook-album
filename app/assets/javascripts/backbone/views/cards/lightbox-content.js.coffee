@@ -46,7 +46,7 @@ class BancoChile.Views.Cards.LightboxContent extends Backbone.View
       notification.save({}
         success:=>
           @cardToGive.set('count', @cardToGive.get('count') - 1)
-          toast(BancoChile.UIMessages.TRADE_SUCCESS, 'user')
+          toast(BancoChile.UIMessages.TRADE_REQUEST_SUCCESS, 'user')
           @render()
       )
     else

@@ -16,6 +16,7 @@ class BancoChile.Views.Notifications.NotificationView extends Backbone.View
       @sender = window.db.users.get(@model.get('sender_id'))
     else
       @template = JST["backbone/templates/notifications/receive"]
+    @model.bind('change', @render, this)
 
   render: =>
     params = 
@@ -31,7 +32,15 @@ class BancoChile.Views.Notifications.NotificationView extends Backbone.View
     @model.set('status', 1)
     @model.save {},
       success: =>
-        toast("accepted", "user")
+        if @sender
+          card_in_id = JSON.parse(@model.get('cards_in'))[0]
+          card_in = @user.getCard(card_in_id)
+          card_in.set('count', card_in.get('count') + 1)
+          toast(BancoChile.UIMessages.TRADE_SUCCESS + card_in_id, 'user')
+
+          card_out_id = JSON.parse(@model.get('cards_out'))[0]
+          card_out = @user.getCard(card_out_id)
+          card_out.set('count', card_out.get('count') - 1)
 
   denyBtnClicked: ->
     toast("denied", "user")
