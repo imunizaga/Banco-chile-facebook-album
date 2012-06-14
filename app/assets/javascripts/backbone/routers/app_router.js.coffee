@@ -3,9 +3,11 @@ class BancoChile.Routers.AppRouter extends Backbone.Router
     window.db =
       cards: new BancoChile.Collections.CardsCollection()
       users: new BancoChile.Collections.UsersCollection()
+      challenges: new BancoChile.Collections.ChallengesCollection()
 
     window.db.cards.reset(@options.cards)
     window.db.users.reset(@options.user.friends)
+    window.db.challenges.reset(@options.challenges)
 
     @user = new BancoChile.Models.User(@options.user)
     window.db.users.add(@user)
@@ -24,9 +26,6 @@ class BancoChile.Routers.AppRouter extends Backbone.Router
       action: 'Action2'
     ]
 
-    @challenges = new BancoChile.Collections.ChallengesCollection(
-      challenge_test_data)
-    
     window.db.fetch = true
 
   routes:
