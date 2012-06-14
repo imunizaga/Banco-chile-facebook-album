@@ -1,11 +1,16 @@
 BancoChile.Views.Cards ||= {}
 
 class BancoChile.Views.Cards.AlbumView extends Backbone.View
+  ### The album view is where the user can see his cards.
+  Each card is a clickable item that should launch a "fancybox" with trading
+  options
+
+  ###
   template: JST["backbone/templates/cards/album"]
 
   initialize: () ->
-    @cards = @options.cards
     @user = @options.user
+    @cards = @user.get('cards')
 
   render: =>
     # removes the DOM element
