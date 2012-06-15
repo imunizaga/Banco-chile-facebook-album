@@ -1,8 +1,12 @@
+<img src="<%= sender.profile_image %>" alt="name user" />
+<h4>Cambio de láminas</h4>
 <p>
-    <span><%= notification.name %></span><%= notification.description %>
+    <span><%= sender.name %></span> te ha propuesto un cambio de láminas
 </p>
 <p class="laminas">
-    <%= notification.details %>
+    Lámina <%= notification.cards_in %> por lámina <%= notification.cards_out %>
 </p>
-<a class="accion" href="#">Aceptar</a>
-<a class="accion2" href="#">Rechazar</a>
+<% if (!notification.status){ %>
+<div class="accion js-notification-accept-btn">Aceptar</div>
+<div class="accion2 js-notification-deny-btn">Rechazar</div>
+<% } %>

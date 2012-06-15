@@ -11,6 +11,7 @@ class BancoChile.Views.Cards.CardItemView extends Backbone.View
   initialize: () ->
     @model = @options.model
     @href = @options.href
+    @model.bind('change', @render, this)
 
   render: ->
     $(@el).html(@template(card: @model.toJSON()))

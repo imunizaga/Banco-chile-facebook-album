@@ -1,0 +1,11 @@
+<img src="<%= user.profile_image %>" alt="name user" />
+<h4>Cambio de láminas</h4>
+<p>
+    Ganaste una lámina por <%= notification.description %>
+</p>
+<p class="laminas">
+    Ahora es tuya la lámina <%= notification.cards_in %>
+</p>
+<% if (!notification.status){ %>
+    <div class="accion js-notification-accept-btn">Ok</div>
+<% } %>

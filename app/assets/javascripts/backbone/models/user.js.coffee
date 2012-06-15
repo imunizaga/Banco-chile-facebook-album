@@ -10,6 +10,11 @@ class BancoChile.Models.User extends Backbone.Model
   # as an optional parameter, the user can receive cards, thats
   # the collection of generic cards
   initialize: (@options) ->
+    if @options['notifications']
+      notifications = new BancoChile.Collections.NotificationsCollection(
+        @options['notifications'])
+      @set('notifications', notifications)
+
     if @options['album']
       #create a duplicate of the cards
       myCards = new BancoChile.Collections.CardsCollection(
@@ -21,7 +26,9 @@ class BancoChile.Models.User extends Backbone.Model
         myCard.set(myCardData)
 
       @set('cards', myCards)
+      @updateUniqueCardCount()
       myCards.bind('reset', @updateUniqueCardCount, this)
+      myCards.bind('change', @updateUniqueCardCount, this)
 
     friends = new BancoChile.Collections.UsersCollection(@options['friends'])
     @set('friends', friends)

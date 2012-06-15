@@ -1,35 +1,38 @@
 class BancoChile.Routers.AppRouter extends Backbone.Router
   initialize: (@options) ->
+    ### The router is what we use to handle urls within our backbone app. 
+    Since it's central to the application, it's instance will be stored 
+    in window.app, and contains the main collections to render the page
+
+    Note:
+     To avoid calling the server many times, we will the window.db
+     object to handle data data should not change
+     Cards and challenges are static information, users may change
+     but it should be understood, that one should only take data from 
+     window.db that it's improbable to change, like de facebook_id
+    ###
     window.db =
-      cards: new BancoChile.Collections.CardsCollection(@options.cards)
+      cards: new BancoChile.Collections.CardsCollection()
+      users: new BancoChile.Collections.UsersCollection()
+      challenges: new BancoChile.Collections.ChallengesCollection()
+
+    window.db.cards.reset(@options.cards)
+    window.db.users.reset(@options.user.friends)
+    window.db.challenges.reset(@options.challenges)
+
+    # the user that's logged in the app
     @user = new BancoChile.Models.User(@options.user)
+
+    # add the user to our database
+    window.db.users.add(@user)
+
+    # the ranking of the page
     @ranking = new BancoChile.Collections.UsersCollection(@options.ranking)
 
-    # Test data - remove!
-    notification_test_data = [
-      description: 'Juan te ha propuesto un cambio de láminas'
-      details: 'Lámina 15 por lámina 5'
-      title: 'Cambio de láminas'
-    ,
-      description: 'Ganaste una lámina por retweet'
-      details: 'Ahora es tuya la lámina 2'
-      title: 'Ganaste una lámina'
-    ]
+    # the base url used 
+    @site_url = window.location.host
 
-    challenge_test_data = [
-      title: 'Title1'
-      description: 'Description1'
-      action: 'Action1'
-    ,
-      title: 'Title2'
-      description: 'Description2'
-      action: 'Action2'
-    ]
-
-    @notifications = new BancoChile.Collections.NotificationsCollection(
-      notification_test_data)
-    @challenges = new BancoChile.Collections.ChallengesCollection(
-      challenge_test_data)
+    return this
 
   routes:
     ""      : "index"
@@ -37,9 +40,12 @@ class BancoChile.Routers.AppRouter extends Backbone.Router
     "_=_"    : "goToIndex"
 
   goToIndex: ->
+    # facebook somethimes returns to the url with the hash _=_
+    # We simply re-route to the home in that case
     @navigate('', trigger: true)
 
   index: ->
+    ### go to the index view ###
     @view = new BancoChile.Views.Home.IndexView(
       user: @user
       ranking: @ranking
@@ -48,14 +54,17 @@ class BancoChile.Routers.AppRouter extends Backbone.Router
     $container.html(@view.render().el)
 
   game: ->
+    ### go to the game view ###
+
+    # if the user is not authenticated
     if not @user.isAuthenticated()
+      # go to the index view
       @navigate('', trigger: true)
     else
+      # render the game view
       @view = new BancoChile.Views.Game.IndexView(
         user: @user
         ranking: @ranking
-        notifications: @notifications
-        challenges: @challenges
       )
       $container = $("#container")
       $container.html(@view.render().el)
