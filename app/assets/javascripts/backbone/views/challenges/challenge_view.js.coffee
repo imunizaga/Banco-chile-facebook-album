@@ -9,4 +9,5 @@ class BancoChile.Views.Challenges.ChallengeView extends Backbone.View
 
   render: ->
     $(@el).html(@template(challenge: @challenge.toJSON() ))
+    $(@el).find(".accion").fancybox()
     return this
