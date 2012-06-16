@@ -27,4 +27,4 @@ class BancoChile.Views.Challenges.ChallengeView extends Backbone.View
     return this
 
   actionBtnClicked: ->
-    @trigger('challengeActionClicked', @lightboxTemplate)
+    @trigger('challengeActionClicked', @lightboxTemplate, @challenge)

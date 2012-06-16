@@ -42,6 +42,6 @@ class BancoChile.Views.Game.TabsView extends Backbone.View
   renderChallengeLightBox: (lightboxTemplate, challenge)=>
     $('#challenge-lightbox').html(lightboxTemplate({}))
     FB.XFBML.parse(document.getElementById('challenge-lightbox'))
-    FB.Event.subscribe('edge.create', (response, challenge) ->
-      console.log('You liked the URL: ' + response " for challenge " + challenge.id)
+    FB.Event.subscribe('edge.create', (response) ->
+      console.log('You liked the URL: ' + response + " for challenge " + challenge.id)
     )
