@@ -17,6 +17,7 @@ ul.links li {
     width: 555px;
     padding-bottom:10px;
     text-align: left;
+    min-height: 280px;
 }
 .light .imagen {
     float: left;
