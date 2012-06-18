@@ -4,7 +4,8 @@ class User < ActiveRecord::Base
   has_many :user_cards
   has_many :cards, :through => :user_cards, :uniq => true
   has_many :notifications
-  before_create :set_empty_album
+  before_save :set_empty_album
+  after_create :assign_first_card
 
   def set_album
     options = {
@@ -27,25 +28,23 @@ class User < ActiveRecord::Base
     return user_album
   end
 
-  def self.ranking n=10
+  def self.ranking n = User.count
     options = {
-      :include => 'user_cards',
-      :select => 'user_cards.card_id',
-      :group => 'users.id',
-      :order => '1 DESC',
+      :select => 'id, facebook_id, name, cards_count',
+      :order => '-cards_count', 
+      :limit => n,
     }
-    raw_ranking = User.count(options).entries[0..n-1]
-    q_users= User.select('id, facebook_id, name').where(:id => raw_ranking.transpose[0])
+    top_users = User.find(:all, options)
     ranking=[]
-    (0..raw_ranking.length-1).each do |i|
-      hsh = {
-        :rank => i+1,
-        :user_id => raw_ranking[i][0],
-        :unique_cards_count => raw_ranking[i][1],
-        :name => q_users.find_by_id(raw_ranking[i][0]).name,
-        :facebook_id => q_users.find_by_id(raw_ranking[i][0]).facebook_id
+    (0..n-1).each do |rank|
+      user_info = {
+        :rank => rank+1,
+        :user_id => top_users[rank].id,
+        :unique_cards_count => top_users[rank].cards_count,
+        :name => top_users[rank].name,
+        :facebook_id => top_users[rank].facebook_id
       }
-      ranking.append(hsh)
+      ranking.append(user_info)
     end
     return ranking
   end
@@ -101,6 +100,12 @@ class User < ActiveRecord::Base
 
   def set_empty_album
     self.album = (1..Card.count).map { |i| {:card_id=>i, :count=>0 }}
+  end
+
+  def assign_first_card
+    cardpack = CardPack.new(challenge_id:1)
+    cardpack.user = self
+    cardpack.save
   end
 
 end

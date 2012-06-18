@@ -4,7 +4,7 @@ class UserCard < ActiveRecord::Base
   belongs_to :card
   belongs_to :card_pack
 
-  after_create :check_cards_count
+  after_save :check_cards_count
   private
     def check_cards_count
       begin
