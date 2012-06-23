@@ -4,7 +4,7 @@ class User < ActiveRecord::Base
   has_many :user_cards
   has_many :cards, :through => :user_cards, :uniq => true
   has_many :notifications
-  before_save :set_empty_album
+  before_create :set_empty_album
   after_create :assign_first_card
 
   def set_album
@@ -15,6 +15,7 @@ class User < ActiveRecord::Base
     cards= self.user_cards.count(options)
     raw_album = Array.new(Card.count,0)
     cards.each {|card| raw_album[card[0]-1] = card[1].to_i}
+    p raw_album
     user_album = []
     (1..raw_album.length).each do |i|
       hsh = Hash.new

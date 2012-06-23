@@ -58,11 +58,11 @@ class NotificationsController < ApplicationController
     respond_to do |format|
       if @notification['status']
         format.json { head :no_content }
-      elsif @notification['user_id'] == session['id']
+      elsif @notification['user_id'] != session['id']
         format.json { head :no_content }
       else params[:status]
         #here goes the trade logic if corresponds
-        @notification.update_attributes(params[:notification].only(:status))
+        @notification.update_attributes(:status=>params[:notification][:status])
         format.json { head :no_content }
       end
     end

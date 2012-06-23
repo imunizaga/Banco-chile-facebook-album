@@ -5,21 +5,24 @@ class UserCard < ActiveRecord::Base
   belongs_to :card_pack
 
   after_save :check_cards_count
+
   private
     def check_cards_count
-      begin
-        owner = self.user
-        cards_count = owner.cards_count
-        card = owner.album[self.card_id - 1]
-        if card[:count] == 0 or card[:count] == nil
-          owner.cards_count += 1
-          owner.album[self.card_id - 1][:count] = 1
-        else
-          owner.album[self.card_id - 1][:count] += 1
+      if self.card_pack == nil
+        begin
+            owner = self.user
+            cards_count = owner.cards_count
+            card = owner.album[self.card_id - 1]
+            if card[:count] == 0 or card[:count] == nil
+              owner.cards_count += 1
+              owner.album[self.card_id - 1][:count] = 1
+            else
+              owner.album[self.card_id - 1][:count] += 1
+            end
+            owner.save
+          rescue Exception=>ex
+            print 'Can\'t update user counts for id ', owner.id, ex.message
         end
-        owner.save
-        rescue Exception=>ex
-          puts 'Can\'t update user counts. Id:', owner.id, ex.message
       end
     end
 end
