@@ -30,7 +30,7 @@ class BancoChile.Routers.AppRouter extends Backbone.Router
     @ranking = new BancoChile.Collections.UsersCollection(@options.ranking)
 
     # the base url used 
-    @site_url = window.location.host
+    @site_url = "#{window.location.protocol}//#{window.location.host}"
 
     return this
 
