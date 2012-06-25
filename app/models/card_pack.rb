@@ -22,8 +22,8 @@ class CardPack < ActiveRecord::Base
         end
         owner.save
         rescue Exception=>ex
-          print 'Can\'t update user counts for id ', owner.id
-          p ex.message
+          print 'Can\'t update user counts.'
+          if !owner then print "No user.\n" end
       end
     end
 
