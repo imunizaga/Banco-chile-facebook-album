@@ -14,4 +14,13 @@ class BancoChile.Views.Challenges.FacebookLikeView extends Backbone.View
       console.log("You liked #{response}, for challenge #{challenge.id}")
     )
 
+    notification = new BancoChile.Models.Notification(
+      challenge_id: challenge.id
+    )
+
+    notification.save({}
+      success:=>
+        toast(BancoChile.UIMessages.CHALLENGE_COMPLETED, 'user')
+        @render()
+    )
     return this
