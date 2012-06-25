@@ -46,22 +46,22 @@ Challenge.create(n_cards:1, kind: 'share', client_param: '54312')
 Challenge.create(n_cards:1, kind: 'code', client_param: 'Partido Chile Colombia', server_param: '2 0 gana Chile')
 
 # user 1
-CardPack.create(challenge_id:2)
-UserCard.create(card_pack_id:2, card_id:1, user_id:1)
-UserCard.create(card_pack_id:2, card_id:1, user_id:1)
-UserCard.create(card_pack_id:2, card_id:1, user_id:1)
+CardPack.create(challenge_id:2, user_id: 1)
+UserCard.create(card_pack_id:1, card_id:1, user_id:1)
+UserCard.create(card_pack_id:1, card_id:1, user_id:1)
+UserCard.create(card_pack_id:1, card_id:1, user_id:1)
 
-CardPack.create(challenge_id:1)
-UserCard.create(card_pack_id:1, card_id:2, user_id:1)
+CardPack.create(challenge_id:1, user_id: 1)
+UserCard.create(card_pack_id:2, card_id:2, user_id:1)
 
 # user 2
-CardPack.create(challenge_id:2)
+CardPack.create(challenge_id:2, user_id: 2)
 UserCard.create(card_pack_id:3, card_id:2, user_id:2)
 UserCard.create(card_pack_id:3, card_id:2, user_id:2)
 UserCard.create(card_pack_id:3, card_id:2, user_id:2)
 
 # user 3
-CardPack.create(challenge_id:3)
+CardPack.create(challenge_id:3, user_id: 3)
 UserCard.create(card_pack_id:4, card_id:1, user_id:3)
 UserCard.create(card_pack_id:4, card_id:2, user_id:3)
 UserCard.create(card_pack_id:4, card_id:3, user_id:3)
@@ -69,7 +69,7 @@ UserCard.create(card_pack_id:4, card_id:3, user_id:3)
 UserCard.create(card_pack_id:4, card_id:3, user_id:3)
 
 # user 4
-CardPack.create(challenge_id:3)
+CardPack.create(challenge_id:3, user_id: 4)
 UserCard.create(card_pack_id:5, card_id:4, user_id:4)
 UserCard.create(card_pack_id:5, card_id:4, user_id:4)
 UserCard.create(card_pack_id:5, card_id:4, user_id:4)
@@ -77,12 +77,12 @@ UserCard.create(card_pack_id:5, card_id:4, user_id:4)
 UserCard.create(card_pack_id:5, card_id:4, user_id:4)
 
 # user 5
-CardPack.create(challenge_id:2)
+CardPack.create(challenge_id:2, user_id: 5)
 UserCard.create(card_pack_id:6, card_id:2, user_id:5)
 UserCard.create(card_pack_id:6, card_id:3, user_id:5)
 UserCard.create(card_pack_id:6, card_id:4, user_id:5)
 
-CardPack.create(challenge_id:2)
+CardPack.create(challenge_id:2, user_id: 5)
 UserCard.create(card_pack_id:7, card_id:5, user_id:5)
 UserCard.create(card_pack_id:7, card_id:5, user_id:5)
 UserCard.create(card_pack_id:7, card_id:5, user_id:5)
