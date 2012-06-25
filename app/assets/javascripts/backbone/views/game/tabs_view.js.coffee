@@ -31,7 +31,7 @@ class BancoChile.Views.Game.TabsView extends Backbone.View
 
     # list of challenge views
     for challenge in @challenges.models
-      challengeView = new BancoChile.Views.Challenges.ChallengeView(
+      challengeView = new BancoChile.Views.Challenges.ChallengeItemView(
         'challenge': challenge
       )
       $(@el).find('#tabs-2 ul').append(challengeView.render().el)

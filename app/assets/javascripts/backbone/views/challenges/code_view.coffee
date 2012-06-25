@@ -1,10 +1,12 @@
 BancoChile.Views.Challenges ||= {}
 
-class BancoChile.Views.Challenges.CodeView extends Backbone.View
+class BancoChile.Views.Challenges.CodeView extends BancoChile.Views.Challenges.ChallengeView
   template: JST["backbone/templates/challenges/code"]
 
-  initialize: (@challenge) ->
-    super()
+  events:
+    "click .js-send-code": "completeChallenge"
 
   render: ->
-    $(@el).html(@template(challenge: @challenge.toJSON() ))
+    $(@el).html(@template(challenge: @challenge.toJSON()))
+
+    return this
