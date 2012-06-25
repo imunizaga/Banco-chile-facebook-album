@@ -3,14 +3,6 @@ BancoChile.Views.Challenges ||= {}
 class BancoChile.Views.Challenges.ChallengeView extends Backbone.View
   template: JST["backbone/templates/challenges/challenge"]
 
-  lightboxTemplates:
-    like: "fb_like"
-    follow: "t_follow"
-    invite: "fb_invite"
-    code: "code"
-    retweet: "t_retweet"
-    share: "fb_share"
-
   tagName: "li"
 
   events:
@@ -18,8 +10,22 @@ class BancoChile.Views.Challenges.ChallengeView extends Backbone.View
 
   initialize: () ->
     @challenge = @options.challenge
-    templateName = @lightboxTemplates[@challenge.get('kind')]
-    @lightboxTemplate = JST["backbone/templates/challenges/" + templateName]
+
+    switch @challenge.get('kind')
+      when 'like'
+        challengeView = BancoChile.Views.Challenges.FacebookLikeView
+      when 'invite'
+        challengeView = BancoChile.Views.Challenges.FacebookInviteView
+      when 'share'
+        challengeView = BancoChile.Views.Challenges.FacebookShareView
+      when 'follow'
+        challengeView = BancoChile.Views.Challenges.TwitterFollowView
+      when 'retweet'
+        challengeView = BancoChile.Views.Challenges.TwitterRetweetView
+      else
+        challengeView = BancoChile.Views.Challenges.CodeView
+
+    @challengeView = new challengeView(@challenge)
 
   render: ->
     $(@el).html(@template(challenge: @challenge.toJSON() ))
@@ -27,4 +33,4 @@ class BancoChile.Views.Challenges.ChallengeView extends Backbone.View
     return this
 
   actionBtnClicked: ->
-    @trigger('challengeActionClicked', @lightboxTemplate, @challenge)
+    @trigger('challengeActionClicked', @challengeView)
