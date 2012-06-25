@@ -14,6 +14,7 @@ class BancoChile.Models.Challenge extends Backbone.Model
     name: null
     set: null
     title: null
+    href: "#challenge-lightbox"
 
 class BancoChile.Collections.ChallengesCollection extends Backbone.Collection
   model: BancoChile.Models.Challenge

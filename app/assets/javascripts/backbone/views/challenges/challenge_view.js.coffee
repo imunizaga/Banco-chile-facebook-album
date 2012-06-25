@@ -20,6 +20,7 @@ class BancoChile.Views.Challenges.ChallengeView extends Backbone.View
         challengeView = BancoChile.Views.Challenges.FacebookShareView
       when 'follow'
         challengeView = BancoChile.Views.Challenges.TwitterFollowView
+        @challenge.set("href", "https://twitter.com/intent/user?screen_name=twitterapi")
       when 'retweet'
         challengeView = BancoChile.Views.Challenges.TwitterRetweetView
       else
