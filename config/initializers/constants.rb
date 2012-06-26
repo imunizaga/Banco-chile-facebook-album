@@ -12,3 +12,7 @@ BCHFB_ID='57173152417'
 BCHTW_ID='bancoodechile'
 BJFB_ID=''
 BJTW_ID='bancajoven'
+
+# Twitter OAuth
+TW_KEY = 'SoJMGFj6ijCkhz8nNJXCw'  # Consumer key
+TW_SECRET = 'hizZmNItjN7WyXfmIirG9YPDlIoQVNB88tXpkWOI4'  # Consumer secret

@@ -1,3 +1,5 @@
+require 'digest/sha1'
+
 FACEBOOK_SCOPE = 'client_credentials'
 class AuthController < ApplicationController
   protect_from_forgery
@@ -38,6 +40,26 @@ class AuthController < ApplicationController
       red = session[:return]
       session[:return] = nil
       redirect_to red and return
+    end
+  end
+
+  def twitter_callback
+    # Check if the cookie was received by the server
+    if cookies[:twitter_anywhere_identity] == nil
+      print "Twitter cookie not received."
+    else
+      # Once the user has authorized the host site, @Anywhere will set a cookie
+      # named "twitter_anywhere_identity" that contains the id of the logged in
+      # user. The format of the cookie is "user_id:signature".
+      (user_id, signature) = cookies[:twitter_anywhere_identity].split(':')
+      
+      # This allow us to verify that the information has come from Twitter,
+      # through the following comparison: 
+      if Digest::SHA1.hexdigest(user_id + TW_SECRET) == signature
+        print "Twitter cookie verified, user_id: #{user_id}"
+      else
+        print "Invalid Twitter cookie."
+      end
     end
   end
 
