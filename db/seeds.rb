@@ -40,9 +40,9 @@ Challenge.create(n_cards:1, kind: 'invite', client_param: '1')
 Challenge.create(n_cards:1, kind: 'code', client_param: 'el muro de Banco de Chile', server_param: '12345')
 Challenge.create(n_cards:1, kind: 'code', client_param: 'la p&aacute;gina de la Banca Joven', server_param: '54321')
 Challenge.create(n_cards:1, kind: 'retweet', client_param: '213378589977100290')
-Challenge.create(n_cards:1, kind: 'share', client_param: '12345')
+Challenge.create(n_cards:1, kind: 'share', client_param: 'Facebook Banco Chile')
 Challenge.create(n_cards:1, kind: 'retweet', client_param: '213379847861436417')
-Challenge.create(n_cards:1, kind: 'share', client_param: '54312')
+Challenge.create(n_cards:1, kind: 'share', client_param: 'Facebook Banca Joven')
 Challenge.create(n_cards:1, kind: 'code', client_param: 'el estado del partido entre Chile y Colombia', server_param: '2 0 gana Chile')
 
 # user 1

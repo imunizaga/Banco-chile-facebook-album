@@ -1,6 +1,8 @@
 BancoChile.Views.Challenges ||= {}
 
 class BancoChile.Views.Challenges.ChallengeView extends Backbone.View
+  renderAsButton: false
+
   initialize: (@challenge) ->
     super()
 
