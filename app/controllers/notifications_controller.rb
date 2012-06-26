@@ -38,12 +38,15 @@ class NotificationsController < ApplicationController
   # POST /notifications.json
   def create
     @notification = Notification.new(params[:notification])
-    user=User.find(session['id'])
-    @notification['sender_id'] = user.id
-
+    @user=User.find(session['id'])
+    @notification['sender_id'] = @user.id
+    @notification['status'] = 0
     respond_to do |format|
       if @notification.save
         format.json { render json: @notification, status: :created, location: @notification }
+        if @notification.challenge_id != nil
+          CardPack.create(challenge_id: @notification.challenge_id, user_id: @user.id)
+        end
       else
         format.json { render json: @notification.errors, status: :unprocessable_entity }
       end
@@ -54,16 +57,19 @@ class NotificationsController < ApplicationController
   def update
     # one can only modify the status
     @notification = Notification.find(params[:id])
-
+    @user=User.find(session['id'])
     respond_to do |format|
-      if @notification['status']
+      if @notification['status'] == 1
         format.json { head :no_content }
       elsif @notification['user_id'] != session['id']
         format.json { head :no_content }
-      else params[:status]
-        #here goes the trade logic if corresponds
+      else params[:status] == 1 and @notification['status'] == 0
         @notification.update_attributes(:status=>params[:notification][:status])
         format.json { head :no_content }
+        if @notification.challenge_id == nil
+          @user.trade_card(@notification.sender_id, @notification.cards_in, 
+            @notification.cards_out) 
+        end
       end
     end
   end

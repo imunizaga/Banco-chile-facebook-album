@@ -29,6 +29,32 @@ class User < ActiveRecord::Base
     return user_album
   end
 
+  def validate_trade sender_id, cards_in_id, cards_out_id
+    cards_in = UserCard.where(id: cards_in_id, user_id: sender_id)
+    cards_out = self.user_cards.where(id: cards_out_id)
+
+    if cards_in.count > 1 and  cards_out.count > 1 then 
+      return [cards_in.first,cards_out.first]
+    else 
+      return [nil, nil]
+    end
+  end
+
+  def trade_card sender_id, card_in_id, card_out_id
+    card_in, card_out = self.validate_trade(sender_id, card_in, card_out)
+    if card_in != nil and card_out != nil then
+      p card_in, card_out
+      sender = User.where(id: sender_id)
+      card_in.user = self
+      card_out.user = sender
+      card_in.save
+      card_out.save
+    self.save
+    else
+      puts "Can't make trade"
+    end    
+  end
+
   def self.ranking n = User.count
     options = {
       :select => 'id, facebook_id, name, cards_count',
