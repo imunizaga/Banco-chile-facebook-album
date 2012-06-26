@@ -31,19 +31,19 @@ card_seeds =[
 card_seeds.each {|card| Card.create(name: card[0], source: card[1])}
 user_seeds.each {|user| User.create(name: user[0], facebook_id: user[1])}
 
-Challenge.create(n_cards:1, kind: 'like', client_param: '53166931056')
-Challenge.create(n_cards:3, kind: 'like', client_param: '106388642729768')
-Challenge.create(n_cards:5, kind: 'like', client_param: '32423176720')
+Challenge.create(n_cards:1, kind: 'like', client_param: 'https://www.facebook.com/pages/Oliver-Atom/53166931056')
+Challenge.create(n_cards:3, kind: 'like', client_param: 'http://www.magnet.cl')
+Challenge.create(n_cards:5, kind: 'like', client_param: 'http://stackoverflow.com/')
 Challenge.create(n_cards:1, kind: 'follow', client_param: 'magnet_dev')
 Challenge.create(n_cards:1, kind: 'follow', client_param: 'ignacio_parada')
 Challenge.create(n_cards:1, kind: 'invite', client_param: '1')
-Challenge.create(n_cards:1, kind: 'code', client_param: 'Muro de Banco de Chile', server_param: '12345')
-Challenge.create(n_cards:1, kind: 'code', client_param: 'P&aacute;gina de la Banca Joven', server_param: '54321')
+Challenge.create(n_cards:1, kind: 'code', client_param: 'el muro de Banco de Chile', server_param: '12345')
+Challenge.create(n_cards:1, kind: 'code', client_param: 'la p&aacute;gina de la Banca Joven', server_param: '54321')
 Challenge.create(n_cards:1, kind: 'retweet', client_param: '213378589977100290')
-Challenge.create(n_cards:1, kind: 'share', client_param: '12345')
+Challenge.create(n_cards:1, kind: 'share', client_param: 'Facebook Banco Chile')
 Challenge.create(n_cards:1, kind: 'retweet', client_param: '213379847861436417')
-Challenge.create(n_cards:1, kind: 'share', client_param: '54312')
-Challenge.create(n_cards:1, kind: 'code', client_param: 'Partido Chile Colombia', server_param: '2 0 gana Chile')
+Challenge.create(n_cards:1, kind: 'share', client_param: 'Facebook Banca Joven')
+Challenge.create(n_cards:1, kind: 'code', client_param: 'el estado del partido entre Chile y Colombia', server_param: '2 0 gana Chile')
 
 # user 1
 CardPack.create(challenge_id:2, user_id: 1)

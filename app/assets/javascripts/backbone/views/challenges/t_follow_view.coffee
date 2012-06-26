@@ -1,10 +1,9 @@
 BancoChile.Views.Challenges ||= {}
 
-class BancoChile.Views.Challenges.TwitterFollowView extends Backbone.View
+class BancoChile.Views.Challenges.TwitterFollowView extends BancoChile.Views.Challenges.ChallengeView
   template: JST["backbone/templates/challenges/t_follow"]
-
-  initialize: (@challenge) ->
-    super()
+  renderAsButton: true
 
   render: ->
     $(@el).html(@template(challenge: @challenge.toJSON() ))
+    return this

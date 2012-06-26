@@ -1,36 +1,18 @@
 BancoChile.Views.Challenges ||= {}
 
 class BancoChile.Views.Challenges.ChallengeView extends Backbone.View
-  template: JST["backbone/templates/challenges/challenge"]
+  renderAsButton: false
 
-  tagName: "li"
+  initialize: (@challenge) ->
+    super()
 
-  events:
-    "click .js-action": "actionBtnClicked"
+  completeChallenge: ->
+    notification = new BancoChile.Models.Notification(
+      challenge_id: @challenge.get('id')
+    )
 
-  initialize: () ->
-    @challenge = @options.challenge
-
-    switch @challenge.get('kind')
-      when 'like'
-        challengeView = BancoChile.Views.Challenges.FacebookLikeView
-      when 'invite'
-        challengeView = BancoChile.Views.Challenges.FacebookInviteView
-      when 'share'
-        challengeView = BancoChile.Views.Challenges.FacebookShareView
-      when 'follow'
-        challengeView = BancoChile.Views.Challenges.TwitterFollowView
-      when 'retweet'
-        challengeView = BancoChile.Views.Challenges.TwitterRetweetView
-      else
-        challengeView = BancoChile.Views.Challenges.CodeView
-
-    @challengeView = new challengeView(@challenge)
-
-  render: ->
-    $(@el).html(@template(challenge: @challenge.toJSON() ))
-    $(@el).find(".accion").fancybox()
-    return this
-
-  actionBtnClicked: ->
-    @trigger('challengeActionClicked', @challengeView)
+    notification.save({}
+      success:=>
+        toast(BancoChile.UIMessages.CHALLENGE_COMPLETED, 'user')
+        @render()
+    )
