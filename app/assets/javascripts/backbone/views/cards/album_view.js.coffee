@@ -28,12 +28,18 @@ class BancoChile.Views.Cards.AlbumView extends Backbone.View
     for card, i  in @cards.models
       # set the class for each element withing the container divs
       lightboxId = "light" + card.get('card_id')
-      cardItemClassName = "card-item-" + card.get('card_id')
+      cardItemId = "card-item-" + card.get('card_id')
+
+      if card.get('count') > 0
+        cardItemClassName = "laTengo"
+      else
+        cardItemClassName = ""
 
       # render the cardItemView
       cardItemView = new BancoChile.Views.Cards.CardItemView(
         model: card
         href: '#' + lightboxId
+        id: cardItemId
         className: cardItemClassName
       )
       $laminas.append(cardItemView.render().el)
@@ -47,7 +53,7 @@ class BancoChile.Views.Cards.AlbumView extends Backbone.View
       $lightboxes.append(lightboxView.render().el)
 
       # set the cardItem to open the fancy box on click
-      $(@el).find("." + cardItemClassName).fancybox()
+      $(@el).find("#" + cardItemId).fancybox()
 
       cardItemView.bind("cardItemClicked", lightboxView.render, lightboxView)
 
