@@ -63,7 +63,7 @@ Challenge.create(
 Challenge.create(
   n_cards:3,
   kind: 'follow',
-  client_param: 'ignacio_parada',
+  client_param: 'github',
   set: '[5]'
 )
 # 6
@@ -93,7 +93,7 @@ Challenge.create(
 Challenge.create(
   n_cards:5,
   kind: 'retweet',
-  client_param: '213378589977100290',
+  client_param: '208950770589114368',
   set: '[4, 1]'
 )
 # 10
