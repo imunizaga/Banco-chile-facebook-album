@@ -9,7 +9,7 @@ class User < ActiveRecord::Base
 
   def set_album
     options = {
-      :include=>"user_cards", 
+      :include=>"user_cards",
       :group=>"card_id"
     }
     cards= self.user_cards.count(options)
@@ -29,36 +29,87 @@ class User < ActiveRecord::Base
     return user_album
   end
 
-  def validate_trade sender_id, cards_in_id, cards_out_id
-    cards_in = UserCard.where(id: cards_in_id, user_id: sender_id)
-    cards_out = self.user_cards.where(id: cards_out_id)
+  # Public: Validates a trade of cards between the current user and another
+  # user, and returns the cards to be traded
+  #
+  # sender_id  - The Integer number that represents the other user
+  # card_in_id  - The Integer number that represents the card to receive
+  # card_out_id  - The Integer number that represents the card to give
+  #
+  # Examples
+  #
+  #   validate_trade(1, 3, 5)
+  #   # => [Card, Card]
+  #
+  # Returns An array with the cards to trade
+  def validate_trade sender_id, card_in_id, card_out_id
 
-    if cards_in.count > 1 and  cards_out.count > 1 then 
-      return [cards_in.first,cards_out.first]
-    else 
-      return [nil, nil]
+    # fetch in my cards the card that will go out
+    my_cards = self.user_cards.where(card_id: card_out_id)
+
+    # fetch the card that will come in from the other user
+    his_cards = UserCard.where(card_id: card_in_id, user_id: sender_id)
+
+    # check if we both have enough cards
+    if my_cards.count > 1 and  his_cards.count > 1 then
+      # return the cards we are going to trade
+      return {:card_in => his_cards.first, :card_out => my_cards.first}
+    else
+      # return an array of nils, indicating that no cards can be traded
+      return {:card_in => nil, :card_out => nil}
     end
   end
 
-  def trade_card sender_id, card_in_id, card_out_id
-    card_in, card_out = self.validate_trade(sender_id, card_in, card_out)
+  # Public: trades an array of cards between the current user and another
+  # user, and returns true if the trade was completed
+  #
+  # sender_id  - The Integer number that represents the other user
+  # cards_in  - The String with the array of cards to receive in json
+  # card_out  - The String with the array of cards to give in json
+  #
+  # Examples
+  #
+  #   trade_card(1, "[3]", "[5]")
+  #   # => [Card, Card]
+  #
+  # Returns A boolian indicating if the trade was successfull
+  def trade_card sender_id, cards_in, cards_out
+    # first decode the json strings we asume that only one card_id comes in
+    # each array
+    card_in_id = ActiveSupport::JSON.decode(cards_in)[0]
+    card_out_id = ActiveSupport::JSON.decode(cards_out)[0]
+
+    # validate the trade and obtian the actual cards
+    trade = self.validate_trade(sender_id, card_in_id, card_out_id)
+    card_in = trade[:card_in]
+    card_out = trade[:card_out]
+
+    # if the trade was validated
     if card_in != nil and card_out != nil then
-      p card_in, card_out
-      sender = User.where(id: sender_id)
+
+      # obtain the sender
+      sender = User.find(sender_id)
+
+      # update the owners
       card_in.user = self
       card_out.user = sender
       card_in.save
       card_out.save
-    self.save
-    else
-      puts "Can't make trade"
-    end    
+
+      # update the user data
+      self.set_album
+      sender.set_album
+      return true
+    end
+    puts "Can't make trade"
+    # if we  reach this point, then we everyting failed
+    return false
   end
 
   def self.ranking n = User.count
     options = {
       :select => 'id, facebook_id, name, cards_count',
-      :order => '-cards_count', 
+      :order => '-cards_count',
       :limit => n,
     }
     top_users = User.find(:all, options)
@@ -75,28 +126,28 @@ class User < ActiveRecord::Base
     end
     return ranking
   end
-  
+
   def find_trades friends = User.where(Arel::Table.new(:users)[:id].not_in self.id)
     friends = friends.includes(:cards,:user_cards)
     self.album.each do |card|
       self.album[card[:card_id]-1][:trades] = []
       count = card[:count]
       trades = []
-      case 
-        when count == 0 then 
+      case
+        when count == 0 then
           print self.name, " doesn\'t have card ", card[:card_id],"\n"
           friends.each do |friend|
             if friend.album[card[:card_id]-1][:count] > 1
-              self.album[card[:card_id]-1][:trades].append(friend.id) 
+              self.album[card[:card_id]-1][:trades].append(friend.id)
               print "\t", friend.name, " has card ", card[:card_id],  " repeated" ,"\n"
             end
           end
         when count > 1 then
-          print self.name, " has card ", card[:card_id], " repeated", "\n"  
+          print self.name, " has card ", card[:card_id], " repeated", "\n"
           friends.each do |friend|
             if card[:card_id].in? friend.remaining_cards.map {
               |friend_card| friend_card[:card_id] }
-              self.album[card[:card_id]-1][:trades].append(friend.id) 
+              self.album[card[:card_id]-1][:trades].append(friend.id)
               print "\t", friend.name, " doesn\'t have card ", card[:card_id],  "\n"
             end
           end
@@ -105,13 +156,13 @@ class User < ActiveRecord::Base
           friends.each do |friend|
             if card[:card_id].in? friend.cards.map { |friend_card| friend_card[:id]}
               print "\t", friend.name, " also has this card \n"
-              self.album[card[:card_id]-1][:trades].append(friend.id) 
+              self.album[card[:card_id]-1][:trades].append(friend.id)
             end
           end
       end
     end
     self.save
-  end    
+  end
 
   def self.sort_by_rank top
     User.order('-cards_count').limit(top)

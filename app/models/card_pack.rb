@@ -31,7 +31,8 @@ class CardPack < ActiveRecord::Base
       if self.challenge != nil and self.user != nil
         cards_count = Card.count
         challenge_cards = self.challenge.n_cards
-        rand_cards =  (1..challenge_cards).map {rand(cards_count)}
+        card_set = ActiveSupport::JSON.decode(self.challenge.set)
+        rand_cards =  (1..challenge_cards).map {card_set.sample}
         rand_cards.each  do |card_id|
            user_card = UserCard.new
            user_card.card_pack = self

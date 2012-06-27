@@ -54,22 +54,49 @@ class NotificationsController < ApplicationController
   end
 
   # PUT /notifications/1.json
+  # Public: Updates the Notification object.
+  # One can only modify the status field from nil to 1(accepted) or 0
+  # (rejected)
   def update
-    # one can only modify the status
+    # obtain the notification
     @notification = Notification.find(params[:id])
-    @user=User.find(session['id'])
+    # obtain the logged user
+    @user = User.find(session['id'])
+
+    new_status = params[:notification][:status]
+
+    # asume that the notification update is valid
+    valid = true
+    #if the notification does not have a "unanswered" status
+    if @notification['status'] != nil
+      valid = false
+      reason = "Notification is closed"
+    # if the user trying to update the notification is not the logged user
+    elsif @notification['user_id'] != session['id']
+      valid = false
+      reason = "Forbidden"
+    # if the status we are updating to is not 0 or 1
+    elsif new_status != 0 and new_status != 1
+      valid = false
+      reason = "Invalid status"
+    # if it's a trade
+    elsif @notification.sender_id != nil
+      valid = @user.trade_card(@notification.sender_id, @notification.cards_in,
+                               @notification.cards_out)
+      reason = "Can't make trade"
+    elsif @notification.challenge_id != nil
+      print "SUPER CHALLENGE"
+    end
+
     respond_to do |format|
-      if @notification['status'] == 1
+      if valid
+        # update the status
+        #@notification.update_attributes(:status=>new_status)
         format.json { head :no_content }
-      elsif @notification['user_id'] != session['id']
-        format.json { head :no_content }
-      else params[:status] == 1 and @notification['status'] == 0
-        @notification.update_attributes(:status=>params[:notification][:status])
-        format.json { head :no_content }
-        if @notification.challenge_id == nil
-          @user.trade_card(@notification.sender_id, @notification.cards_in, 
-            @notification.cards_out) 
-        end
+      else
+        # responde a bad request
+        format.json { head :bad_request }
+        print reason
       end
     end
   end
