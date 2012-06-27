@@ -6,7 +6,7 @@
 */
 
 @charset "utf-8";
-/* Default Website - 2011 */
+/* Álbum Banco de Chile 2012 */
 
 /* Generals
 ------------------------------------------------------------------*/
@@ -130,7 +130,7 @@ h2.rank {
 	padding-left:20px;
 	position:relative;
 	padding-bottom:20px;
-	border-bottom:1px solid #540002;
+	border-bottom:1px solid #2A3C16;
 }
 .ranking a.prev {
 	position: absolute;
@@ -211,7 +211,7 @@ h2.rank {
 	min-height:60px;
 	margin:0 0 0 40px;
 	padding:20px 0 20px 0;
-	border-bottom:1px solid #540002;
+	border-bottom:1px solid #2A3C16;
 }
 .contenidos a.comenzar, .contenidos a.ingresar {
 	display: block;
@@ -232,12 +232,12 @@ h2.rank {
 	box-shadow:1px 1px 2px #000;
 }
 .contenidos a.comenzar:hover, .contenidos a.ingresar:hover {
-	background:red;
+	background:#006699;
 	color: #fff;
 }
 .contenidos a.comenzar:active, .contenidos a.ingresar:active {
 	background:#000;
-	color: #a00000;
+	color: #006699;
 	-webkit-box-shadow:none;
 	-moz-box-shadow:none;
 	box-shadow:none;
@@ -286,7 +286,7 @@ h2.rank {
 	margin-top:14px;
 	color:#000;
 	text-transform:uppercase;
-	border-bottom:1px solid #540002;
+	border-bottom:1px solid #2A3C16;
 	font-family: 'Oswald', sans-serif;
 	font-weight:700;
 	}
@@ -300,6 +300,7 @@ h2.rank {
 	color:#fff;
 	text-align:right;
 	margin-top:14px;
+	text-shadow:1px 1px 1px #000;
 }
 .izq p span {
 	font-size:15px;
@@ -311,7 +312,6 @@ h2.rank {
 	margin-top:5px;
 }
 .izq ul.laminas li {
-    cursor: pointer;
 	float: left;
 	width:40px;
 	height:60px;
@@ -322,19 +322,19 @@ h2.rank {
 	background:url(/assets/camiseta_latengo.png) top left no-repeat;
 }
 .repetidas {
-	color:red;
+	color:#94A42C;
 	font-size:10px;
 }
 .camiseta {
 	width:40px;
 	height:30px;
-	color:#FF9677;
+	color:#A6BE00;
 	text-align:center;
+	text-shadow:1px 1px 1px #000;
 	float: left;
 	margin:12px 0 0 0;
 }
 .camiseta:hover {
-	text-shadow:1px 1px 1px #000;
 	text-decoration:none;
 	color:#fff;
 }
@@ -469,7 +469,7 @@ hr {
 	list-style:none;
 	margin:0;
 	border:none;
-	background:#540002;
+	background:#223011;
 }
 #tabs ul li a {
 	font-family:Arial, sans-serif;
@@ -478,11 +478,11 @@ hr {
 	color:#fff;
 }
 .ui-tabs-selected {
-	background:#2F0001 !important;
+	background:#121B07 !important;
 }
 #tabs ul li a .numero {
 	padding: 1px 5px;
-	background:#da0000;
+	background:#006699;
 	font-size:10px;
 	color:#fff;
 	-webkit-border-radius:8px;
@@ -515,8 +515,11 @@ ul.pruebas {
 	text-align:left;
 	overflow-y:scroll;
 	overflow-x:hidden;
-	border-left:1px solid #790000 !important;
+	border-left:1px solid #2A3C16 !important;
 	background:transparent !important;
+}
+ul.pruebas p iframe {
+	margin:7px;
 }
 ul.pruebas li {
 	float: left;
@@ -524,8 +527,8 @@ ul.pruebas li {
 	height:auto;
 	margin:0 0 5px 0;
 	padding:10px;
-	border-bottom:1px solid #2F0000 !important;
-	border-top:1px solid #750101 !important;
+	border-bottom:1px solid #2A3C16 !important;
+	border-top:1px solid #2A3C16 !important;
 	background:url(/assets/bg_pruebas.png) top left repeat-y !important;
 }
 ul.pruebas li img {
@@ -539,7 +542,7 @@ ul.pruebas li img {
 }
 ul.pruebas li h4 {
 	font-size:13px;
-	color:#C80000;
+	color:#69751F;
 	text-transform:uppercase;
 	font-family: 'OSWALD', sans-serif;
 	font-weight:500 !important;
@@ -547,12 +550,12 @@ ul.pruebas li h4 {
 ul.pruebas li p {
 	font-size:11px;
 	padding-bottom:6px;
-	color:#C80000;
+	color:#006699;
 }
 ul.pruebas li.nueva {
 	background:transparent !important;
-	border-top:1px solid #a00000 !important;
-	border-bottom:1px solid #540002 !important;
+	border-top:1px solid #2A3C16 !important;
+	border-bottom:1px solid #2A3C16 !important;
 }
 ul.pruebas li.nueva h4 {
 	color:#fff;
@@ -566,8 +569,8 @@ ul.pruebas li.nueva p {
 ul.pruebas li p.laminas {
 	padding:7px 10px 3px;
 	text-align:center;
-	background:#540002;
-	color:red !important;
+	background:#1E2E0D;
+	color:#006699 !important;
 	-webkit-border-radius:11px;
 	-moz-border-radius:11px;
 	border-radius:11px;
@@ -578,7 +581,7 @@ ul.pruebas li p.laminas {
 }
 ul.pruebas li.nueva p.laminas {
 	padding:9px 10px 1px;
-	background:#FF3300;
+	background:#94A42C;
 	font-weight:700 !important;
 	color:#000 !important;
 	-webkit-box-shadow:inset 2px 2px 10px #000;
@@ -591,8 +594,7 @@ ul.pruebas li p.laminas .lam1 {
 ul.pruebas li p.laminas .lam2 {
 	font-size:13px;
 }
-ul.pruebas li .accion {
-    cursor: pointer;
+ul.pruebas li a.accion {
 	float: right;
 	margin:10px 0 0 0;
 	padding: 5px 10px;
@@ -607,39 +609,38 @@ ul.pruebas li .accion {
 	font-size:12px;
 	color:#fff;
 }
-ul.pruebas li .accion:hover {
-	background:#da0000;
+ul.pruebas li a.accion:hover {
+	background:#006699;
 	color:#fff !important;
 }
-ul.pruebas li .accion:active {
+ul.pruebas li a.accion:active {
 	background:#fff;
 	color:#000 !important;
 	-webkit-box-shadow:none;
 	-moz-box-shadow:none;
 	box-shadow:none;
 }
-ul.pruebas li .accion2 {
-    cursor: pointer;
+ul.pruebas li a.accion2 {
 	float: left;
 	margin:20px 0 0 0;
 	padding: 0;
-	color:#C80000 !important;
+	color:#94A42C !important;
 	font-weight:bold !important;
 	text-decoration:none;
 }
-ul.pruebas li .accion2:hover {
+ul.pruebas li a.accion2:hover {
 	color:#fff !important;
 }
-ul.pruebas li .accion2:active {
+ul.pruebas li a.accion2:active {
 	color:#999 !important;
 }
-ul.pruebas li.nueva .accion2 {
+ul.pruebas li.nueva a.accion2 {
 	color:#ddd !important;
 }
-ul.pruebas li.nueva .accion2:hover {
+ul.pruebas li.nueva a.accion2:hover {
 	color:#fff !important;
 }
-ul.pruebas li.nueva .accion2:active {
+ul.pruebas li.nueva a.accion2:active {
 	color:#000 !important;
 }
 
@@ -681,8 +682,8 @@ ul.pruebas li.nueva .accion2:active {
 /* Magnet
 ------------------------------------------------------------------*/
 .hidden {
-    display: none;
+	display: none;
 }
-.clickable{
-    cursor: pointer;
+.clickable {
+	cursor: pointer;
 }
