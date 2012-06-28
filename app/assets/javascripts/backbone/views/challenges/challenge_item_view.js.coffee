@@ -14,17 +14,22 @@ class BancoChile.Views.Challenges.ChallengeItemView extends Backbone.View
     switch @challenge.get('kind')
       when 'like'
         challengeView = BancoChile.Views.Challenges.FacebookLikeView
+        @image = "sFacebook.jpg"
       when 'invite'
         challengeView = BancoChile.Views.Challenges.FacebookInviteView
+        @image = "sFacebook.jpg"
       when 'share'
         challengeView = BancoChile.Views.Challenges.FacebookShareView
+        @image = "sFacebook.jpg"
       when 'follow'
         challengeView = BancoChile.Views.Challenges.TwitterFollowView
-        challengeView.renderButton = true
+        @image = "sTwitter.jpg"
       when 'retweet'
         challengeView = BancoChile.Views.Challenges.TwitterRetweetView
+        @image = "sTwitter.jpg"
       else
         challengeView = BancoChile.Views.Challenges.CodeView
+        @image = "sCode.jpg"
 
     @challengeView = new challengeView(@challenge)
 
@@ -36,7 +41,7 @@ class BancoChile.Views.Challenges.ChallengeItemView extends Backbone.View
     a lightbox
 
     ###
-    $(@el).html(@template(challenge: @challenge.toJSON() ))
+    $(@el).html(@template(challenge: @challenge.toJSON(), image: @image))
     if @challengeView.renderAsButton
       $(@el).find(".js-action-container").html(@challengeView.render().el)
     else
