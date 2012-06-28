@@ -22,8 +22,6 @@ class BancoChile.Views.Challenges.ChallengeView extends Backbone.View
           user.get('notifications').push(notification)
         else
           toast(BancoChile.UIMessages.CHALLENGE_FAILED, 'user')
-          window.location.reload()
       error:=>
         toast(BancoChile.UIMessages.CHALLENGE_FAILED, 'user')
-        window.location.reload()
     )

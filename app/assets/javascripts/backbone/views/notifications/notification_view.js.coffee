@@ -50,7 +50,6 @@ class BancoChile.Views.Notifications.NotificationView extends Backbone.View
             toast(BancoChile.UIMessages.TRADE_SUCCESS + card_in_id, 'user')
           else
             toast(BancoChile.UIMessages.TRADE_FAILED)
-            window.location.reload()
 
   denyBtnClicked: ->
     ### not implemented yet ###
