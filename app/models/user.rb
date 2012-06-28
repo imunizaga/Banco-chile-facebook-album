@@ -30,19 +30,42 @@ class User < ActiveRecord::Base
   end
 
   # Public: Validates a trade of cards between the current user and another
-  # user, and returns the cards to be traded
+  # user, and returns a boolean indicating if the trade can be made
   #
   # sender_id  - The Integer number that represents the other user
-  # card_in_id  - The Integer number that represents the card to receive
-  # card_out_id  - The Integer number that represents the card to give
+  # cards_in  - The String with the array of cards to receive in json
+  # card_out  - The String with the array of cards to give in json
   #
   # Examples
   #
-  #   validate_trade(1, 3, 5)
+  #   validate_trade(1, "[3]", "[5]")
+  #   # => false
+  #
+  # Returns A boolean indicating if the trade can be done
+  def validate_trade sender_id, cards_in, cards_out
+    trade = prepare_trade(sender_id, cards_in, cards_out)
+    return if trade[:card_in] != nil and trade[:card_out] != nil
+  end
+
+  # Public: Prepares a trade of cards between the current user and another
+  # user, and returns the cards to be traded
+  #
+  # sender_id  - The Integer number that represents the other user
+  # cards_in  - The String with the array of cards to receive in json
+  # card_out  - The String with the array of cards to give in json
+  #
+  # Examples
+  #
+  #   prepare_trade(1, "[3]", "[5]")
   #   # => [Card, Card]
   #
   # Returns An array with the cards to trade
-  def validate_trade sender_id, card_in_id, card_out_id
+  def prepare_trade sender_id, cards_in, cards_out
+
+    # first decode the json strings we asume that only one card_id comes in
+    # each array
+    card_in_id = ActiveSupport::JSON.decode(cards_in)[0]
+    card_out_id = ActiveSupport::JSON.decode(cards_out)[0]
 
     # fetch in my cards the card that will go out
     my_cards = self.user_cards.where(card_id: card_out_id)
@@ -74,13 +97,8 @@ class User < ActiveRecord::Base
   #
   # Returns A boolian indicating if the trade was successfull
   def trade_card sender_id, cards_in, cards_out
-    # first decode the json strings we asume that only one card_id comes in
-    # each array
-    card_in_id = ActiveSupport::JSON.decode(cards_in)[0]
-    card_out_id = ActiveSupport::JSON.decode(cards_out)[0]
-
-    # validate the trade and obtian the actual cards
-    trade = self.validate_trade(sender_id, card_in_id, card_out_id)
+    # obtian the actual cards to be trade
+    trade = self.prepare_trade(sender_id, card_in_id, card_out_id)
     card_in = trade[:card_in]
     card_out = trade[:card_out]
 
@@ -101,8 +119,9 @@ class User < ActiveRecord::Base
       sender.set_album
       return true
     end
+
+    # if we  reach this point, then we everything failed
     puts "Can't make trade"
-    # if we  reach this point, then we everyting failed
     return false
   end
 

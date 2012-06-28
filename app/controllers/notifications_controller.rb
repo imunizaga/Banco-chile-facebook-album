@@ -37,18 +37,66 @@ class NotificationsController < ApplicationController
   # POST /notifications
   # POST /notifications.json
   def create
+    # instanciate the new notification
     @notification = Notification.new(params[:notification])
+
+    # set the status of the notification as nil ("unread")
+    @notification.status = nil
+
+    #asume that the new notification is a valid one
+    valid = true
+
+    # obtain the logged user
     @user=User.find(session['id'])
-    @notification['sender_id'] = @user.id
-    @notification['status'] = 0
-    respond_to do |format|
-      if @notification.save
-        format.json { render json: @notification, status: :created, location: @notification }
-        if @notification.challenge_id != nil
-          CardPack.create(challenge_id: @notification.challenge_id, user_id: @user.id)
-        end
+
+    # if the notification already sets a user then we asume it's a trade
+    # So we set the logged user as the sender
+    # Else, asume it's a challenge completed notification
+    if @notification.user_id
+      # this is a trade, so check if a user is not trading with himself
+      if @notification.user_id == @user.id
+        valid = false
       else
-        format.json { render json: @notification.errors, status: :unprocessable_entity }
+        @notification.sender_id = @user.id
+        valid = @notification.validate_trade(@user)
+        # set trade values
+        @notification.challenge_id = nil
+      end
+    else
+      # this is not a trade, thus it's a challenge completed notification
+      if @notification.challenge_id == nil
+        valid = false
+      else
+        # set challenge values values
+        @notification.user_id = @user.id
+        valid = @notification.validate_challenge(@user)
+        @notification.sender_id = nil
+      end
+    end
+
+    if valid
+      valid = @notification.save
+    end
+
+    respond_to do |format|
+      if valid
+        if @notification.challenge_id != nil
+          card_pack = CardPack.create(challenge_id: @notification.challenge_id,
+                                      user_id: @user.id)
+          json_card_ids = ActiveSupport::JSON.encode(card_pack[:card_ids])
+          @notification.cards_in = json_card_ids
+          @notification.save
+        end
+        format.json {
+          render json: @notification,
+          status: :created,
+          location: @notification
+        }
+      else
+        format.json {
+          render json: @notification.errors,
+          status: :unprocessable_entity
+        }
       end
     end
   end
@@ -91,7 +139,7 @@ class NotificationsController < ApplicationController
     respond_to do |format|
       if valid
         # update the status
-        #@notification.update_attributes(:status=>new_status)
+        @notification.update_attributes(:status=>new_status)
         format.json { head :no_content }
       else
         # responde a bad request

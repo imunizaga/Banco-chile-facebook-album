@@ -96,6 +96,26 @@ class BancoChile.Models.User extends Backbone.Model
         friendsWithoutCard.push(friend)
     return friendsWithoutCard
 
+  tradeCards: (jsonCardsIn, jsonCardsOut) ->
+    # get the card we are going to receive
+    cards_in_ids = JSON.parse(jsonCardsIn)
+    for card_in_id in cards_in_ids
+      card_in = @getCard(card_in_id)
+
+      #adjust the incoming card count
+      card_in.set('count', card_in.get('count') + 1)
+
+    # get the card we are going to send
+    if jsonCardsOut
+      cards_out_ids = JSON.parse(jsonCardsOut)
+      for card_out_id in cards_out_ids
+        card_out = @getCard(card_out_id)
+
+        # adjust the incoming card count
+        card_out.set('count', card_out.get('count') - 1)
+
+    return true
+
 class BancoChile.Collections.UsersCollection extends Backbone.Collection
   model: BancoChile.Models.User
   url: '/users'

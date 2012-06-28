@@ -18,7 +18,7 @@ class BancoChile.Views.Challenges.FacebookShareView extends BancoChile.Views.Cha
       description: 'Nueva empresa de desarrollo de software'
 
     callback = (response) ->
-      consol.log("Post ID: " + response['post_id'])
+      console.log("Post ID: " + response['post_id'])
 
     FB.ui(obj, callback)
 

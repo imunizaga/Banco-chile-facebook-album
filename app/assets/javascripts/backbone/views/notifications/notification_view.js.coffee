@@ -45,22 +45,12 @@ class BancoChile.Views.Notifications.NotificationView extends Backbone.View
     @model.save {},
       success: =>
         if @sender
-          # get the card we are going to receive
-          card_in_id = JSON.parse(@model.get('cards_in'))[0]
-          card_in = @user.getCard(card_in_id)
-
-          #adjust the incoming card count
-          card_in.set('count', card_in.get('count') + 1)
-
-          # get the card we are going to send
-          card_out_id = JSON.parse(@model.get('cards_out'))[0]
-          card_out = @user.getCard(card_out_id)
-
-          # adjust the incoming card count
-          card_out.set('count', card_out.get('count') - 1)
-
-          # tell the user everything went ok
-          toast(BancoChile.UIMessages.TRADE_SUCCESS + card_in_id, 'user')
+          if @user.tradeCards(@model.get('cards_in'), @model.get('cards_out'))
+            # tell the user everything went ok
+            toast(BancoChile.UIMessages.TRADE_SUCCESS + card_in_id, 'user')
+          else
+            toast(BancoChile.UIMessages.TRADE_FAILED)
+            window.location.reload()
 
   denyBtnClicked: ->
     ### not implemented yet ###

@@ -33,16 +33,19 @@ class CardPack < ActiveRecord::Base
         challenge_cards = self.challenge.n_cards
         card_set = ActiveSupport::JSON.decode(self.challenge.set)
         rand_cards =  (1..challenge_cards).map {card_set.sample}
+        self[:card_ids] = []
         rand_cards.each  do |card_id|
            user_card = UserCard.new
            user_card.card_pack = self
            user_card.card_id = card_id
            user_card.user = self.user
            user_card.save
+           self[:card_ids].push(card_id)
            #if @user_card.save == nil
            #  format.html { render action: "new" }
            #  format.json { render json: @card_pack.errors, status: :unprocessable_entity }
            #end
+
         end
       end
     end

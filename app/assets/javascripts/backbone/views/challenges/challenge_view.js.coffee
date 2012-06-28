@@ -13,6 +13,16 @@ class BancoChile.Views.Challenges.ChallengeView extends Backbone.View
 
     notification.save({}
       success:=>
-        toast(BancoChile.UIMessages.CHALLENGE_COMPLETED, 'user')
-        @render()
+        if window.app.user.tradeCards(notification.get('cards_in'), false)
+          base_message = BancoChile.UIMessages.CHALLENGE_COMPLETED
+          toast("#{base_message}: #{notification.get('cards_in')}", 'user')
+          if not @renderAsButton
+            $.fancybox.close()
+        else
+          toast(BancoChile.UIMessages.CHALLENGE_FAILED, 'user')
+          window.location.reload()
+      error:=>
+        toast(BancoChile.UIMessages.CHALLENGE_FAILED, 'user')
+        debugger
+        window.location.reload()
     )
