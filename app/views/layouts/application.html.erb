@@ -1,94 +1,27 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" xmlns:fb="http://ogp.me/ns/fb#">
-    <head>
-        <title>Álbum de la Roja!</title>
-        <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-        <meta name="language" content="es" />
-        <meta name="Description" content="" />
-        <meta name="Keywords" content="" />
-        <%= favicon_link_tag %>
-        <%= stylesheet_link_tag    "application", :media => "all" %>
-        <%= javascript_include_tag "application" %>
-        <%= csrf_meta_tags %>
-    </head>
-    <body>
-        <div id="fb-root"></div>
-        <script>
-            window.fbAsyncInit = function() {
-                FB.init({
-                    appId      : <%= APP_ID -%>, // App ID
-                    channelUrl : '<%= SITE_URL -%>/channel.html', // Channel File
-                    status     : true, // check login status
-                    cookie     : true, // enable cookies to allow the server to access the session
-                    xfbml      : true  // parse XFBML
-                });
+  <head>
+    <title>Álbum de la Roja!</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta name="language" content="es" />
+    <meta name="Description" content="" />
+    <meta name="Keywords" content="" />
+    <%= favicon_link_tag %>
+    <%= stylesheet_link_tag    "application", :media => "all" %>
+    <%= javascript_include_tag "application" %>
+    <%= csrf_meta_tags %>
+  </head>
+  <body>
+    <div id="fb-root"></div>
+    <script>
+      initSocialApps(<%= APP_ID -%>);
+    </script>
 
-                console.log("Getting facebook login status");
-                FB.getLoginStatus(function(response) {
-                    console.log("reponse status: " + response.status);
-                    if(window.app){
-                        var user = window.app.user;
-                        if(response.status == 'connected'){
-                            if(user.get('login_status') != 'connected'){
-                                window.location = "/facebook/login"
-                            }
-                            else{
-                                facebookId = parseInt(response.authResponse.userID)
-                                user.set('facebook_id', facebookId);
-                            }
-                        }
-                        else{
-                            user.set('login_status', response.status);
-                        }
-                    }
-                });
-            };
+    <div id="container">
+      <%= yield %>
+    </div>
 
-            // Load the SDK Asynchronously
-            (function(d){
-                var js, id = 'facebook-jssdk', ref = d.getElementsByTagName('script')[0];
-                if (d.getElementById(id)) {return;}
-                js = d.createElement('script'); js.id = id; js.async = true;
-                js.src = "//connect.facebook.net/en_US/all.js";
-                ref.parentNode.insertBefore(js, ref);
-            }(document));
+    <script src="https://platform.twitter.com/anywhere.js?id=SoJMGFj6ijCkhz8nNJXCw&v=1" type="text/javascript"></script>
 
-            // Twitter events
-            // First, load the widgets.js file asynchronously 
-            window.twttr = (function (d,s,id) {
-                console.log("In twttr definition");
-                var t, js, fjs = d.getElementsByTagName(s)[0];
-                if (d.getElementById(id)) return; js=d.createElement(s); js.id=id;
-                js.src="//platform.twitter.com/widgets.js"; fjs.parentNode.insertBefore(js, fjs);
-                return window.twttr || (t = { _e: [], ready: function(f){ t._e.push(f) } });
-            }(document, "script", "twitter-wjs"));
-
-            // Wait for the asynchronous resources to load
-            twttr.ready(function (twttr) {
-                console.log("In twttr ready");
-                // Now bind our custom intent events
-                twttr.events.bind('tweet', function(event) {
-                    var tweet_id = event.data.source_tweet_id;
-                    console.log("tweeted!: " + tweet_id);
-                });
-                twttr.events.bind('follow', function(event) {
-                    var followed_user_id = event.data.user_id;
-                    var followed_screen_name = event.data.screen_name;
-                    console.log("followed!: " + followed_screen_name);
-                });
-                twttr.events.bind('retweet', function(event) {
-                    var retweeted_tweet_id = event.data.source_tweet_id;
-                    console.log("re-tweeted!: " + tweet_id);
-                });
-            });
-
-       </script>
-
-        <div id="container">
-            <%= yield %>
-        </div>
-
-        <script src="https://platform.twitter.com/anywhere.js?id=SoJMGFj6ijCkhz8nNJXCw&v=1" type="text/javascript"></script>
-        
-    </body>
+  </body>
 </html>

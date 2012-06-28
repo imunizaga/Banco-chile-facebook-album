@@ -17,3 +17,8 @@ doc/
 .DS_Store
 
 .sass-cache
+
+pull_push.sh
+
+# npm modules
+node_modules
