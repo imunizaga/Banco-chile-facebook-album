@@ -44,7 +44,7 @@ class User < ActiveRecord::Base
   # Returns A boolean indicating if the trade can be done
   def validate_trade sender_id, cards_in, cards_out
     trade = prepare_trade(sender_id, cards_in, cards_out)
-    return if trade[:card_in] != nil and trade[:card_out] != nil
+    return (trade[:card_in] != nil and trade[:card_out] != nil)
   end
 
   # Public: Prepares a trade of cards between the current user and another

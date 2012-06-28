@@ -58,7 +58,7 @@ class NotificationsController < ApplicationController
         valid = false
       else
         @notification.sender_id = @user.id
-        valid = @notification.validate_trade(@user)
+        valid = @notification.validate_trade()
         # set trade values
         @notification.challenge_id = nil
       end

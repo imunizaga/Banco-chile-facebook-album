@@ -15,7 +15,7 @@ class Notification < ActiveRecord::Base
   #   # => true
   #
   # Returns A boolean indicating if the trade can be done
-  def validate_challenge user
+  def validate_challenge user=nil
       return true
   end
 
@@ -30,20 +30,23 @@ class Notification < ActiveRecord::Base
   #   # => true
   #
   # Returns A boolean indicating if the trade can be done
-  def validate_trade user
+  def validate_trade user=nil
 
     # since the user parameter is optional, check if its nil
     if user != nil
       # if the user we got is not the user specified in user_id
-      if user.id != notification.user_id
+      if user.id != self.user_id
+          p user.id, self.user_id
           return false
       end
     else
-      user = User.find(notification.user_id)
+      user = User.find(self.user_id)
     end
-    sender_id = notification.sender_id
-    cards_in = notification.cards_in
-    cards_out = notification.cards_out
+    sender_id = self.sender_id
+    cards_in = self.cards_in
+    cards_out = self.cards_out
+
+    print user.id, sender_id, cards_in, cards_out
 
     return user.validate_trade(sender_id, cards_in, cards_out)
   end
