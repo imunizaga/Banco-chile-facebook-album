@@ -98,7 +98,7 @@ class User < ActiveRecord::Base
   # Returns A boolian indicating if the trade was successfull
   def trade_card sender_id, cards_in, cards_out
     # obtian the actual cards to be trade
-    trade = self.prepare_trade(sender_id, card_in_id, card_out_id)
+    trade = self.prepare_trade(sender_id, cards_in, cards_out)
     card_in = trade[:card_in]
     card_out = trade[:card_out]
 
