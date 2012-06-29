@@ -1,4 +1,5 @@
 window.initSocialApps = (app_id) ->
+  window.fb_app_id = app_id
   window.fbAsyncInit = ->
     site_url = "#{window.location.protocol}//#{window.location.host}"
     FB.init
