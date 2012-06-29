@@ -1,6 +1,6 @@
 class Notification < ActiveRecord::Base
   attr_accessible :title, :description, :details, :user_id, :cards_in,
-    :cards_out, :sender_id, :status, :challenge_id
+    :cards_out, :sender_id, :status, :challenge_id, :daasdf
   belongs_to :user
 
   # Public: Validates a that a challenge was completed acording to the
@@ -14,9 +14,10 @@ class Notification < ActiveRecord::Base
   #   notification.validate_challenge()
   #   # => true
   #
-  # Returns A boolean indicating if the trade can be done
+  # Returns A boolean indicating if the challenge was completed
   def validate_challenge user=nil
-      return true
+      challenge = Challenge.find(self.challenge_id)
+      return challenge.validate_complete(user, self[:data])
   end
 
   # Public: Prepares a trade of specified in the notification

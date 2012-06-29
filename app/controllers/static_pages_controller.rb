@@ -29,7 +29,7 @@ class StaticPagesController < ApplicationController
       end
 
       @cards = Card.all
-      @challenges = Challenge.all
+      @challenges = Challenge.all_without_server_params
     else
       @user = {}
     end

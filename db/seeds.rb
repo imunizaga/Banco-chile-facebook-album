@@ -141,12 +141,6 @@ CardPack.create(challenge_id:4, user_id: 4)
 # user 5
 CardPack.create(challenge_id:10, user_id: 5)
 
-Notification.create(user_id:1, sender_id:2, cards_in:'[2]', cards_out:'[1]')
-Notification.create(user_id:2, sender_id:3, cards_in:'[3]', cards_out:'[2]')
-Notification.create(user_id:3, sender_id:4, cards_in:'[4]', cards_out:'[3]')
-Notification.create(user_id:4, sender_id:5, cards_in:'[5]', cards_out:'[4]')
-Notification.create(user_id:5, sender_id:1, cards_in:'[1]', cards_out:'[5]')
-
 Notification.create(user_id:1, description:'retweet', cards_in:'[1]')
 Notification.create(user_id:2, description:'retweet', cards_in:'[2]')
 Notification.create(user_id:3, description:'retweet', cards_in:'[3]')

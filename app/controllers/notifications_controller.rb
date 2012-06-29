@@ -141,9 +141,10 @@ class NotificationsController < ApplicationController
       reason = "Invalid status"
     # if it's a trade
     elsif @notification.sender_id != nil
-      valid = @user.trade_card(@notification.sender_id, @notification.cards_in,
+      trade = @user.trade_card(@notification.sender_id, @notification.cards_in,
                                @notification.cards_out)
-      reason = "Can't make trade"
+      valid = trade[:valid]
+      reason = trade[:reason]
     elsif @notification.challenge_id != nil
       print "SUPER CHALLENGE"
     end

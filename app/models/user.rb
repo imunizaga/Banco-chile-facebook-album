@@ -154,7 +154,7 @@ class User < ActiveRecord::Base
   end
 
   # Public: trades an array of cards between the current user and another
-  # user, and returns true if the trade was completed
+  # user
   #
   # sender_id  - The Integer number that represents the other user
   # cards_in  - The String with the array of cards to receive in json
@@ -162,10 +162,13 @@ class User < ActiveRecord::Base
   #
   # Examples
   #
-  #   trade_card(1, "[3]", "[5]")
-  #   # => [Card, Card]
+  #   user.prepare_trade_hash(my_cards, his_cards)
+  #   # => {:card_in => Card, :card_out => Card, :valid => true}
+  #   or
+  #   user.prepare_trade_hash(my_cards, his_cards)
+  #   # => {:card_in => nil, :card_out => nil, :valid => false}
   #
-  # Returns A boolian indicating if the trade was successfull
+  # Returns A hash with the cards to trade and if the trade if valid
   def trade_card sender_id, cards_in, cards_out
     # obtian the actual cards to be trade
     trade = self.prepare_trade(sender_id, cards_in, cards_out)
@@ -187,11 +190,8 @@ class User < ActiveRecord::Base
       # update the user data
       self.set_album
       sender.set_album
-      return true
     end
-
-    # if we  reach this point, then we everything failed
-    return false
+    return trade
   end
 
   def self.ranking n = User.count
