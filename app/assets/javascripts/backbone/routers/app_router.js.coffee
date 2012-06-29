@@ -54,7 +54,9 @@ class BancoChile.Routers.AppRouter extends Backbone.Router
     $container.html(@view.render().el)
 
   game: ->
-    ### go to the game view ###
+    ### renthers the game view ###
+    #
+    window.scrollTo(0,0)
 
     # if the user is not authenticated
     if not @user.isAuthenticated()

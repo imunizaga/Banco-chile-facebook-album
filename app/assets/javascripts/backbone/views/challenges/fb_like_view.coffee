@@ -9,6 +9,7 @@ class BancoChile.Views.Challenges.FacebookLikeView extends BancoChile.Views.Chal
     FB.XFBML.parse(document.getElementById('challenge-lightbox'))
 
     FB.Event.subscribe('edge.create', (response) ->
+      console.log("You liked #{response}")
       console.log("You liked #{response}, for challenge #{@challenge.get('id')}")
 
       # notify the server the challenge is complete
