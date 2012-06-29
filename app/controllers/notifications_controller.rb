@@ -41,7 +41,7 @@ class NotificationsController < ApplicationController
     @notification = Notification.new(params[:notification])
 
     # set the status of the notification as nil ("unread")
-    @notification.status = nil
+    @notification[:status] = nil
 
     #asume that the new notification is a valid one
     valid = true
@@ -57,10 +57,10 @@ class NotificationsController < ApplicationController
       if @notification.user_id == @user.id
         valid = false
       else
-        @notification.sender_id = @user.id
+        @notification[:sender_id] = @user.id
         valid = @notification.validate_trade()
         # set trade values
-        @notification.challenge_id = nil
+        @notification[:challenge_id] = nil
       end
     else
       # this is not a trade, thus it's a challenge completed notification
@@ -68,9 +68,9 @@ class NotificationsController < ApplicationController
         valid = false
       else
         # set challenge values values
-        @notification.user_id = @user.id
+        @notification[:user_id] = @user.id
         valid = @notification.validate_challenge(@user)
-        @notification.sender_id = nil
+        @notification[:sender_id] = nil
       end
     end
 
