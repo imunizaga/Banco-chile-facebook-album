@@ -49,7 +49,7 @@ class BancoChile.Views.Cards.LightboxContent extends Backbone.View
         success:=>
           @cardToGive.set('count', @cardToGive.get('count') - 1)
           toast(BancoChile.UIMessages.TRADE_REQUEST_SUCCESS, 'user')
-          @render()
+          $.fancybox.close()
       )
     else
       if not @selectedUser
