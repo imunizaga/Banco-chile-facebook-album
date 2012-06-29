@@ -184,8 +184,8 @@ class User < ActiveRecord::Base
       card_out.user = sender
 
       #update the locks
-      card_in.lock = false
-      card_out.lock = false
+      card_in[:locked] = false
+      card_out[:locked] = false
 
       #save
       card_in.save
