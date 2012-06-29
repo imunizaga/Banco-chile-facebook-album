@@ -182,6 +182,12 @@ class User < ActiveRecord::Base
       # update the owners
       card_in.user = self
       card_out.user = sender
+
+      #update the locks
+      card_in.lock = false
+      card_out.lock = false
+
+      #save
       card_in.save
       card_out.save
 
