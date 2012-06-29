@@ -20,7 +20,11 @@ class BancoChile.Views.Game.TabsView extends Backbone.View
       can complete to get more cards
 
     ###
-    $(@el).html(@template(user: @user.toJSON()))
+    $(@el).html(@template(
+      user: @user.toJSON()
+      notifications: @user.get('notifications')
+      challenges: @challenges
+    ))
 
     # list of notification views
     for notification in @user.get('notifications').models

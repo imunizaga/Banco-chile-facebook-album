@@ -152,7 +152,8 @@ class NotificationsController < ApplicationController
     respond_to do |format|
       if valid
         # update the status
-        @notification.update_attributes(:status=>new_status)
+        #@notification.update_attributes(:status=>new_status)
+        @notification.destroy()
         format.json { head :no_content }
       else
         # responde a bad request

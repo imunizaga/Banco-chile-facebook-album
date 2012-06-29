@@ -47,9 +47,11 @@ class BancoChile.Views.Notifications.NotificationView extends Backbone.View
         if @sender
           if @user.tradeCards(@model.get('cards_in'), @model.get('cards_out'))
             # tell the user everything went ok
-            toast(BancoChile.UIMessages.TRADE_SUCCESS + card_in_id, 'user')
+            toast(BancoChile.UIMessages.TRADE_SUCCESS + @model.get('cards_in'), 'user')
           else
             toast(BancoChile.UIMessages.TRADE_FAILED)
+      error: =>
+        toast(BancoChile.UIMessages.TRADE_FAILED)
 
   denyBtnClicked: ->
     ### not implemented yet ###

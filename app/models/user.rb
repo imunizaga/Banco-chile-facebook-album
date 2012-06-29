@@ -79,7 +79,24 @@ class User < ActiveRecord::Base
     his_cards = UserCard.where(card_id: card_in_id, user_id: sender_id,
                                locked: false)
 
-    return self.prepare_trade_hash(my_cards, his_cards)
+    # check if we both have enough cards
+    if my_cards.count > 1 and  his_cards.count > 1 then
+      # return the cards we are going to trade
+      return {
+        :card_in => his_cards.first,
+        :card_out => my_cards.first,
+        :valid => true,
+        :reason => ""
+      }
+    else
+      # return an array of nils, indicating that no cards can be traded
+      return {
+        :card_in => nil,
+        :card_out => nil,
+        :valid => false,
+        :reason => [my_cards.count, his_cards.count]
+      }
+    end
   end
 
   # Public: Prepares a trade of cards between the current user and another
@@ -114,27 +131,8 @@ class User < ActiveRecord::Base
     his_cards = UserCard.where(card_id: card_in_id, user_id: sender_id,
                                locked: true)
 
-    return self.prepare_trade_hash(my_cards, his_cards)
-  end
-
-  # Public: Both prepare_trade and prepare_trade_proposal return the same
-  # structure of hash. This method is to keep things DRY
-  #
-  # my_cards  - The Array of UserCards that belong to this user
-  # his_cards  - The Array of UserCards that belong to the other user
-  #
-  # Examples
-  #
-  #   user.prepare_trade_hash(my_cards, his_cards)
-  #   # => {:card_in => Card, :card_out => Card, :valid => true}
-  #   or
-  #   user.prepare_trade_hash(my_cards, his_cards)
-  #   # => {:card_in => nil, :card_out => nil, :valid => false}
-  #
-  # Returns A hash with the cards to trade and if the trade if valid
-  def prepare_trade_hash(my_cards, his_cards)
     # check if we both have enough cards
-    if my_cards.count > 1 and  his_cards.count > 1 then
+    if my_cards.count > 1 and  his_cards.count > 0 then
       # return the cards we are going to trade
       return {
         :card_in => his_cards.first,
