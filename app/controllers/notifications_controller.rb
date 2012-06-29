@@ -156,8 +156,10 @@ class NotificationsController < ApplicationController
         format.json { head :no_content }
       else
         # responde a bad request
-        format.json { head :bad_request }
-        print reason
+        format.json {
+          render json: reason,
+          status: :unprocessable_entity
+        }
       end
     end
   end
