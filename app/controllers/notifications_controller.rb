@@ -43,8 +43,10 @@ class NotificationsController < ApplicationController
     # set the status of the notification as nil ("unread")
     @notification[:status] = nil
 
-    #asume that the new notification is a valid one
+    #asume that the new notification is a valid one, and default empty reason
+    #of why it could fail
     valid = true
+    reason = ""
 
     # obtain the logged user
     @user=User.find(session['id'])
@@ -57,10 +59,13 @@ class NotificationsController < ApplicationController
       if @notification.user_id == @user.id
         valid = false
       else
-        @notification[:sender_id] = @user.id
-        valid = @notification.validate_trade()
         # set trade values
+        @notification[:sender_id] = @user.id
         @notification[:challenge_id] = nil
+
+        trade = @notification.prepare_trade_proposal()
+        valid = trade[:valid]
+        reason = trade[:reason]
       end
     else
       # this is not a trade, thus it's a challenge completed notification
@@ -80,12 +85,19 @@ class NotificationsController < ApplicationController
 
     respond_to do |format|
       if valid
+        # if it's a challenge
         if @notification.challenge_id != nil
           card_pack = CardPack.create(challenge_id: @notification.challenge_id,
                                       user_id: @user.id)
           json_card_ids = ActiveSupport::JSON.encode(card_pack[:card_ids])
           @notification.cards_in = json_card_ids
           @notification.save
+        else
+          # it's a trade, lock out the card
+          card_in = trade[:card_in]
+          card_in[:locked] = true
+          card_in.save
+          @user.set_album
         end
         format.json {
           render json: @notification,
@@ -94,7 +106,7 @@ class NotificationsController < ApplicationController
         }
       else
         format.json {
-          render json: @notification.errors,
+          render json: reason,
           status: :unprocessable_entity
         }
       end

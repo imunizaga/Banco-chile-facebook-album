@@ -7,26 +7,28 @@ class User < ActiveRecord::Base
   before_create :set_empty_album
   after_create :assign_first_card
 
+  # Public: Creates a string representation of the album of the user, to
+  # avoid doing user_cards queries
   def set_album
+
+    # We want to count the user's cards and group them by id
     options = {
       :include=>"user_cards",
-      :group=>"card_id"
+      :group=>"card_id",
+      :conditions => {:locked => false}
     }
     cards= self.user_cards.count(options)
-    raw_album = Array.new(Card.count,0)
-    cards.each {|card| raw_album[card[0]-1] = card[1].to_i}
-    p raw_album
-    user_album = []
-    (1..raw_album.length).each do |i|
-      hsh = Hash.new
-      hsh[:card_id] = i
-      hsh[:count] = raw_album[i-1]
-      user_album.append(hsh)
-      p hsh
+
+    # Within an array we will hold a hash for each card containing the
+    # card id and the count
+    self.set_empty_album()
+
+    cards.each do |card|
+      album[card[0]-1][:count] = card[1].to_i
     end
-    self.album = user_album
+
     self.save
-    return user_album
+    return self.album
   end
 
   # Public: Validates a trade of cards between the current user and another
@@ -44,11 +46,11 @@ class User < ActiveRecord::Base
   # Returns A boolean indicating if the trade can be done
   def validate_trade sender_id, cards_in, cards_out
     trade = prepare_trade(sender_id, cards_in, cards_out)
-    return (trade[:card_in] != nil and trade[:card_out] != nil)
+    return trade[:valid]
   end
 
-  # Public: Prepares a trade of cards between the current user and another
-  # user, and returns the cards to be traded
+  # Public: Prepares a trade proposal of cards between the current user and
+  # another user, by checking that not-locked cards that both users have
   #
   # sender_id  - The Integer number that represents the other user
   # cards_in  - The String with the array of cards to receive in json
@@ -56,10 +58,46 @@ class User < ActiveRecord::Base
   #
   # Examples
   #
-  #   prepare_trade(1, "[3]", "[5]")
-  #   # => [Card, Card]
+  #   user.prepare_trade(1, "[3]", "[5]")
+  #   # => {:card_in => Card, :card_out => Card, :valid => true}
+  #   or
+  #   user.prepare_trade(1, "[3]", "[4]")
+  #   # => {:card_in => nil, :card_out => nil, :valid => false}
   #
-  # Returns An array with the cards to trade
+  # Returns A hash with the cards to trade and if the trade if valid
+  def prepare_trade_proposal sender_id, cards_in, cards_out
+
+    # first decode the json strings we asume that only one card_id comes in
+    # each array
+    card_in_id = ActiveSupport::JSON.decode(cards_in)[0]
+    card_out_id = ActiveSupport::JSON.decode(cards_out)[0]
+
+    # fetch in my cards the card that will go out
+    my_cards = self.user_cards.where(card_id: card_out_id, locked: false)
+
+    # fetch the card that will come in from the other user
+    his_cards = UserCard.where(card_id: card_in_id, user_id: sender_id,
+                               locked: false)
+
+    return self.prepare_trade_hash(my_cards, his_cards)
+  end
+
+  # Public: Prepares a trade of cards between the current user and another
+  # user by checking the locked cards
+  #
+  # sender_id  - The Integer number that represents the other user
+  # cards_in  - The String with the array of cards to receive in json
+  # card_out  - The String with the array of cards to give in json
+  #
+  # Examples
+  #
+  #   user.prepare_trade(1, "[3]", "[5]")
+  #   # => {:card_in => Card, :card_out => Card, :valid => true}
+  #   or
+  #   user.prepare_trade(1, "[3]", "[4]")
+  #   # => {:card_in => nil, :card_out => nil, :valid => false}
+  #
+  # Returns A hash with the cards to trade and if the trade if valid
   def prepare_trade sender_id, cards_in, cards_out
 
     # first decode the json strings we asume that only one card_id comes in
@@ -68,18 +106,50 @@ class User < ActiveRecord::Base
     card_out_id = ActiveSupport::JSON.decode(cards_out)[0]
 
     # fetch in my cards the card that will go out
-    my_cards = self.user_cards.where(card_id: card_out_id)
+    my_cards = self.user_cards.where(card_id: card_out_id, locked: false)
 
-    # fetch the card that will come in from the other user
-    his_cards = UserCard.where(card_id: card_in_id, user_id: sender_id)
+    # fetch the card that will come in from the other user. We need to check
+    # they are locked since it's the user that locked a card to propose a
+    # trade
+    his_cards = UserCard.where(card_id: card_in_id, user_id: sender_id,
+                               locked: true)
 
+    return self.prepare_trade_hash(my_cards, his_cards)
+  end
+
+  # Public: Both prepare_trade and prepare_trade_proposal return the same
+  # structure of hash. This method is to keep things DRY
+  #
+  # my_cards  - The Array of UserCards that belong to this user
+  # his_cards  - The Array of UserCards that belong to the other user
+  #
+  # Examples
+  #
+  #   user.prepare_trade_hash(my_cards, his_cards)
+  #   # => {:card_in => Card, :card_out => Card, :valid => true}
+  #   or
+  #   user.prepare_trade_hash(my_cards, his_cards)
+  #   # => {:card_in => nil, :card_out => nil, :valid => false}
+  #
+  # Returns A hash with the cards to trade and if the trade if valid
+  def prepare_trade_hash(my_cards, his_cards)
     # check if we both have enough cards
     if my_cards.count > 1 and  his_cards.count > 1 then
       # return the cards we are going to trade
-      return {:card_in => his_cards.first, :card_out => my_cards.first}
+      return {
+        :card_in => his_cards.first,
+        :card_out => my_cards.first,
+        :valid => true,
+        :reason => ""
+      }
     else
       # return an array of nils, indicating that no cards can be traded
-      return {:card_in => nil, :card_out => nil}
+      return {
+        :card_in => nil,
+        :card_out => nil,
+        :valid => false,
+        :reason => [my_cards.count, his_cards.count]
+      }
     end
   end
 
@@ -103,7 +173,7 @@ class User < ActiveRecord::Base
     card_out = trade[:card_out]
 
     # if the trade was validated
-    if card_in != nil and card_out != nil then
+    if trade[:valid] then
 
       # obtain the sender
       sender = User.find(sender_id)
@@ -121,7 +191,6 @@ class User < ActiveRecord::Base
     end
 
     # if we  reach this point, then we everything failed
-    puts "Can't make trade"
     return false
   end
 
