@@ -43,8 +43,9 @@ class BancoChile.Views.Game.IndexView extends Backbone.View
     )
 
     ## initialize the tabs view
-    $tabs = $(@.el).find('#tabs')
-    $tabs.append(tabsView.render().el)
+    $tabs = $(@el).find('#tabs')
+    $tabs.append(tabsView.el)
+    tabsView.render()
     $tabs.tabs(event: "click")
     twttr.anywhere.config(
       callbackURL: window.app.site_url + "/auth/twitter/callback"

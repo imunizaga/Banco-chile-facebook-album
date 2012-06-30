@@ -11,6 +11,24 @@ class BancoChile.Views.Game.TabsView extends Backbone.View
     @user = @options.user
     # we take the list of challenges from our local db
     @challenges = window.db.challenges
+    @user.get('notifications').bind('add', @renderNofications, this)
+
+  renderNofications: ->
+    ### Renders the notifications of the user in the '#tabs-1 ul' element ###
+
+    $tabs = $(@el).find('#tabs-1 ul')
+    $tabs.empty()
+
+    # list of notification views
+    notifications = @user.get('notifications').models
+    for notification in notifications
+      notificationView = new BancoChile.Views.Notifications.NotificationView(
+        'model': notification
+      )
+      $tabs.append(notificationView.render().el)
+
+    # update the number of notifications
+    $(@el).find('.js-notifications-length').html(notifications.length)
 
   render: =>
     ### Renders the tabs view, which consists mainly in groups 2 views,
@@ -22,16 +40,10 @@ class BancoChile.Views.Game.TabsView extends Backbone.View
     ###
     $(@el).html(@template(
       user: @user.toJSON()
-      notifications: @user.get('notifications')
       challenges: @challenges
     ))
 
-    # list of notification views
-    for notification in @user.get('notifications').models
-      notificationView = new BancoChile.Views.Notifications.NotificationView(
-        'model': notification
-      )
-      $(@el).find('#tabs-1 ul').append(notificationView.render().el)
+    @renderNofications()
 
     # list of challenge views
     for challenge in @challenges.models

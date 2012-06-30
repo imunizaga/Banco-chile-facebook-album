@@ -57,13 +57,4 @@ window.initSocialApps = (app_id) ->
 
   # Wait for the asynchronous resources to load
   twttr.ready (twttr) ->
-    console.log("In twttr ready")
-
-    # Now bind our custom intent events
-    twttr.events.bind "tweet", (event) ->
-      tweet_id = event.data.source_tweet_id
-      console.log("tweeted!: " + tweet_id)
-
-    twttr.events.bind "retweet", (event) ->
-      retweeted_tweet_id = event.data.source_tweet_id
-      console.log("re-tweeted!: " + tweet_id)
+    console.log("twttr ready!")
