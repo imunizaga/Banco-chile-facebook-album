@@ -64,11 +64,6 @@ window.initSocialApps = (app_id) ->
       tweet_id = event.data.source_tweet_id
       console.log("tweeted!: " + tweet_id)
 
-    twttr.events.bind "follow", (event) ->
-      followed_user_id = event.data.user_id
-      followed_screen_name = event.data.screen_name
-      console.log("followed!: " + followed_screen_name)
-
     twttr.events.bind "retweet", (event) ->
       retweeted_tweet_id = event.data.source_tweet_id
       console.log("re-tweeted!: " + tweet_id)
