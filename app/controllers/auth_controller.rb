@@ -1,5 +1,3 @@
-require 'digest/sha1'
-
 FACEBOOK_SCOPE = 'client_credentials'
 class AuthController < ApplicationController
   protect_from_forgery
@@ -8,7 +6,7 @@ class AuthController < ApplicationController
     @auth_url =  authenticator.url_for_oauth_code(:permissions=>params[:permissions])
     if @auth_url['localhost']
       @auth_url['localhost']='127.0.0.1'
-      end
+    end
     respond_to do |format|
       format.html {  }
     end
@@ -43,24 +41,56 @@ class AuthController < ApplicationController
     end
   end
 
+  def twitter
+    oauth = OAuth::Consumer.new(TW_KEY, TW_SECRET, {:site => 'https://twitter.com'})
+    url = 'http://127.0.0.1:3000/auth/twitter/callback'  # TODO get dynamic domain
+    request_token = oauth.get_request_token(:oauth_callback => url)
+    # this values will be used during the callback
+    session[:tw_token] = request_token.token
+    session[:tw_secret] = request_token.secret
+
+    # redirect to twitter
+    redirect_to request_token.authorize_url
+
+  end
+
   def twitter_callback
-    # Check if the cookie was received by the server
-    if cookies[:twitter_anywhere_identity] == nil
-      print "Twitter cookie not received."
-    else
-      # Once the user has authorized the host site, @Anywhere will set a cookie
-      # named "twitter_anywhere_identity" that contains the id of the logged in
-      # user. The format of the cookie is "user_id:signature".
-      (user_id, signature) = cookies[:twitter_anywhere_identity].split(':')
-      
-      # This allow us to verify that the information has come from Twitter,
-      # through the following comparison: 
-      if Digest::SHA1.hexdigest(user_id + TW_SECRET) == signature
-        print "Twitter cookie verified, user_id: #{user_id}"
-      else
-        print "Invalid Twitter cookie."
-      end
-    end
+    oauth = OAuth::Consumer.new(TW_KEY, TW_SECRET, {:site => 'https://twitter.com'})
+
+    request_token = OAuth::RequestToken.new(oauth, session[:tw_token], session[:tw_secret])
+    # TODO this value should be stored on the database
+    session[:tw_access_token] = request_token.get_access_token(:oauth_verifier => params[:oauth_verifier])
+
+    redirect_to root_url  # TODO return to the calling url
+  end
+
+  def twitter_retweet
+    oauth = OAuth::Consumer.new(TW_KEY, TW_SECRET, {:site => 'https://twitter.com'})
+    
+    # Perform action through a post call to the Twitter API
+    # See https://dev.twitter.com/docs/api/1/post/statuses/retweet/%3Aid
+    response = oauth.request(:post, '/statuses/retweet/213379847861436417.json',
+                             session[:tw_access_token], { :scheme => :query_string })
+    # The response can be parsed to confirm the retweeted id
+    retweet_info = JSON.parse(response.body)
+    print "retweet_info: #{retweet_info['retweeted_status']['id_str']}\n"
+
+    redirect_to root_url  # TODO return to the calling url
+  end
+
+  def twitter_follow
+    oauth = OAuth::Consumer.new(TW_KEY, TW_SECRET, {:site => 'https://twitter.com'})
+    
+    # Perform action through a post call to the Twitter API
+    # See https://dev.twitter.com/docs/api/1/post/friendships/create
+    response = oauth.request(:post, '/friendships/create.json',
+                             session[:tw_access_token], { :scheme => :query_string },
+                             { :user_id => '602411091' })
+    # The response can be parsed to confirm the followed account
+    follow_info = JSON.parse(response.body)
+    print "follow_info: #{follow_info['id']}\n"
+
+    redirect_to root_url  # TODO return to the calling url
   end
 
   def host
