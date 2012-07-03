@@ -32,3 +32,4 @@ end
 gem 'jquery-rails'
 gem 'fancybox-rails'
 gem 'rails-backbone'
+gem 'oauth'

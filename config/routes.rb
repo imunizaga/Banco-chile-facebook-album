@@ -26,6 +26,9 @@ BancoChile::Application.routes.draw do
   match 'auth/facebook/callback' => 'auth#facebook_callback'
   match 'auth/twitter/callback' => 'auth#twitter_callback'
   match 'logout' => 'auth#logout'
+  match 'auth/twitter' => 'auth#twitter'
+  match 'auth/twitter/follow' => 'auth#twitter_follow'
+  match 'auth/twitter/retweet' => 'auth#twitter_retweet'
   #root :to => 'ApplicationController/#index'
 
   # The priority is based upon order of creation:
