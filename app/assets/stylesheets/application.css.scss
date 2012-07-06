@@ -61,13 +61,13 @@ select {font-size:1.0em;}
 	margin-top:80px;
 }
 #headerWrapper {
-	background:#000;
+	background:url(/assets/bg_header.jpg) top left repeat-x;
 	height:80px;
 	top:0;
 	-webkit-box-shadow:0 2px 10px #000;
 	-moz-box-shadow:0 2px 10px #000;
 	box-shadow:0 2px 10px #000;
-	border-bottom:1px solid #333;
+	border-bottom:1px solid #69751F;
 }
 #mainWrapper {
 	/*background:#fff;*/
@@ -356,7 +356,7 @@ h2.rank {
 }
 .der {
 	float: right;
-	width:280px;
+	width:290px;
 	height:auto;
 }
 .der h3 {
@@ -523,7 +523,7 @@ ul.pruebas {
 	border-left:1px solid #2A3C16 !important;
 	background:transparent !important;
 }
-ul.pruebas p iframe {
+ul.pruebas li.tuiter iframe {
 	margin:7px;
 }
 ul.pruebas li {
@@ -535,6 +535,9 @@ ul.pruebas li {
 	border-bottom:1px solid #2A3C16 !important;
 	border-top:1px solid #2A3C16 !important;
 	background:url(/assets/bg_pruebas.png) top left repeat-y !important;
+}
+ul.pruebas li.tuiter {
+	background:url(/assets/bg_pruebas2.png) top left repeat-y !important;
 }
 ul.pruebas li img {
 	float: left;
@@ -652,9 +655,10 @@ ul.pruebas li.nueva a.accion2:active {
 	color:#000 !important;
 }
 .marcas {
-	width:187px;
+	width:100px;
+	height: 100px;
 	float: left;
-	margin:30px 0 0 40px;
+	margin:20px 0 20px 40px;
 }
 .marcas a:hover {
 	cursor: default;
@@ -663,7 +667,7 @@ ul.pruebas li.nueva a.accion2:active {
 	width:90px;
 	height:37px;
 	float:right;
-	margin:40px -10px 20px 0;
+	margin:70px -10px 20px 0;
 }
 .acid img {
 	width:90px;
