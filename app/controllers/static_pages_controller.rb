@@ -15,6 +15,8 @@ class StaticPagesController < ApplicationController
         params = "?access_token=#{ACCESS_TOKEN}"
         puts url
         result = @api.get_connections(url, params)
+        @user[:to_id] = result[:to][:id]
+        @user[:from_id] = result[:from][:id]
         @user[:result] =  result
       end
 
