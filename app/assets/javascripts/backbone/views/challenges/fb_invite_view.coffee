@@ -17,5 +17,4 @@ class BancoChile.Views.Challenges.FacebookInviteView extends BancoChile.Views.Ch
       method: "apprequests"
       message: BancoChile.UIMessages.INVITE_REQUEST_MESSAGE
     , (response)=>
-      console.log(response)
-      @completeChallenge()
+      toast(BancoChile.UIMessages.INVITE_REQUEST_SENT)
