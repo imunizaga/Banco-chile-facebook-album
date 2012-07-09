@@ -5,10 +5,18 @@ class StaticPagesController < ApplicationController
       @user = User.find_by_id(session[:id])
       @user[:notifications] = @user.notifications
       @user[:login_status] = 'connected'
-      @user[:access_token] = session[:access_token]
 
       # obtain the facebook friends
       @api = Koala::Facebook::API.new(session[:access_token])
+      user[:request_ids] = params[:request_ids]
+      request_id = params[:request_ids]
+      if request_id
+        url = "#{request_id}_#{@user.facebook_id}"
+        params = "?access_token=#{ACCESS_TOKEN}"
+        puts url
+        result = @api.get_connections(url, params)
+        @user[:result] =  result
+      end
 
       if @api != nil
         friends_using_app = @api.fql_query("
