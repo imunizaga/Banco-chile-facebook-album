@@ -6,6 +6,7 @@ BancoChile.UIMessages =
   TRADE_REQUEST_SUCCESS: "¡Solicitud enviada!, ahora espera la respuesta de tu amigo"
   TRADE_SUCCESS: "¡Cambio aceptado!, ahora es tuya la lámina "
   TRADE_FAILED: "Ha ocurrido un problema, recarga la página e intenta nuevamente"
+  INVITE_REQUEST_MESSAGE: "¡Invita a tus amigos y gana más láminas!"
   CHALLENGE_TITLES:
     like: "Like"
     follow: "Follow"

@@ -1,7 +1,6 @@
 class StaticPagesController < ApplicationController
   def home
     @ranking = User.ranking
-    puts "id: #{session[:id]}"
     if session[:id] != nil
       @user = User.find_by_id(session[:id])
       @user[:notifications] = @user.notifications
@@ -9,6 +8,7 @@ class StaticPagesController < ApplicationController
 
       # obtain the facebook friends
       @api = Koala::Facebook::API.new(session[:access_token])
+
       if @api != nil
         friends_using_app = @api.fql_query("
             SELECT uid, name, is_app_user, pic_square

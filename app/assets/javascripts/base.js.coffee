@@ -8,6 +8,7 @@ window.initSocialApps = (app_id) ->
       status: true # check login status
       cookie: true # enable cookies to allow the server to access the session
       xfbml: true # parse XFBML
+      frictionlessRequests: true,
 
     console.log "Getting facebook login status"
     FB.getLoginStatus (response) ->
