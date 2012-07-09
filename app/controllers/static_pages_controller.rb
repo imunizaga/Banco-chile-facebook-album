@@ -8,7 +8,7 @@ class StaticPagesController < ApplicationController
 
       # obtain the facebook friends
       @api = Koala::Facebook::API.new(session[:access_token])
-      user[:request_ids] = params[:request_ids]
+      @user[:request_ids] = params[:request_ids]
       request_id = params[:request_ids]
       if request_id
         url = "#{request_id}_#{@user.facebook_id}"
