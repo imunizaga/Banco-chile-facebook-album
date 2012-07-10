@@ -81,11 +81,11 @@ class AuthController < ApplicationController
     end
 
     if session[:return] == nil
-      #redirect_to '/' and return
+      redirect_to '/' and return
     else
       red = session[:return]
       session[:return] = nil
-      #redirect_to red and return
+      redirect_to red and return
     end
   end
 
