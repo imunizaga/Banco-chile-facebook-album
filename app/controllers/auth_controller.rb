@@ -21,10 +21,6 @@ class AuthController < ApplicationController
 
   def facebook_callback
     if params[:code]
-      request_id = session[:request_id]
-      if request_id
-        session[:from_id] = result['from']['id']
-      end
       # acknowledge code and get access token from FB :
       session[:access_token] = authenticator.get_access_token(params[:code])
       @api = Koala::Facebook::API.new(session[:access_token])
