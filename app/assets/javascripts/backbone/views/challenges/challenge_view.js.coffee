@@ -6,9 +6,10 @@ class BancoChile.Views.Challenges.ChallengeView extends Backbone.View
   initialize: (@challenge) ->
     super()
 
-  completeChallenge: ->
+  completeChallenge: (data)->
     notification = new BancoChile.Models.Notification(
       challenge_id: @challenge.get('id')
+      data: data
     )
 
     notification.save({}

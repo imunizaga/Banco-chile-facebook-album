@@ -15,9 +15,9 @@ class Notification < ActiveRecord::Base
   #   # => true
   #
   # Returns A boolean indicating if the challenge was completed
-  def validate_challenge user=nil
+  def validate_challenge user=nil, data=nil
       challenge = Challenge.find(self.challenge_id)
-      return challenge.validate_complete(user, self[:data])
+      return challenge.validate_complete(user, data)
   end
 
   # Public: Prepares a trade of specified in the notification

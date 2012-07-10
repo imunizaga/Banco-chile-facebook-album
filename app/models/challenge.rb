@@ -112,7 +112,9 @@ class Challenge < ActiveRecord::Base
   #
   # Returns A boolean indicating if the challenge was completed
   def validate_code user, data
-    return true
+    p "data", data
+    p "server_param", self[:server_param]
+    return self[:server_param] == data
   end
 
   # Public: Returns a list of all challenges without the server_params value.

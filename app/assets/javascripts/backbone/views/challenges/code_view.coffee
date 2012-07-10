@@ -6,6 +6,10 @@ class BancoChile.Views.Challenges.CodeView extends BancoChile.Views.Challenges.C
   events:
     "click .js-send-code": "completeChallenge"
 
+  completeChallenge: ->
+    data = $(@el).find(".js-code-input").val()
+    super(data)
+
   render: ->
     $(@el).html(@template(challenge: @challenge.toJSON()))
 

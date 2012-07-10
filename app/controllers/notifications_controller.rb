@@ -37,6 +37,7 @@ class NotificationsController < ApplicationController
   # POST /notifications
   # POST /notifications.json
   def create
+    data = params[:notification].delete(:data)
     # instanciate the new notification
     @notification = Notification.new(params[:notification])
 
@@ -74,7 +75,7 @@ class NotificationsController < ApplicationController
       else
         # set challenge values values
         @notification[:user_id] = @user.id
-        valid = @notification.validate_challenge(@user)
+        valid = @notification.validate_challenge(@user, data)
         @notification[:sender_id] = nil
       end
     end
