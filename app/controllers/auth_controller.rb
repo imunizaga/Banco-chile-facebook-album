@@ -21,23 +21,75 @@ class AuthController < ApplicationController
 
   def facebook_callback
     if params[:code]
+      request_id = session[:request_id]
+      if request_id
+        session[:from_id] = result['from']['id']
+      end
       # acknowledge code and get access token from FB :
       session[:access_token] = authenticator.get_access_token(params[:code])
       @api = Koala::Facebook::API.new(session[:access_token])
       @user = @api.get_object("me")
-      this_user = User.where(facebook_id:@user['id']).first_or_create(name:@user['name'])
+
+      # if the user does not exist in our database
+      fb_id = @user['id']
+      if User.where(facebook_id:fb_id).count == 0
+        #check whether we have a request_id in our session
+        request_id = session[:request_id]
+        if request_id
+
+          # get the facebook_id of the user that made the request
+          from_id = session[:from_id]
+
+          # it should not be possible, but check if the from user is not the
+          # same as the current user
+          if from_id != fb_id
+
+            # check that the from user exists
+            if User.where(facebook_id:from_id).count == 1
+
+              # finnaly check if it's a valid facebook request
+              url = "#{request_id}_#{fb_id}"
+              params = "?access_token=#{ACCESS_TOKEN}"
+              result = @api.get_connections(url, params)
+
+              # if it's a valid result
+              if result and from_id == result['from']['id']
+                # reward the user
+                from_user = User.where(facebook_id:from_id).first
+                card_pack = CardPack.create(challenge_id:6, user_id: from_user.id)
+
+                # create a notification to the from user
+                notification = Notification.new()
+                notification[:status] = nil
+                notification[:user_id] = from_user.id
+                notification[:challenge_id] = 6
+                json_card_ids = ActiveSupport::JSON.encode(card_pack[:card_ids])
+                notification.cards_in = json_card_ids
+                notification.save
+
+                #delete request
+                delete_success = @api.delete_object(request_id)
+              end
+            end
+          end
+        end
+      end
+      session[:request_id] = nil
+      session[:from_id] = nil
+
+      this_user = User.where(facebook_id:fb_id).first_or_create(name:@user['name'])
       session[:id] = this_user.id
       end
     respond_to do |format|
-      format.html {   }			 
+      format.html {   }
     end
 
     if session[:return] == nil
-      redirect_to '/' and return
+      #redirect_to '/' and return
     else
       red = session[:return]
       session[:return] = nil
-      redirect_to red and return
+      #redirect_to red and return
     end
   end
 
@@ -66,7 +118,7 @@ class AuthController < ApplicationController
 
   def twitter_retweet
     oauth = OAuth::Consumer.new(TW_KEY, TW_SECRET, {:site => 'https://twitter.com'})
-    
+
     # Perform action through a post call to the Twitter API
     # See https://dev.twitter.com/docs/api/1/post/statuses/retweet/%3Aid
     response = oauth.request(:post, '/statuses/retweet/213379847861436417.json',
@@ -80,7 +132,7 @@ class AuthController < ApplicationController
 
   def twitter_follow
     oauth = OAuth::Consumer.new(TW_KEY, TW_SECRET, {:site => 'https://twitter.com'})
-    
+
     # Perform action through a post call to the Twitter API
     # See https://dev.twitter.com/docs/api/1/post/friendships/create
     response = oauth.request(:post, '/friendships/create.json',

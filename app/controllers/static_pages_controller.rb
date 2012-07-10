@@ -8,17 +8,6 @@ class StaticPagesController < ApplicationController
 
       # obtain the facebook friends
       @api = Koala::Facebook::API.new(session[:access_token])
-      @user[:request_ids] = params[:request_ids]
-      request_id = params[:request_ids]
-      if request_id
-        url = "#{request_id}_#{@user.facebook_id}"
-        params = "?access_token=#{ACCESS_TOKEN}"
-        puts url
-        result = @api.get_connections(url, params)
-        @user[:to_id] = result[:to][:id]
-        @user[:from_id] = result[:from][:id]
-        @user[:result] =  result
-      end
 
       if @api != nil
         friends_using_app = @api.fql_query("
@@ -41,8 +30,23 @@ class StaticPagesController < ApplicationController
 
       @cards = Card.all
       @challenges = Challenge.all_without_server_params
-    else
+    else # the user is not logged
       @user = {}
+
+      # we now check weather we got a request
+      @user[:request_ids] = params[:request_ids]
+      request_id = params[:request_ids]
+      if request_id
+        url = request_id
+        params = "?access_token=#{ACCESS_TOKEN}"
+        result = @api.get_connections(url, params)
+
+        if result
+          session[:from_id] = result['from']['id']
+          session[:request_id] = request_id
+        end
+      end
+
     end
   end
 
