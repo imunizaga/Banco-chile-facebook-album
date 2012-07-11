@@ -42,8 +42,10 @@ class Challenge < ActiveRecord::Base
     valid = false
     # check that we got a valid result
     if result
+      data = result['data']
+      like =  data[0]
       # check that this user is the one that emited the share
-      if self.client_param == result['data'][0]['id']
+      if self.client_param == like['id']
         valid = true
       end
     end
