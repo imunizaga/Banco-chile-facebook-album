@@ -32,8 +32,12 @@ class Challenge < ActiveRecord::Base
   #
   # Returns A boolean indicating if the challenge was completed
   def validate_like user, data
-    @api = Koala::Facebook::API.new(ACCESS_TOKEN)
+    #@api = Koala::Facebook::API.new("127174043311|F6mjALyN9OCelH8dE1UtPTPl_4k")
+    #url = "100004040536236/likes/53166931056"
+    #puts "#{url}?access_token=127174043311|F6mjALyN9OCelH8dE1UtPTPl_4k"
+    #result = @api.get_connections(url, "?access_token=127174043311|F6mjALyN9OCelH8dE1UtPTPl_4k")
 
+    @api = Koala::Facebook::API.new(ACCESS_TOKEN)
     # link for the user-app-like
     url = "#{user.facebook_id}/likes/#{self.server_param}"
     puts "#{url}?access_token=#{ACCESS_TOKEN}"
@@ -41,10 +45,13 @@ class Challenge < ActiveRecord::Base
 
     valid = false
     # check that we got a valid result
+    puts result
     if result
       like =  result[0]
+      puts like
       # check that this user is the one that emited the share
-      if self.client_param == like['id']
+      puts self.client_param, like['id']
+      if self.server_param == like['id']
         valid = true
       end
     end
