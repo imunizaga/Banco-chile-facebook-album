@@ -4,7 +4,7 @@ class BancoChile.Models.Challenge extends Backbone.Model
   initialize: (@options) ->
     @set('title', BancoChile.UIMessages.CHALLENGE_TITLES[@options['kind']])
     description = BancoChile.UIMessages.CHALLENGE_DESCRIPTIONS[@options['kind']]
-    @set('description', description + @options['client_param'])
+    @set('description', description)
     @set('action', BancoChile.UIMessages.CHALLENGE_ACTIONS[@options['kind']])
 
   defaults:

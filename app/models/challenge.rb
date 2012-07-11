@@ -64,7 +64,22 @@ class Challenge < ActiveRecord::Base
   #
   # Returns A boolean indicating if the challenge was completed
   def validate_share user, data
-    return true
+    @api = Koala::Facebook::API.new(ACCESS_TOKEN)
+    result = @api.get_connections(data, "")
+    client_param = ActiveSupport::JSON.decode(self.client_param)
+
+    valid = false
+    # check that we got a valid result
+    if result
+      # check that this user is the one that emited the share
+      if user.facebook_id == result['from']['id'].to_i
+        # check that this share is about his link
+        if result['link'] == client_param['link']
+          valid = true
+        end
+      end
+    end
+    return valid
   end
 
   # Public: Validates a that a challenge of type invite was completed by the

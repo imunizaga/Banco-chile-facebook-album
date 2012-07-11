@@ -97,10 +97,18 @@ Challenge.create(
   set: '[4, 1]'
 )
 # 10
+challenge_client_param = {
+  'method' => 'feed',
+  'link' => 'http://www.magnet.cl/',
+  'picture' => 'http://fbrell.com/f8.jpg',
+  'name' => 'Magnet.cl',
+  'caption' => 'Magnet.cl',
+  'description' => 'Nueva empresa de desarrollo de software'
+}
 Challenge.create(
   n_cards:5,
   kind: 'share',
-  client_param: 'Facebook Banco Chile',
+  client_param: ActiveSupport::JSON.encode(challenge_client_param),
   set: '[5, 2]'
 )
 # 11
@@ -111,10 +119,18 @@ Challenge.create(
   set: '[1, 2, 3, 4, 5]'
 )
 # 12
+challenge_client_param = {
+  'method' => 'feed',
+  'link' => 'http://www.magnet.cl/',
+  'picture' => 'http://fbrell.com/f8.jpg',
+  'name' => 'Magnet.cl',
+  'caption' => 'Magnet.cl',
+  'description' => 'Nueva empresa de desarrollo de software'
+}
 Challenge.create(
   n_cards:1,
   kind: 'share',
-  client_param: 'Facebook Banca Joven',
+  client_param: ActiveSupport::JSON.encode(challenge_client_param),
   set: '[6, 7, 8, 9, 10]'
 )
 # 13
