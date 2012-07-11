@@ -43,7 +43,7 @@ Challenge.create(
 Challenge.create(
   n_cards:3,
   kind: 'like',
-  client_param: 'https://apps.facebook.com/127174043311/',
+  client_param: 'http://www.facebook.com/apps/application.php?id=127174043311',
   server_param: '127174043311',
   set: '[2]'
 )
