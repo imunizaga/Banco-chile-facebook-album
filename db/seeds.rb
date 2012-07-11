@@ -36,20 +36,23 @@ Challenge.create(
   n_cards:3,
   kind: 'like',
   client_param: 'https://www.facebook.com/pages/Oliver-Atom/53166931056',
+  server_param: '53166931056',
   set: '[1]'
 )
 # 2
 Challenge.create(
   n_cards:3,
   kind: 'like',
-  client_param: 'http://www.magnet.cl',
+  client_param: 'https://apps.facebook.com/127174043311/',
+  server_param: '127174043311',
   set: '[2]'
 )
 # 3
 Challenge.create(
   n_cards:3,
   kind: 'like',
-  client_param: 'http://stackoverflow.com/',
+  client_param: 'https://www.facebook.com/pages/GitHub/50595864761',
+  server_param: '50595864761',
   set: '[3]'
 )
 # 4

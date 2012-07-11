@@ -32,7 +32,21 @@ class Challenge < ActiveRecord::Base
   #
   # Returns A boolean indicating if the challenge was completed
   def validate_like user, data
-      return true
+    @api = Koala::Facebook::API.new(ACCESS_TOKEN)
+
+    # link for the user-app-like
+    url = "#{user.facebook_id}/likes/#{self.client_param}"
+    result = @api.get_connections(url, "?access_token=#{ACCESS_TOKEN}")
+
+    valid = false
+    # check that we got a valid result
+    if result
+      # check that this user is the one that emited the share
+      if self.client_param == result['data'][0]['id']
+        valid = true
+      end
+    end
+    return valid
   end
 
   # Public: Validates a that a challenge of type follow was completed by the
