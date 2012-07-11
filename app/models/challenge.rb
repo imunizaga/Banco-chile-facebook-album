@@ -35,7 +35,8 @@ class Challenge < ActiveRecord::Base
     @api = Koala::Facebook::API.new(ACCESS_TOKEN)
 
     # link for the user-app-like
-    url = "#{user.facebook_id}/likes/#{self.client_param}"
+    url = "#{user.facebook_id}/likes/#{self.server_param}"
+    puts "#{url}?access_token=#{ACCESS_TOKEN}"
     result = @api.get_connections(url, "?access_token=#{ACCESS_TOKEN}")
 
     valid = false
