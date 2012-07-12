@@ -57,8 +57,9 @@ select {font-size:1.0em;}
 }
 #superiorWrapper {
 	/*background:#bbb;*/
-	height:270px;
-	margin-top:80px;
+	height:auto;
+	margin-top:20px;
+	margin-bottom:20px;
 }
 #headerWrapper {
 	background:url(/assets/bg_header.jpg) top left repeat-x;
@@ -72,14 +73,15 @@ select {font-size:1.0em;}
 #mainWrapper {
 	/*background:#fff;*/
 	height:auto;
-	margin-top:20px;
+	margin-top:0px;
 	margin-bottom:50px;
 }
 #superior {
-	width:760px;
+	width:840px;
 	margin:0 auto;
 	text-align:left;
 	color:#ccc;
+	height:365px;
 }
 #footerWrapper {}
 #header, #main, #footer {
