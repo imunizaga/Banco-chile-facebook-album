@@ -15,17 +15,31 @@ user_seeds = [
 ]
 
 card_seeds =[
-  ['oliver atom',         53166931056],
-  ['sapito livingstone',  106388642729768],
-  ['pato yanez',          32423176720],
-  ['condor rojas',        233877793326597],
-  ['carlos caszely',      100003281187419],
-  ['wooo',  807892319],
-  ['nacho', 606953998],
-  ['muni',  646008286],
-  ['joao',  556381267],
-  ['ale',   1029630749],
-  ['johnny', 27542063907]
+  ['Bravo', 'lamina01Bravo.jpg'],
+  ['Alexis', 'lamina02Alexis.jpg'],
+  ['Celebracion', 'lamina03Celebracion.jpg'],
+  ['Alexis', 'lamina04Alexis.jpg'],
+  ['OGonzalez', 'lamina05OGonzalez.jpg'],
+  ['JPFuenzalida', 'lamina06JPFuenzalida.jpg'],
+  ['MCamposT', 'lamina07MCamposT.jpg'],
+  ['Borghi', 'lamina08Borghi.jpg'],
+  ['Alexis', 'lamina09Alexis.jpg'],
+  ['Bravo', 'lamina10Bravo.jpg'],
+  ['LJimenes', 'lamina11LJimenes.jpg'],
+  ['Pinto', 'lamina12Pinto.jpg'],
+  ['Barra', 'lamina13Barra.jpg'],
+  ['MFernandez', 'lamina14MFernandez.jpg'],
+  ['Alexis', 'lamina15Alexis.jpg'],
+  ['Borghi', 'lamina16Borghi.jpg'],
+  ['Gary', 'lamina17Gary.jpg'],
+  ['Celebracion', 'lamina18Celebracion.jpg'],
+  ['EVargas', 'lamina19EVargas.jpg'],
+  ['NN', 'lamina20NN.jpg'],
+  ['EParedes', 'lamina21EParedes.jpg'],
+  ['DRubio', 'lamina22DRubio.jpg'],
+  ['Pinto', 'lamina23Pinto.jpg'],
+  ['Bravo', 'lamina30Bravo.jpg'],
+  ['Gary', 'lamina40Gary.jpg']
 ]
 
 card_seeds.each {|card| Card.create(name: card[0], source: card[1])}
