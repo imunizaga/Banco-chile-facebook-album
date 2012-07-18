@@ -28,7 +28,7 @@ ul.links li {
 .light .imagen img {
     float: left;
     width:200px;
-    height: 250px;
+    height: auto;
     margin:0;
 }
 .light h2, .light h3, .light p {
@@ -76,14 +76,14 @@ ul.links li {
     width:234px;
     height:18px;
     margin:0 0 0 20px;
-    color:#666;
+    color:#fff;
     font-size:15px;
 }
 .light .repeticiones p.bajada, .light .amigos p.bajada {
     width:234px;
     height:auto;
     margin:4px 0 0 20px;
-    color:#666;
+    color:#999;
     font-size:11px;
 }
 .light .amigos {
@@ -197,3 +197,21 @@ ul.links li {
 #fancybox-frame {
     overflow-y:auto !important;
 }
+
+
+#fancybox-wrap #fancybox-outer {
+    background:#000;
+}
+#fancybox-wrap #fancybox-content {
+    border-color:#000;
+}
+.light h2 {
+    color:#fff;
+}
+.light h3 {
+    color:#DB2428;
+}
+.light .js-trade-friends p {
+    color:#0079EA;
+}
+
