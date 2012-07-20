@@ -204,6 +204,24 @@ h2.rank {
 	color:#fff;
 }
 
+/*RANKING DENTRO DE IZQUIERDA*/
+.izquierdo h2.rank {
+	width:500px;
+	height:20px;
+	font-size:22px;
+	margin:0px 0 0 0px;
+}
+.izquierdo .ranking {
+	width:500px;
+	height:70px;
+	margin:0px 0 0 0px;
+	padding-bottom:10px;
+	border-bottom:none;
+}
+.izquierdo .ranking li {
+	margin:0px 10px 0 0;
+}
+
 .contenidos {
 	float: left;
 	width:760px;
@@ -249,16 +267,10 @@ h2.rank {
 	float: left;
 	width:500px;
 	height:100px;
-	-webkit-border-radius:5px;
-	-moz-border-radius:5px;
-	border-radius:5px;
-	-webkit-box-shadow:1px 1px 5px #2A3C16;
-	-moz-box-shadow:1px 1px 5px #2A3C16;
-	box-shadow:1px 1px 5px #2A3C16;
 }
 .contenidos a.ingresar {
 	float: right;
-	margin:20px 0 0 0;
+	margin:30px 0 0 0;
 }
 
 
@@ -380,9 +392,9 @@ h2.rank {
 #header h2 {
 	width:600px;
 	height:40px;
-	float: left;
+	float: right;
 	color:#fff;
-	text-align:left;
+	text-align:right;
 	text-transform:uppercase;
 	margin:23px 0 0 10px;
 	font-family: 'Oswald', sans-serif;
@@ -395,7 +407,7 @@ h2.rank {
     font-family: 'Oswald', sans-serif;
 }
 .logo {
-	float: right;
+	float: left;
 	margin:31px 10px 0 0;
 	width:190px;
 	height:34px;
