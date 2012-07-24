@@ -1,0 +1,30 @@
+    ============= MAGNET.CL =============
+    === APLICACIÓN FB BANCO DE CHILE ====
+
+
+- DEPLOY
+
+  # apt-get install ruby
+  # gem install rails
+   
+  # gem install passenger 
+  # passenger-install-apache2-module // Seguir instrucciones para instalación
+                                     // y configuración de apache
+
+  # apt-get install libxslt-dev libxml2-dev
+  # gem install nokogiri -v '1.5.5'
+
+  # bundle install
+
+  $ rake db:migrate RAILS_ENV=production
+  $ bundle exec rake assets:precompile
+
+  // Reiniciar servidor
+  $ touch <PROJECT_HOME>/tmp/restart.txt
+
+- FACEBOOK CONNECT
+
+  Para conectar a facebook se debe modificar la configuración del servidor de 
+  la aplicación en developers.facebook.com. Utilizar APP_ID y APP_SECRET 
+  ubicados en config/initializers/contants.rb para definir el id y llave de la
+  app.
