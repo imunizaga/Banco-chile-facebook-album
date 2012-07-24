@@ -49,6 +49,7 @@ user_seeds.each {|user| User.create(name: user[0], facebook_id: user[1])}
 Challenge.create(
   n_cards:3,
   kind: 'like',
+  description: "Oliver Atom",
   client_param: 'https://www.facebook.com/pages/Oliver-Atom/53166931056',
   server_param: '53166931056',
   set: '[1]'
@@ -57,6 +58,7 @@ Challenge.create(
 Challenge.create(
   n_cards:3,
   kind: 'like',
+  description: "Este Album",
   client_param: 'http://www.facebook.com/apps/application.php?id=127174043311',
   server_param: '127174043311',
   set: '[2]'
@@ -65,6 +67,7 @@ Challenge.create(
 Challenge.create(
   n_cards:3,
   kind: 'like',
+  description: "Github",
   client_param: 'https://www.facebook.com/pages/GitHub/50595864761',
   server_param: '50595864761',
   set: '[3]'
@@ -73,6 +76,7 @@ Challenge.create(
 Challenge.create(
   n_cards:3,
   kind: 'follow',
+  description: "magnet_dev",
   client_param: 'magnet_dev',
   set: '[4]'
 )
@@ -80,6 +84,7 @@ Challenge.create(
 Challenge.create(
   n_cards:3,
   kind: 'follow',
+  description: "github",
   client_param: 'github',
   set: '[5]'
 )
@@ -87,6 +92,7 @@ Challenge.create(
 Challenge.create(
   n_cards:5,
   kind: 'invite',
+  description: "un amigo",
   client_param: '1',
   set: '[1, 3]'
 )
@@ -94,7 +100,8 @@ Challenge.create(
 Challenge.create(
   n_cards:5,
   kind: 'code',
-  client_param: 'el muro de Banco de Chile',
+  description: "el muro de Banco de Chile",
+  client_param: '',
   server_param: '12345',
   set: '[2, 4]'
 )
@@ -102,7 +109,8 @@ Challenge.create(
 Challenge.create(
   n_cards:5,
   kind: 'code',
-  client_param: 'la p&aacute;gina de la Banca Joven',
+  description: "la p&aacute;gina de la Banca Joven",
+  client_param: '',
   server_param: '54321',
   set: '[3, 5]'
 )
@@ -110,6 +118,7 @@ Challenge.create(
 Challenge.create(
   n_cards:5,
   kind: 'retweet',
+  description: "un tweet de Seth Macfarland",
   client_param: '208950770589114368',
   set: '[4, 1]'
 )
@@ -125,6 +134,7 @@ challenge_client_param = {
 Challenge.create(
   n_cards:5,
   kind: 'share',
+  description: "Magnet.cl",
   client_param: ActiveSupport::JSON.encode(challenge_client_param),
   set: '[5, 2]'
 )
@@ -132,6 +142,7 @@ Challenge.create(
 Challenge.create(
   n_cards:1,
   kind: 'retweet',
+  description: "Erik Magnus",
   client_param: '213379847861436417',
   set: '[1, 2, 3, 4, 5]'
 )
@@ -147,6 +158,7 @@ challenge_client_param = {
 Challenge.create(
   n_cards:1,
   kind: 'share',
+  description: "Magnet.cl",
   client_param: ActiveSupport::JSON.encode(challenge_client_param),
   set: '[6, 7, 8, 9, 10]'
 )
@@ -154,7 +166,8 @@ Challenge.create(
 Challenge.create(
   n_cards:1,
   kind: 'code',
-  client_param: 'el estado del partido entre Chile y Colombia',
+  description: "el estado del partido entre Chile y Colombia",
+  client_param: '',
   server_param: '2 0 gana Chile',
   set: '[11]'
 )
