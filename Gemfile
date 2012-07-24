@@ -3,14 +3,14 @@ source 'https://rubygems.org'
 gem 'rails', '3.2.3'
 
 gem 'koala'
+gem 'rspec-rails', '2.9.0'
+gem "rails-erd"
+gem 'immigrant'
+gem 'foreigner'
+gem 'yaml_db'
 
 group :development, :test do
   gem 'sqlite3', '1.3.5'
-  gem 'rspec-rails', '2.9.0'
-  gem "rails-erd"
-  gem 'immigrant'
-  gem 'foreigner'
-  gem 'yaml_db'
   gem 'ruby-debug19'
 end
 
@@ -27,6 +27,7 @@ group :test do
 
 group :production do
   gem 'pg', '0.12.2'
+  gem 'therubyracer'
 end
 
 gem 'jquery-rails'
