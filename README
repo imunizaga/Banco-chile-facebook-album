@@ -28,3 +28,9 @@
   la aplicación en developers.facebook.com. Utilizar APP_ID y APP_SECRET 
   ubicados en config/initializers/contants.rb para definir el id y llave de la
   app.
+
+- TWITTER CONNECT
+
+  Para conectar a twitter modificar TW_KEY y TW_SECRET en 
+  config/initializers/contants.rb con los datos obtenidos al crear una
+  aplicación en dev.twitter.com.
