@@ -38,8 +38,30 @@ card_seeds =[
   ['EParedes', 'lamina21EParedes.jpg'],
   ['DRubio', 'lamina22DRubio.jpg'],
   ['Pinto', 'lamina23Pinto.jpg'],
+  ['Barra', 'lamina24Barra.jpg'],
+  ['Oficial', 'lamina25Oficial.jpg'],
+  ['Suazo', 'lamina26Suazo.jpg'],
+  ['Vidal', 'lamina27Vidal.jpg'],
+  ['Borghi', 'lamina28Borghi.jpg'],
+  ['Paredes', 'lamina29Paredes.jpg'],
   ['Bravo', 'lamina30Bravo.jpg'],
-  ['Gary', 'lamina40Gary.jpg']
+  ['Gary', 'lamina31Gary.jpg'],
+  ['DiegoRubio', 'lamina32DiegoRubio.jpg'],
+  ['Alexis', 'lamina33Alexis.jpg'],
+  ['Suazo', 'lamina34Suazo.jpg'],
+  ['Vidal', 'lamina35Vidal.jpg'],
+  ['Isla', 'lamina36Isla.jpg'],
+  ['MatiFernadez', 'lamina37MatiFernadez.jpg'],
+  ['Matias', 'lamina38Matias.jpg'],
+  ['Alexis', 'lamina39Alexis.jpg'],
+  ['Gary', 'lamina40Gary.jpg'],
+  ['Toro', 'lamina41Toro.jpg'],
+  ['Gary', 'lamina42Gary.jpg'],
+  ['MDiaz', 'lamina43MDiaz.jpg'],
+  ['Ponce', 'lamina44Ponce.jpg'],
+  ['Alexis', 'lamina45Alexis.jpg'],
+  ['ChAranguiz', 'lamina46ChAranguiz.jpg'],
+  ['OGonzalez', 'lamina47OGonzalez.jpg']
 ]
 
 card_seeds.each {|card| Card.create(name: card[0], source: card[1])}

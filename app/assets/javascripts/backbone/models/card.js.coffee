@@ -13,7 +13,10 @@ class BancoChile.Models.Card extends Backbone.Model
       @set('card_id', @options['id'])
 
   getImage: (size) ->
-    return "assets/small/" + @get('source')
+    if @get('count') == 0
+      return "assets/cards/byn_" + @get('source')
+    else
+      return "assets/cards/" + @get('source')
 
   toJSON: () ->
     jsonCard = super()
