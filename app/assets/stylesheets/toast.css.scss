@@ -18,9 +18,9 @@ $background-color: black;
 
     @include toast-element;
 
-    color: $background-color;
-    background-color: $background-color;
-    border-color: $border-color;
+    color: #000;
+    background-color: #fff;
+    border: none;
     position: absolute;
     opacity: 0.8;
 }
@@ -28,7 +28,7 @@ $background-color: black;
 .toast-text{
     @include toast-element;
 
-    color: $font-color;
+    color: #000;
 }
 
 .toast-background, .toast-text{
@@ -40,7 +40,7 @@ $background-color: black;
 }
 
 .toast-background-user, .toast-text-user{
-    padding: 10px;
+    padding: 25px;
     z-index: 10000;
 }
 
