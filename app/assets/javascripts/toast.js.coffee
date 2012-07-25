@@ -8,7 +8,7 @@ HEIGHT = {
 
 TIME = {
   debug: 1500
-  user: 3000
+  user: 5000
 }
 
 window.toast = (msg, type='debug') ->
