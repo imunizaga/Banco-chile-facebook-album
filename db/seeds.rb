@@ -59,9 +59,12 @@ card_seeds =[
   ['Gary', 'lamina42Gary.jpg'],
   ['MDiaz', 'lamina43MDiaz.jpg'],
   ['Ponce', 'lamina44Ponce.jpg'],
-  ['Alexis', 'lamina45Alexis.jpg'],
+  ['EduVargas', 'lamina45EduVargas.jpg'],
   ['ChAranguiz', 'lamina46ChAranguiz.jpg'],
-  ['OGonzalez', 'lamina47OGonzalez.jpg']
+  ['OGonzalez', 'lamina47OGonzalez.jpg'],
+  ['Alexis', 'lamina48Alexis.jpg'],
+  ['EduVargas', 'lamina49EduVargas.jpg'],
+  ['Vidal', 'lamina50Vidal.jpg']
 ]
 
 card_seeds.each {|card| Card.create(name: card[0], source: card[1])}
