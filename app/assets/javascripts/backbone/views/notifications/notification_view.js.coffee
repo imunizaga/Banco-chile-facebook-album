@@ -14,6 +14,8 @@ class BancoChile.Views.Notifications.NotificationView extends Backbone.View
   initialize: () ->
     @model = @options.model
     @user = window.db.users.get(@model.get('user_id'))
+    if not @model.get('status')
+      @el.className = "nueva"
 
     # if the sender_id is set, then it's a trade
     if @model.get('sender_id')
@@ -41,6 +43,7 @@ class BancoChile.Views.Notifications.NotificationView extends Backbone.View
     If if the @sender is set, then handles the trade in the backbone side
 
     ###
+    @el.className = ""
     @model.set('status', 1)
     @model.save {},
       success: =>
