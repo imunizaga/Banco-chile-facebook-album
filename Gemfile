@@ -8,6 +8,8 @@ gem "rails-erd"
 gem 'immigrant'
 gem 'foreigner'
 gem 'yaml_db'
+gem 'therubyracer'
+gem 'execjs'
 
 group :development, :test do
   gem 'sqlite3', '1.3.5'
@@ -27,7 +29,6 @@ group :test do
 
 group :production do
   gem 'pg', '0.12.2'
-  gem 'therubyracer'
 end
 
 gem 'jquery-rails'

@@ -187,6 +187,7 @@ PLATFORMS
 DEPENDENCIES
   capybara (= 1.1.2)
   coffee-rails (~> 3.2.2)
+  execjs
   fancybox-rails
   foreigner
   immigrant
