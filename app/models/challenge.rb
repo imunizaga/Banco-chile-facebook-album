@@ -238,7 +238,7 @@ class Challenge < ActiveRecord::Base
   #
   # Returns an Array of Challenge objects
   def self.all_without_server_params
-    challenges = self.all
+    challenges = self.where('id > 1')
     for challenge in challenges
       challenge[:server_param] = nil
     end
