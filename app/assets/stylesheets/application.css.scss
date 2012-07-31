@@ -74,7 +74,7 @@ select {font-size:1.0em;}
 	/*background:#fff;*/
 	height:auto;
 	margin-top:10px;
-	margin-bottom:50px;
+	margin-bottom:10px;
 }
 #superior {
 	width:840px;
@@ -228,8 +228,7 @@ h2.rank {
 	height:auto;
 	min-height:60px;
 	margin:0 0 0 40px;
-	padding:20px 0 20px 0;
-	border-bottom:1px solid #2A3C16;
+	padding:20px 0;
 }
 .contenidos:hover {
 	text-decoration:none;
@@ -412,7 +411,7 @@ h2.rank {
 }
 .logo {
 	float: left;
-	margin:32px 10px 0 0;
+	margin:33px 10px 0 0;
 	width:190px;
 	height:34px;
 }
@@ -673,17 +672,19 @@ ul.pruebas li.nueva a.accion2:active {
 	color:#000 !important;
 }
 .marcas {
-	width:100px;
+	width:80px;
 	height: 100px;
 	float: left;
-	margin:20px 0 0 80px;
+	margin:28px 0 0 70px;
 }
-
+.marcas a img {
+	width: 80px;
+}
 .acid {
 	width:90px;
 	height:37px;
 	float:right;
-	margin:90px -50px 0 0;
+	margin:72px -50px 0 0;
 }
 .acid img {
 	width:90px;
@@ -694,20 +695,21 @@ ul.pruebas li.nueva a.accion2:active {
 .como, .bases {
 	float: left;
     height: 20px;
-    margin: 20px 0 0 40px;
+    margin: 15px 0 0 80px;
     padding: 70px 0 0;
-    width: 100px;
-    color:#fff;
+    width: 80px;
+    color:#000;
     font-size: 11px;
-    background: url("/assets/iconInstruct.png") top left no-repeat;
+    background: url("/assets/iconInstruct.png") top center no-repeat;
 }
 
 .bases {
-    margin: 20px 0 0 20px;
-    background: url("/assets/iconBases.png") top left no-repeat;
+    margin: 15px 0 0 10px;
+    background: url("/assets/iconBases.png") top center no-repeat;
 }
 .como:hover, .bases:hover {
 	text-decoration: none;
+	color:#fff;
 }
 
 /*------------ Home ------------*/
@@ -722,9 +724,43 @@ ul.pruebas li.nueva a.accion2:active {
 /* Footer
 ------------------------------------------------------------------*/
 #footer {
-	width:760px;
 	margin:0 auto;
 	text-align:left;
+	height: 130px;
+	background:#0D2565 url(/assets/bg_header.jpg) top left repeat-x;
+	border-top:1px solid #000;
+	-webkit-box-shadow:0 0 15px #000;
+	-moz-box-shadow:0 0 15px #000;
+	box-shadow:0 0 15px #000;
+}
+#footer .logo {
+	width:150px;
+	height: 100px;
+	float: left;
+	margin:15px 0 0 40px;
+	padding-right: 50px;
+	border-right: 1px solid #6D9FCC;
+}
+#footer .logo img {
+	width:150px;
+	height: auto;
+	float: left;
+	margin-top: 40px;
+}
+#footer .legal {
+	width: 540px;
+	float: left;
+	margin:25px 0 0 30px;
+	color:#fff;
+	font-size: 12px;
+}
+#footer .legal p {
+	float: left;
+	width: 540px;
+	margin-top: 10px;
+}
+#footer .legal p a {
+	color:#AFDDFF;
 }
 #footer p {line-height:1.4em;}
 #footer ul {display:table;}
