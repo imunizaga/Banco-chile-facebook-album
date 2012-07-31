@@ -58,12 +58,12 @@ select {font-size:1.0em;}
 #superiorWrapper {
 	/*background:#bbb;*/
 	height:auto;
-	margin-top:15px;
-	margin-bottom:15px;
+	margin-top:10px;
+	margin-bottom:10px;
 }
 #headerWrapper {
-	background:url(/assets/bg_header.jpg) bottom left repeat-x;
-	height:60px;
+	background:#0D2565 url(/assets/bg_header.jpg) top left repeat-x;
+	height:100px;
 	top:0;
 	-webkit-box-shadow:0 2px 10px #000;
 	-moz-box-shadow:0 2px 10px #000;
@@ -73,7 +73,7 @@ select {font-size:1.0em;}
 #mainWrapper {
 	/*background:#fff;*/
 	height:auto;
-	margin-top:15px;
+	margin-top:10px;
 	margin-bottom:50px;
 }
 #superior {
@@ -396,7 +396,7 @@ h2.rank {
 	color:#F2E9D2;
 	text-align:right;
 	text-transform:uppercase;
-	margin:16px 0 0 10px;
+	margin:32px 0 0 10px;
 	font-family: 'Oswald', sans-serif;
 	font-weight:300;
 	font-size:34px;
@@ -408,7 +408,7 @@ h2.rank {
 }
 .logo {
 	float: left;
-	margin:18px 10px 0 0;
+	margin:32px 10px 0 0;
 	width:190px;
 	height:34px;
 }
@@ -688,6 +688,20 @@ ul.pruebas li.nueva a.accion2:active {
 	height:37px;
 	float:left;
 }
+
+.como, .bases {
+	float: left;
+    height: 20px;
+    margin: 20px 0 0 40px;
+    padding: 70px 0 0;
+    width: 100px;
+    color:#fff;
+}
+
+.bases {
+    margin: 20px 0 0 20px;
+}
+
 
 /*------------ Home ------------*/
 #mainColumns {}
