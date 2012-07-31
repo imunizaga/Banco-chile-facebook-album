@@ -123,7 +123,7 @@ h2.rank {
 }
 .ranking {
 	float: left;
-	width:740px;
+	width:460px;
 	height:90px;
 	margin:0px 0 0 40px;
 	overflow: hidden;
@@ -715,10 +715,13 @@ ul.pruebas li.nueva a.accion2:active {
 /* Magnet
 ------------------------------------------------------------------*/
 .hidden {
-	display: none;
+    display: none;
 }
 .clickable {
-	cursor: pointer;
+    cursor: pointer;
+}
+.clear {
+    clear:both;
 }
 
 
