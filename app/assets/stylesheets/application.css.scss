@@ -698,12 +698,17 @@ ul.pruebas li.nueva a.accion2:active {
     padding: 70px 0 0;
     width: 100px;
     color:#fff;
+    font-size: 11px;
+    background: url("/assets/iconInstruct.png") top left no-repeat;
 }
 
 .bases {
     margin: 20px 0 0 20px;
+    background: url("/assets/iconBases.png") top left no-repeat;
 }
-
+.como:hover, .bases:hover {
+	text-decoration: none;
+}
 
 /*------------ Home ------------*/
 #mainColumns {}
