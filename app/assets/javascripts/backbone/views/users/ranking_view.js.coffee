@@ -39,9 +39,9 @@ class BancoChile.Views.Users.RankingView extends Backbone.View
 
     count = 0
     for user in @ranking.models
-      count++
-      if count < @from
+      if user.get('rank') < @from
         continue
+      count++
       if count > 8
         break
       rankingItem = new BancoChile.Views.Users.RankingItemView(
