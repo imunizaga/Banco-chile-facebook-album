@@ -1,6 +1,5 @@
 BancoChile.UIMessages =
   CHALLENGE_COMPLETED: "¡Has ganado una nueva carta!"
-  CHALLENGE_FAILED: "Ha ocurrido un problema, recarga la página e intenta nuevamente"
   TRADE_ERROR_NO_USER: "Debes escoger un amigo con el cual hacer el cambio"
   TRADE_ERROR_NO_CARD: "Debes escoger la carta que quieres cambiar"
   TRADE_REQUEST_SUCCESS: "¡Solicitud enviada!, ahora espera la respuesta de tu amigo"
@@ -36,3 +35,6 @@ BancoChile.UIMessages =
     code: "Ingresar"
     retweet: "Retweet"
     share: "Compartir"
+  CHALLENGE_FAILED:
+    default: "Ha ocurrido un problema, recarga la página e intenta nuevamente",
+    completed: "No puedes completar este desarfío pues ya lo realizaste"

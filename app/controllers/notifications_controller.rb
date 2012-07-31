@@ -75,7 +75,8 @@ class NotificationsController < ApplicationController
       else
         # set challenge values values
         @notification[:user_id] = @user.id
-        valid = @notification.validate_challenge(@user, data)
+        reason = @notification.validate_challenge(@user, data)
+        valid = reason[:success]
         @notification[:sender_id] = nil
       end
     end
@@ -108,7 +109,7 @@ class NotificationsController < ApplicationController
       else
         format.json {
           render json: reason,
-          status: :unprocessable_entity
+          status: :created
         }
       end
     end

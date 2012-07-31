@@ -16,6 +16,9 @@ class BancoChile.Models.Challenge extends Backbone.Model
     title: null
     href: "#challenge-lightbox"
 
+  failureReason: (type)->
+    return BancoChile.UIMessages.CHALLENGE_FAILED[type]
+
 class BancoChile.Collections.ChallengesCollection extends Backbone.Collection
   model: BancoChile.Models.Challenge
   url: '/challenges'

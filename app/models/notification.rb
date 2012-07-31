@@ -12,9 +12,14 @@ class Notification < ActiveRecord::Base
   # Examples
   #
   #   notification.validate_challenge()
-  #   # => true
+  #   # => {success: true}
   #
-  # Returns A boolean indicating if the challenge was completed
+  # Returns A hash with the following structure:
+  # {
+  #   success: boolean, //indicating if the challenge was completed
+  #   reason: string, // the reason for failure
+  #   data: string // extra data when necesary
+  # }
   def validate_challenge user=nil, data=nil
       challenge = Challenge.find(self.challenge_id)
       return challenge.validate_complete(user, data)

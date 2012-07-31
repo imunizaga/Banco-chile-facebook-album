@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120629181243) do
+ActiveRecord::Schema.define(:version => 20120730191713) do
 
   create_table "card_packs", :force => true do |t|
     t.integer  "challenge_id"
@@ -34,11 +34,12 @@ ActiveRecord::Schema.define(:version => 20120629181243) do
     t.integer  "n_cards"
     t.text     "set"
     t.text     "description"
-    t.datetime "created_at",   :null => false
-    t.datetime "updated_at",   :null => false
+    t.datetime "created_at",                      :null => false
+    t.datetime "updated_at",                      :null => false
     t.text     "client_param"
     t.text     "server_param"
     t.text     "kind"
+    t.boolean  "repeatable",   :default => false
   end
 
   create_table "notifications", :force => true do |t|
@@ -65,6 +66,13 @@ ActiveRecord::Schema.define(:version => 20120629181243) do
     t.integer  "card_pack_id"
     t.text     "log"
     t.boolean  "locked",       :default => false
+  end
+
+  create_table "user_challenges", :force => true do |t|
+    t.integer  "user_id"
+    t.integer  "challenge_id"
+    t.datetime "created_at",   :null => false
+    t.datetime "updated_at",   :null => false
   end
 
   create_table "users", :force => true do |t|

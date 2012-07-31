@@ -72,145 +72,159 @@ user_seeds.each {|user| User.create(name: user[0], facebook_id: user[1])}
 
 # 1
 Challenge.create(
-  n_cards:3,
-  kind: 'like',
-  description: "Oliver Atom",
-  client_param: 'https://www.facebook.com/pages/Oliver-Atom/53166931056',
-  server_param: '53166931056',
-  set: '[1]'
+  n_cards:1,
+  kind: 'join',
+  description: "Registrate en la aplicaci&oacute;n",
+  client_param: '',
+  server_param: '',
+  set: '[2,3,4,5,6,7]'
 )
 # 2
 Challenge.create(
-  n_cards:3,
+  n_cards:1,
+  kind: 'like',
+  description: "Banco de chile en Facebook",
+  client_param: 'https://www.facebook.com/bancochile.cl',
+  server_param: '57173152417',
+  set: '[1]'
+)
+# 3
+Challenge.create(
+  n_cards:1,
   kind: 'like',
   description: "Este Album",
   client_param: 'http://www.facebook.com/apps/application.php?id=127174043311',
   server_param: '127174043311',
-  set: '[2]'
-)
-# 3
-Challenge.create(
-  n_cards:3,
-  kind: 'like',
-  description: "Github",
-  client_param: 'https://www.facebook.com/pages/GitHub/50595864761',
-  server_param: '50595864761',
-  set: '[3]'
+  set: '[33]'
 )
 # 4
 Challenge.create(
-  n_cards:3,
-  kind: 'follow',
-  description: "magnet_dev",
-  client_param: 'magnet_dev',
-  set: '[4]'
+  n_cards:1,
+  kind: 'like',
+  description: "Banca Joven en Facebook",
+  client_param: 'https://www.facebook.com/BancaJoven',
+  server_param: '300723886643482',
+  set: '[37]'
 )
 # 5
 Challenge.create(
-  n_cards:3,
+  n_cards:1,
   kind: 'follow',
-  description: "github",
-  client_param: 'github',
-  set: '[5]'
+  description: "bancodechile",
+  client_param: 'bancodechile',
+  set: '[35]'
 )
 # 6
 Challenge.create(
-  n_cards:5,
-  kind: 'invite',
-  description: "un amigo",
-  client_param: '1',
-  set: '[1, 3]'
+  n_cards:1,
+  kind: 'follow',
+  description: "bancajoven",
+  client_param: 'bancajoven',
+  set: '[26]'
 )
 # 7
 Challenge.create(
-  n_cards:5,
-  kind: 'code',
-  description: "el muro de Banco de Chile",
-  client_param: '',
-  server_param: '12345',
-  set: '[2, 4]'
+  n_cards:1,
+  kind: 'invite',
+  description: "un amigo",
+  client_param: '1',
+  set: '[2,3,4,5,6,7,9,10,11,12,13,14,15,16,18,19,20,21,22,23,24,27,28,29,30,31,32]',
+  repeatable: true
 )
 # 8
 Challenge.create(
-  n_cards:5,
+  n_cards:1,
   kind: 'code',
-  description: "la p&aacute;gina de la Banca Joven",
+  description: "el muro de Banco de Chile",
   client_param: '',
-  server_param: '54321',
-  set: '[3, 5]'
+  server_param: 'vamos Chile',
+  set: '[17]'
 )
 # 9
 Challenge.create(
-  n_cards:5,
-  kind: 'retweet',
-  description: "un tweet de Seth Macfarland",
-  client_param: '208950770589114368',
-  set: '[4, 1]'
+  n_cards:1,
+  kind: 'code',
+  description: "la p&aacute;gina de la Banca Joven",
+  client_param: '',
+  server_param: 'viva Chile',
+  set: '[08]'
 )
 # 10
-challenge_client_param = {
-  'method' => 'feed',
-  'link' => 'http://www.magnet.cl/',
-  'picture' => 'http://fbrell.com/f8.jpg',
-  'name' => 'Magnet.cl',
-  'caption' => 'Magnet.cl',
-  'description' => 'Nueva empresa de desarrollo de software'
-}
-Challenge.create(
-  n_cards:5,
-  kind: 'share',
-  description: "Magnet.cl",
-  client_param: ActiveSupport::JSON.encode(challenge_client_param),
-  set: '[5, 2]'
-)
-# 11
 Challenge.create(
   n_cards:1,
   kind: 'retweet',
-  description: "Erik Magnus",
-  client_param: '213379847861436417',
-  set: '[1, 2, 3, 4, 5]'
+  description: "un tweet del Banco de Chile",
+  client_param: '230313801784897537',
+  set: '[2,3,4,5,6,7,9,10,11,12,13,14,15,16,18,19,20,21,22,23,24,27,28,29,30,31,32,34,36,38,39,40,41,42,43,44,45,46,47,48,49,50]',
+  repeatable: true
 )
-# 12
+# 11
 challenge_client_param = {
   'method' => 'feed',
-  'link' => 'http://www.magnet.cl/',
-  'picture' => 'http://fbrell.com/f8.jpg',
-  'name' => 'Magnet.cl',
-  'caption' => 'Magnet.cl',
-  'description' => 'Nueva empresa de desarrollo de software'
+  'link' => 'https://www.facebook.com/BancaJoven',
+  'picture' => 'https://fbcdn-profile-a.akamaihd.net/hprofile-ak-snc4/373024_300723886643482_1440234310_n.jpg',
+  'name' => 'Banca Joven del Banco de Chile',
+  'caption' => 'Rel&aacute;jate con la Banca Joven',
+  'description' => 'Rel&aacute;jate y disfruta con un 30% de descuento en todos los tratamientos faciales y corporales en Mundo Curvas, pagando con las Tarjetas del Chile.'
 }
 Challenge.create(
   n_cards:1,
   kind: 'share',
-  description: "Magnet.cl",
+  description: "https://www.facebook.com/BancaJoven",
   client_param: ActiveSupport::JSON.encode(challenge_client_param),
-  set: '[6, 7, 8, 9, 10]'
+  set: '[2,3,4,5,6,7,9,10,11,12,13,14,15,16,18,19,20,21,22,23,24,27,28,29,30,31,32,34,36,38,39,40,41,42,43,44,45,46,47,48,49,50]',
+  repeatable: true
+)
+# 12
+Challenge.create(
+  n_cards:1,
+  kind: 'retweet',
+  description: "un tweet de la Banca Joven",
+  client_param: '230067273283543041',
+  set: '[2,3,4,5,6,7,9,10,11,12,13,14,15,16,18,19,20,21,22,23,24,27,28,29,30,31,32,34,36,38,39,40,41,42,43,44,45,46,47,48,49,50]',
+  repeatable: true
 )
 # 13
+challenge_client_param = {
+  'method' => 'feed',
+  'link' => 'https://www.facebook.com/bancochile.cl',
+  'picture' => 'https://fbcdn-profile-a.akamaihd.net/hprofile-ak-snc4/174873_57173152417_2016874032_n.jpg',
+  'name' => 'Banco de Chile',
+  'caption' => 'https://www.facebook.com/bancochile.cl',
+  'description' => 'Renueva tu casa u oficina aprovechando hasta un 20% de dcto. en Carpenter con tus Tarjetas del Banco de Chile.'
+}
+Challenge.create(
+  n_cards:1,
+  kind: 'share',
+  description: "https://www.facebook.com/bancochile.cl",
+  client_param: ActiveSupport::JSON.encode(challenge_client_param),
+  set: '[2,3,4,5,6,7,9,10,11,12,13,14,15,16,18,19,20,21,22,23,24,27,28,29,30,31,32,34,36,38,39,40,41,42,43,44,45,46,47,48,49,50]',
+  repeatable: true
+)
+# 14
 Challenge.create(
   n_cards:1,
   kind: 'code',
   description: "el estado del partido entre Chile y Colombia",
   client_param: '',
-  server_param: '2 0 gana Chile',
-  set: '[11]'
+  server_param: 'Chile al mundial',
+  set: '[25]',
 )
 
 # user 1
-CardPack.create(challenge_id:6, user_id: 1)
+CardPack.create(challenge_id:1, user_id: 1)
 
 # user 2
-CardPack.create(challenge_id:2, user_id: 2)
+CardPack.create(challenge_id:1, user_id: 2)
 
 # user 3
-CardPack.create(challenge_id:3, user_id: 3)
+CardPack.create(challenge_id:1, user_id: 3)
 
 # user 4
-CardPack.create(challenge_id:4, user_id: 4)
+CardPack.create(challenge_id:1, user_id: 4)
 
 # user 5
-CardPack.create(challenge_id:10, user_id: 5)
+CardPack.create(challenge_id:1, user_id: 5)
 
 Notification.create(user_id:1, challenge_id:9, cards_in:'[1]')
 Notification.create(user_id:2, challenge_id:9, cards_in:'[2]')

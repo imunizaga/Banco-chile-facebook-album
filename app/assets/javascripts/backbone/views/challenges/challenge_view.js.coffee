@@ -14,15 +14,22 @@ class BancoChile.Views.Challenges.ChallengeView extends Backbone.View
 
     notification.save({}
       success:=>
-        user = window.app.user
-        if user.tradeCards(notification.get('cards_in'), false)
-          base_message = BancoChile.UIMessages.CHALLENGE_COMPLETED
-          if not @renderAsButton
-            $.fancybox.close()
-          toast("#{base_message}: #{notification.get('cards_in')}", 'user')
-          user.get('notifications').add(notification)
+        # since we need to parse the reason, then we need the notification
+        # contain the success response
+        if notification.get('success')
+          user = window.app.user
+          if user.tradeCards(notification.get('cards_in'), false)
+            base_message = BancoChile.UIMessages.CHALLENGE_COMPLETED
+            if not @renderAsButton
+              $.fancybox.close()
+            toast("#{base_message}: #{notification.get('cards_in')}", 'user')
+            user.get('notifications').add(notification)
+          else
+            toast(BancoChile.UIMessages.CHALLENGE_FAILED['default'], 'user')
         else
-          toast(BancoChile.UIMessages.CHALLENGE_FAILED, 'user')
-      error:=>
-        toast(BancoChile.UIMessages.CHALLENGE_FAILED, 'user')
+          type = notification.get('reason')
+          reason = BancoChile.UIMessages.CHALLENGE_FAILED[type]
+          toast(reason, 'user')
+      error: (response, asdf)=>
+        toast(BancoChile.UIMessages.CHALLENGE_FAILED['default'], 'user')
     )
