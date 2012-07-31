@@ -147,7 +147,7 @@ Challenge.create(
   description: "la p&aacute;gina de la Banca Joven",
   client_param: '',
   server_param: 'viva Chile',
-  set: '[08]'
+  set: '[8]'
 )
 # 10
 Challenge.create(
@@ -225,10 +225,3 @@ CardPack.create(challenge_id:1, user_id: 4)
 
 # user 5
 CardPack.create(challenge_id:1, user_id: 5)
-
-Notification.create(user_id:1, challenge_id:9, cards_in:'[1]')
-Notification.create(user_id:2, challenge_id:9, cards_in:'[2]')
-Notification.create(user_id:3, challenge_id:6, cards_in:'[3]')
-Notification.create(user_id:3, challenge_id:9, cards_in:'[3]')
-Notification.create(user_id:4, challenge_id:9, cards_in:'[4]')
-Notification.create(user_id:5, challenge_id:9, cards_in:'[5]')

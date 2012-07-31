@@ -29,6 +29,19 @@ class CardPack < ActiveRecord::Base
 
     def create_cards
       if self.challenge != nil and self.user != nil
+
+        # we are going to log that this user completed this challenge
+        user_challenge = UserChallenge.where(user_id: self.user.id,
+                             challenge_id: self.challenge.id).first
+        if user_challenge
+          # update the updated_at time
+          user_challenge.updated_at = Time.now
+          user_challenge.save
+        else
+          # create a new record indicating that the user completed this challenge
+          UserChallenge.create(user_id: self.user.id,
+                             challenge_id: self.challenge.id)
+        end
         cards_count = Card.count
         challenge_cards = self.challenge.n_cards
         card_set = ActiveSupport::JSON.decode(self.challenge.set)

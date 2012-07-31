@@ -47,6 +47,12 @@ class BancoChile.Views.Game.TabsView extends Backbone.View
 
     # list of challenge views
     for challenge in @challenges.models
+      # if the user has completed the challenge
+      if challenge.get('completed')
+        # and the challenge is not repeatable
+        if not challenge.get('repeatable')
+          # render nothing
+          continue
       challengeView = new BancoChile.Views.Challenges.ChallengeItemView(
         'challenge': challenge
       )

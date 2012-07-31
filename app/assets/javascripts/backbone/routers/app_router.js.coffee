@@ -32,6 +32,11 @@ class BancoChile.Routers.AppRouter extends Backbone.Router
     # the base url used 
     @site_url = "#{window.location.protocol}//#{window.location.host}"
 
+    for userChallenge in @options.userChallenges
+      challenge = window.db.challenges.get(userChallenge.challenge_id)
+      if challenge
+        challenge.set('completed', true)
+
     return this
 
   routes:

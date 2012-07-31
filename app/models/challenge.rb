@@ -48,26 +48,7 @@ class Challenge < ActiveRecord::Base
     # now dinamically call the method that validates the challenge
     method_name = "validate_#{self.kind}"
 
-    response = self.send(method_name, user, data)
-
-    # if the challenge was successfully completed
-    puts response
-    if response[:success]
-      puts 2
-      # if the user_challenge was defined
-      if user_challenge
-        puts 3
-        # update the updated_at time
-        user_challenge.updated_at = Time.now
-        user_challenge.save
-      else
-        puts 4
-        # create a new record indicating that the user completed this challenge
-        UserChallenge.create(user_id: user.id, challenge_id: self.id)
-      end
-    end
-    puts 5
-    return response
+    return  self.send(method_name, user, data)
   end
 
   # Public: Validates a that a challenge of type like was completed by the

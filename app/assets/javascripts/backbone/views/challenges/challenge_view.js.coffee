@@ -16,7 +16,12 @@ class BancoChile.Views.Challenges.ChallengeView extends Backbone.View
       success:=>
         # since we need to parse the reason, then we need the notification
         # contain the success response
-        if notification.get('success')
+        if notification.get('success') == false
+          type = notification.get('reason')
+          reason = BancoChile.UIMessages.CHALLENGE_FAILED[type]
+          toast(reason, 'user')
+        else
+          @challenge.set('completed', true)
           user = window.app.user
           if user.tradeCards(notification.get('cards_in'), false)
             base_message = BancoChile.UIMessages.CHALLENGE_COMPLETED
@@ -26,10 +31,6 @@ class BancoChile.Views.Challenges.ChallengeView extends Backbone.View
             user.get('notifications').add(notification)
           else
             toast(BancoChile.UIMessages.CHALLENGE_FAILED['default'], 'user')
-        else
-          type = notification.get('reason')
-          reason = BancoChile.UIMessages.CHALLENGE_FAILED[type]
-          toast(reason, 'user')
       error: (response, asdf)=>
         toast(BancoChile.UIMessages.CHALLENGE_FAILED['default'], 'user')
     )

@@ -4,12 +4,15 @@ class BancoChile.Views.Challenges.ChallengeItemView extends Backbone.View
   template: JST["backbone/templates/challenges/challenge"]
 
   tagName: "li"
+  className: "nueva"
 
   events:
     "click .js-action": "actionBtnClicked"
 
   initialize: () ->
     @challenge = @options.challenge
+    if @challenge.get('completed')
+      @el.className = ""
 
     switch @challenge.get('kind')
       when 'like'

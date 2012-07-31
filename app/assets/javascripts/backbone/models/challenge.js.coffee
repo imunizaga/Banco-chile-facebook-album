@@ -8,6 +8,7 @@ class BancoChile.Models.Challenge extends Backbone.Model
     @set('action', BancoChile.UIMessages.CHALLENGE_ACTIONS[@options['kind']])
 
   defaults:
+    completed: false
     action: null
     description: null
     n_cards: null

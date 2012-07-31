@@ -32,6 +32,7 @@ class StaticPagesController < ApplicationController
 
         @cards = Card.all
         @challenges = Challenge.all_without_server_params
+        @user_challenges = UserChallenge.where(user_id:@user[:id])
       else
         session[:id] = nil
       end
