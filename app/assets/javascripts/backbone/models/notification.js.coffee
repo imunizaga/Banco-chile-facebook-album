@@ -1,14 +1,19 @@
 class BancoChile.Models.Notification extends Backbone.Model
-  url: '/notifications'
+  url: ()->
+    url = '/notifications'
+    if @id
+      return  url + "/" + @id
+    else
+      return url
 
   initialize: (@options) ->
-    if @options['id']
-      @url = @url + "/" + @options['id']
     challenge_id = @get('challenge_id')
     if challenge_id
       challenge = window.db.challenges.get(challenge_id)
       kind = challenge.get('kind')
-      @set('description', BancoChile.UIMessages.NOTIFICATION_DESCRIPTIONS[kind])
+      debugger
+      @set('description', BancoChile.UIMessages.NOTIFICATION_DESCRIPTIONS[kind]
+           + challenge.get('description'))
 
   paramRoot: 'notification'
 
