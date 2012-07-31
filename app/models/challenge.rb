@@ -229,7 +229,7 @@ class Challenge < ActiveRecord::Base
     if self[:server_param] == data
       return {:success=> true}
     else
-      return {:success=> false, :reason=>"invalid"}
+      return {:success=> false, :reason=>"invalid_code"}
     end
   end
 
