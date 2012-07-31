@@ -93,7 +93,7 @@ Challenge.create(
   n_cards:1,
   kind: 'like',
   description: "Este Album",
-  client_param: 'http://www.facebook.com/apps/application.php?id=127174043311',
+  client_param: 'https://www.facebook.com/apps/application.php?id=127174043311',
   server_param: '127174043311',
   set: '[33]'
 )
