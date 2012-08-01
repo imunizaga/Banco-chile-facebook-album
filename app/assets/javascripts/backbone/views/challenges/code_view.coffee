@@ -11,6 +11,9 @@ class BancoChile.Views.Challenges.CodeView extends BancoChile.Views.Challenges.C
     super(data)
 
   render: ->
-    $(@el).html(@template(challenge: @challenge.toJSON()))
+    if not @rendered
+      $(@el).html(@template(challenge: @challenge.toJSON()))
+      @rendered = true
+    @delegateEvents()
 
     return this
