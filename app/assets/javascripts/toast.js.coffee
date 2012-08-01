@@ -2,12 +2,12 @@ toastSlots = [false]
 lastSlot = 0
 
 HEIGHT = {
-  debug: 30
+  debug: 50
   user: 50
 }
 
 TIME = {
-  debug: 1500
+  debug: 5000
   user: 5000
 }
 

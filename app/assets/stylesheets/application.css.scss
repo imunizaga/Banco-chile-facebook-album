@@ -174,6 +174,15 @@ h2.rank {
 	height:44px;
 	border:3px solid #131313;
 }
+.ranking-list2 {
+	float: left;
+    margin: -20px 0 30px 20px;
+    padding: 20px 0 0;
+    width: 760px;
+}
+.ranking-list2 a {
+	color:#fff;
+}
 .ranking li h4 {
 	position: absolute;
 	width:20px;
@@ -229,6 +238,9 @@ h2.rank {
 	min-height:60px;
 	margin:0 0 0 40px;
 	padding:20px 0;
+}
+.logueado .contenidos {
+	border-bottom:1px solid #2A3C16;
 }
 .contenidos:hover {
 	text-decoration:none;
@@ -392,7 +404,7 @@ h2.rank {
 /* Header
 ------------------------------------------------------------------*/
 #header {position:relative;}
-#header h2 {
+/*#header h2 {
 	width:600px;
 	height:40px;
 	float: right;
@@ -403,12 +415,18 @@ h2.rank {
 	font-family: 'Oswald', sans-serif;
 	font-weight:300;
 	font-size:34px;
+}*/
+#header .equipodetodos {
+	width:249px;
+	height:57px;
+	float: right;
+	margin:22px 0 0;
 }
-#header h2 span {
+/*#header h2 span {
 	color:#CC3333;
 	font-weight:700;
     font-family: 'Oswald', sans-serif;
-}
+}*/
 .logo {
 	float: left;
 	margin:33px 10px 0 0;
@@ -711,7 +729,12 @@ ul.pruebas li.nueva a.accion2:active {
 	text-decoration: none;
 	color:#fff;
 }
-
+.logueado .marcas {
+	margin:18px 0 0 40px;
+}
+.logueado .acid {
+	margin:52px -10px 0 0;
+}
 /*------------ Home ------------*/
 #mainColumns {}
 #main {}
