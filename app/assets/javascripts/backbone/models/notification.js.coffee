@@ -11,7 +11,6 @@ class BancoChile.Models.Notification extends Backbone.Model
     if challenge_id
       challenge = window.db.challenges.get(challenge_id)
       kind = challenge.get('kind')
-      debugger
       @set('description', BancoChile.UIMessages.NOTIFICATION_DESCRIPTIONS[kind]
            + challenge.get('description'))
 

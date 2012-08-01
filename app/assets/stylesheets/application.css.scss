@@ -132,7 +132,8 @@ h2.rank {
 	padding-bottom:20px;
 	border-bottom:1px solid #2A3C16;
 }
-.ranking a.prev {
+.ranking div.prev {
+    cursor: pointer;
 	position: absolute;
 	display: block;
 	width:15px;
@@ -141,7 +142,8 @@ h2.rank {
 	left:0;
 	background: url(/assets/flechita.png) left center no-repeat;
 }
-.ranking a.next {
+.ranking div.next {
+    cursor: pointer;
 	position: absolute;
 	display: block;
 	width:15px;
@@ -150,7 +152,7 @@ h2.rank {
 	right:0;
 	background: url(/assets/flechita.png) right center no-repeat;
 }
-/*.ranking a.prev:hover, .ranking a.next:hover {
+/*.ranking div.prev:hover, .ranking a.next:hover {
 	background-color:#ccc;
 }*/
 .ranking li {

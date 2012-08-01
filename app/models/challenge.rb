@@ -70,7 +70,7 @@ class Challenge < ActiveRecord::Base
   # }
   def validate_like user, data
     #@api = Koala::Facebook::API.new("127174043311|F6mjALyN9OCelH8dE1UtPTPl_4k")
-    #url = "100004040536236/likes/53166931056"
+    #url = "100004040536236/likes/#{self.server_param}"
     #puts "#{url}?access_token=127174043311|F6mjALyN9OCelH8dE1UtPTPl_4k"
     #result = @api.get_connections(url, "?access_token=127174043311|F6mjALyN9OCelH8dE1UtPTPl_4k")
 
