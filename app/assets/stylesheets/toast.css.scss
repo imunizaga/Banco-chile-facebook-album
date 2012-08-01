@@ -39,11 +39,11 @@ $background-color: black;
     border-radius: 8px;
 }
 
-.toast-background-user, .toast-text-user{
+.toast-background-user, .toast-background-debug, .toast-text-user, .toast-text-debug {
     padding: 25px;
     z-index: 10000;
 }
 
-.toast-text-user{
+.toast-text-user, .toast-text-debug {
     border: 2px solid black;
 }
