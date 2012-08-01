@@ -75,6 +75,10 @@ class AuthController < ApplicationController
       session[:from_id] = nil
 
       this_user = User.where(facebook_id:fb_id).first_or_create(name:@user['name'])
+      if this_user.fb_access_token != session[:access_token]
+        this_user.fb_access_token = session[:access_token]
+        this_user.save()
+      end
       session[:id] = this_user.id
       end
     respond_to do |format|
