@@ -3,10 +3,10 @@
 <p>
     <span><%= sender.name %></span> te ha propuesto un cambio de láminas
 </p>
-<p class="laminas">
-    Lámina <%= notification.cards_in %> por lámina <%= notification.cards_out %>
-</p>
 <% if (!notification.status){ %>
 <a class="accion js-notification-accept-btn">Aceptar</a>
 <a class="accion2 js-notification-deny-btn">Rechazar</a>
 <% } %>
+<p class="laminas">
+    Lámina <%= notification.cards_in %> por lámina <%= notification.cards_out %>
+</p>
