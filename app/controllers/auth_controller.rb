@@ -3,7 +3,8 @@ class AuthController < ApplicationController
   protect_from_forgery
   def facebook
     session[:access_token] = nil
-    @auth_url =  authenticator.url_for_oauth_code(:permissions=>params[:permissions])
+    @auth_url =  authenticator.url_for_oauth_code(
+      :permissions=>'user_about_me,user_likes')
     if @auth_url['localhost']
       @auth_url['localhost']='127.0.0.1'
     end
@@ -118,7 +119,8 @@ class AuthController < ApplicationController
     # Perform action through a post call to the Twitter API
     # See https://dev.twitter.com/docs/api/1/post/statuses/retweet/%3Aid
     response = oauth.request(:post, '/statuses/retweet/213379847861436417.json',
-                             session[:tw_access_token], { :scheme => :query_string })
+                             session[:tw_access_token],
+                             { :scheme => :query_string })
     # The response can be parsed to confirm the retweeted id
     retweet_info = JSON.parse(response.body)
     print "retweet_info: #{retweet_info['retweeted_status']['id_str']}\n"
