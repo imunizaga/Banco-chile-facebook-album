@@ -181,6 +181,7 @@ h2.rank {
     margin: -20px 0 30px 20px;
     padding: 20px 0 0;
     width: 760px;
+    display: none;
 }
 .ranking-list2 a {
 	color:#fff;
@@ -732,10 +733,16 @@ ul.pruebas li.nueva a.accion2:active {
     font-size: 11px;
     background: url("/assets/iconInstruct.png") top center no-repeat;
 }
-
 .bases {
     margin: 15px 0 0 10px;
     background: url("/assets/iconBases.png") top center no-repeat;
+}
+.logueado .como {
+	margin: 5px 0 0 150px;
+}
+.logueado .bases {
+	margin-top: 5px;
+	margin-left: 20px;
 }
 .como:hover, .bases:hover {
 	text-decoration: none;
