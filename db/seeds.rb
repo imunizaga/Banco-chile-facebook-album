@@ -94,7 +94,7 @@ Challenge.create(
   kind: 'like',
   description: "Este Album",
   client_param: 'http://apps.facebook.com/bancochilealbum/',
-  server_param: '127174043311',
+  server_param: '185738041556931',
   set: '[33]'
 )
 # 4
