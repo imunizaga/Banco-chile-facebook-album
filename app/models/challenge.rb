@@ -74,10 +74,10 @@ class Challenge < ActiveRecord::Base
     #puts "#{url}?access_token=127174043311|F6mjALyN9OCelH8dE1UtPTPl_4k"
     #result = @api.get_connections(url, "?access_token=127174043311|F6mjALyN9OCelH8dE1UtPTPl_4k")
 
-    @api = Koala::Facebook::API.new(ACCESS_TOKEN)
+    @api = Koala::Facebook::API.new(session[:access_token])
     # link for the user-app-like
     url = "#{user.facebook_id}/likes/#{self.server_param}"
-    result = @api.get_connections(url, "?access_token=#{ACCESS_TOKEN}")
+    result = @api.get_connections(url, "?access_token=#{session[:access_token]}")
 
 
     # check that we got a valid result
@@ -130,7 +130,7 @@ class Challenge < ActiveRecord::Base
   #   data: string // extra data when necesary
   # }
   def validate_share user, data
-    @api = Koala::Facebook::API.new(ACCESS_TOKEN)
+    @api = Koala::Facebook::API.new(session[:access_token])
     result = @api.get_connections(data, "")
     client_param = ActiveSupport::JSON.decode(self.client_param)
 

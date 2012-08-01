@@ -4,7 +4,7 @@ class AuthController < ApplicationController
   def facebook
     session[:access_token] = nil
     @auth_url =  authenticator.url_for_oauth_code(
-      :permissions=>'user_about_me,user_likes')
+      :permissions=>'user_likes')
     if @auth_url['localhost']
       @auth_url['localhost']='127.0.0.1'
     end
@@ -46,7 +46,7 @@ class AuthController < ApplicationController
 
               # finnaly check if it's a valid facebook request
               url = "#{request_id}_#{fb_id}"
-              params = "?access_token=#{ACCESS_TOKEN}"
+              params = "?access_token=#{session[:access_token]}"
               result = @api.get_connections(url, params)
 
               # if it's a valid result
