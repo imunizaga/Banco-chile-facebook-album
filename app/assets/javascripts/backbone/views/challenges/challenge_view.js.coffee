@@ -28,7 +28,7 @@ class BancoChile.Views.Challenges.ChallengeView extends Backbone.View
             if not @renderAsButton
               $.fancybox.close()
             toast("#{base_message}: #{notification.get('cards_in')}", 'user')
-            user.get('notifications').add(notification)
+            user.get('notifications').add(notification, {at: 0})
           else
             toast(BancoChile.UIMessages.CHALLENGE_FAILED['default'], 'user')
       error: (response, asdf)=>

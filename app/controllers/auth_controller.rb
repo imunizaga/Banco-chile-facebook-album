@@ -4,7 +4,7 @@ class AuthController < ApplicationController
   def facebook
     session[:access_token] = nil
     @auth_url =  authenticator.url_for_oauth_code(
-      :permissions=>'user_likes')
+      :permissions=>['user_likes','read_stream'])
     if @auth_url['localhost']
       @auth_url['localhost']='127.0.0.1'
     end
