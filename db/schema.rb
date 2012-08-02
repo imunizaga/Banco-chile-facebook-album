@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120801215217) do
+ActiveRecord::Schema.define(:version => 20120802155251) do
 
   create_table "card_packs", :force => true do |t|
     t.integer  "challenge_id"
@@ -88,6 +88,7 @@ ActiveRecord::Schema.define(:version => 20120801215217) do
     t.integer  "cards_count",                  :default => 0
     t.text     "album"
     t.string   "fb_access_token"
+    t.string   "tw_access_token"
   end
 
 end
