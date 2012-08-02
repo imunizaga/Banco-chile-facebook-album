@@ -563,9 +563,7 @@ ul.pruebas {
 	border-left:1px solid #2A3C16 !important;
 	background:transparent !important;
 }
-ul.pruebas li.tuiter iframe {
-	margin:7px;
-}
+
 ul.pruebas li {
 	float: left;
 	width:235px;
@@ -577,7 +575,11 @@ ul.pruebas li {
 	background:url(/assets/bg_pruebas.png) top left repeat-y !important;
 }
 ul.pruebas li.tuiter {
-	background:url(/assets/bg_pruebas2.png) top left repeat-y !important;
+	height: 105px;
+	background:url(/assets/connectTwitter.png) top left no-repeat !important;
+}
+ul.pruebas li.tuiter iframe {
+	margin:65px 0 0 73px;
 }
 ul.pruebas li img {
 	float: left;
