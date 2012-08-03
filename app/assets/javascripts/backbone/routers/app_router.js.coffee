@@ -57,7 +57,8 @@ class BancoChile.Routers.AppRouter extends Backbone.Router
       ranking: @ranking
     )
     $container = $("#container")
-    $container.html(@view.render().el)
+    $container.html(@view.el)
+    @view.render()
 
   game: ->
     ### renthers the game view ###
@@ -75,4 +76,5 @@ class BancoChile.Routers.AppRouter extends Backbone.Router
         ranking: @ranking
       )
       $container = $("#container")
-      $container.html(@view.render().el)
+      $container.html(@view.el)
+      @view.render()

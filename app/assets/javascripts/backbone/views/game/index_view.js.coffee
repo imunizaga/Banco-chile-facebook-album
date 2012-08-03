@@ -48,4 +48,9 @@ class BancoChile.Views.Game.IndexView extends Backbone.View
     tabsView.render()
     $tabs.tabs(event: "click")
 
+    gameDataTemplate = JST["backbone/templates/home/game_data"]
+    $(@el).find('.game-data').html(gameDataTemplate())
+
+    $(@el).find(".como").fancybox()
+    $(@el).find(".bases").fancybox()
     return this

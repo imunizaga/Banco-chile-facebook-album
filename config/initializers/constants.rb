@@ -6,7 +6,7 @@ if Rails.env == 'development' || Rails.env == 'test'
 else
   APP_ID='127174043311'
   APP_SECRET='0305f7cb7bf84888cc313e9f163ab118'
-  SITE_URL = 'http://bancochilealbum.herokuapp.com/'
+  SITE_URL = 'https://apps.facebook.com/127174043311/'
   ACCESS_TOKEN = '127174043311|F6mjALyN9OCelH8dE1UtPTPl_4k'
 end
 

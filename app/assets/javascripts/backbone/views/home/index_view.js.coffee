@@ -42,4 +42,10 @@ class BancoChile.Views.Home.IndexView extends Backbone.View
     else if loginStatus
       $(@el).find('#mainContainer').append(@notLoggedTemplate())
 
+    gameDataTemplate = JST["backbone/templates/home/game_data"]
+    $(@el).find('.game-data').html(gameDataTemplate())
+
+    $(@el).find(".como").fancybox()
+    $(@el).find(".bases").fancybox()
+
     return this

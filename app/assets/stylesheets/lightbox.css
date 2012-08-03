@@ -218,4 +218,21 @@ ul.links li {
 .light .js-trade-friends p {
     color:#0079EA;
 }
-
+.light-instrucciones {
+    height: auto;
+    float: left;
+    width: 730px;
+    padding-bottom:10px;
+    text-align: left;
+    min-height: 400px;
+    color: white;
+}
+.light-bases {
+    height: auto;
+    float: left;
+    width: 730px;
+    padding-bottom:10px;
+    text-align: left;
+    min-height: 400px;
+    color: white;
+}
