@@ -7,6 +7,11 @@ class StaticPagesController < ApplicationController
       if @user
         @user[:notifications] = @user.notifications
         @user[:login_status] = 'connected'
+        if session[:tw_access_token]
+          @user[:twitter_connected] = true
+        else
+          @user[:twitter_connected] = false
+        end
 
         # obtain the facebook friends
         @api = Koala::Facebook::API.new(session[:access_token])
@@ -31,7 +36,7 @@ class StaticPagesController < ApplicationController
         end
 
         @cards = Card.all
-        @challenges = Challenge.all_without_server_params
+        @challenges = Challenge.all_without_server_params(session)
         @user_challenges = UserChallenge.where(user_id:@user[:id])
       else
         session[:id] = nil

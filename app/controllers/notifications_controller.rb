@@ -75,7 +75,7 @@ class NotificationsController < ApplicationController
       else
         # set challenge values values
         @notification[:user_id] = @user.id
-        reason = @notification.validate_challenge(@user, data)
+        reason = @notification.validate_challenge(session, @user, data)
         valid = reason[:success]
         @notification[:sender_id] = nil
       end

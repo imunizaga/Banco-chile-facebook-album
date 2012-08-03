@@ -653,7 +653,8 @@ ul.pruebas li p.laminas .lam1 {
 ul.pruebas li p.laminas .lam2 {
 	font-size:13px;
 }
-ul.pruebas li a.accion {
+ul.pruebas li .accion {
+    cursor: pointer;
 	float: right;
 	margin:0;
 	padding: 5px 10px;
@@ -670,11 +671,11 @@ ul.pruebas li a.accion {
 	width: 50px;
 	text-align: center
 }
-ul.pruebas li a.accion:hover {
+ul.pruebas li .accion:hover {
 	background:#006699;
 	color:#fff !important;
 }
-ul.pruebas li a.accion:active {
+ul.pruebas li .accion:active {
 	background:#fff;
 	color:#000 !important;
 	-webkit-box-shadow:none;

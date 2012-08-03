@@ -45,6 +45,10 @@ class BancoChile.Views.Game.TabsView extends Backbone.View
 
     @renderNofications()
 
+    twitter_connected = false
+    if @user.get('twitter_connected')
+      twitter_connected = true
+
     # list of challenge views
     for challenge in @challenges.models
       # if the user has completed the challenge
@@ -53,6 +57,9 @@ class BancoChile.Views.Game.TabsView extends Backbone.View
         if not challenge.get('repeatable')
           # render nothing
           continue
+
+      challenge.set('twitter_connected', twitter_connected)
+
       challengeView = new BancoChile.Views.Challenges.ChallengeItemView(
         'challenge': challenge
       )

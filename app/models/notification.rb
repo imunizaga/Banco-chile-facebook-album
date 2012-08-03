@@ -20,9 +20,9 @@ class Notification < ActiveRecord::Base
   #   reason: string, // the reason for failure
   #   data: string // extra data when necesary
   # }
-  def validate_challenge user=nil, data=nil
+  def validate_challenge session, user=nil, data=nil
       challenge = Challenge.find(self.challenge_id)
-      return challenge.validate_complete(user, data)
+      return challenge.validate_complete(session, user, data)
   end
 
   # Public: Prepares a trade of specified in the notification

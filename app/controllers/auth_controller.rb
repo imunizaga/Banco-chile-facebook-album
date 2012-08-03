@@ -113,7 +113,6 @@ class AuthController < ApplicationController
     request_token = OAuth::RequestToken.new(oauth, session[:tw_token], session[:tw_secret])
     # TODO this value should be stored on the database
     session[:tw_access_token] = request_token.get_access_token(:oauth_verifier => params[:oauth_verifier])
-
     redirect_to root_url  # TODO return to the calling url
   end
 

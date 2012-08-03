@@ -111,7 +111,7 @@ Challenge.create(
   n_cards:1,
   kind: 'follow',
   description: "bancodechile",
-  client_param: 'bancodechile',
+  client_param: '14114282',
   set: '[35]'
 )
 # 6
@@ -119,7 +119,7 @@ Challenge.create(
   n_cards:1,
   kind: 'follow',
   description: "bancajoven",
-  client_param: 'bancajoven',
+  client_param: '14277567',
   set: '[26]'
 )
 # 7
@@ -155,6 +155,7 @@ Challenge.create(
   kind: 'retweet',
   description: "un tweet del Banco de Chile",
   client_param: '230313801784897537',
+  server_param: 'PymeBCH+from:bancodechile',
   set: '[2,3,4,5,6,7,9,10,11,12,13,14,15,16,18,19,20,21,22,23,24,27,28,29,30,31,32,34,36,38,39,40,41,42,43,44,45,46,47,48,49,50]',
   repeatable: true
 )
@@ -181,6 +182,7 @@ Challenge.create(
   kind: 'retweet',
   description: "un tweet de la Banca Joven",
   client_param: '230067273283543041',
+  server_param: 'ConciertosBCH+from:bancajoven',
   set: '[2,3,4,5,6,7,9,10,11,12,13,14,15,16,18,19,20,21,22,23,24,27,28,29,30,31,32,34,36,38,39,40,41,42,43,44,45,46,47,48,49,50]',
   repeatable: true
 )

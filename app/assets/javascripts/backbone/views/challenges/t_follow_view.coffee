@@ -29,15 +29,8 @@ class BancoChile.Views.Challenges.TwitterFollowView extends BancoChile.Views.Cha
     @buttonBinded = false
 
   twitterBtnClicked: ->
-    ### Handles the click event of the twitter follow button in the challenges
-    list, by creating a listener for the follow event, and unbinding the event
-    when callback is called
-
-    # ###
-    # we need a reference for this view
-    if not @buttonBinded
-      window.twttr.events.bind("follow", @handleTwitterFollow)
-      @buttonBinded = true
+    $(@el).find('.js-twitter-btn').hide()
+    @completeChallenge()
 
   render: ->
     $(@el).html(@template(challenge: @challenge.toJSON() ))

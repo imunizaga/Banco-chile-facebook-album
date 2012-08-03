@@ -19,7 +19,7 @@ class Challenge < ActiveRecord::Base
   #   reason: string, // the reason for failure
   #   data: string // extra data when necesary
   # }
-  def validate_complete user, data
+  def validate_complete session, user, data
     # search if the user had already done this challenge
     user_challenge = UserChallenge.where(user_id: user.id,
                                          challenge_id: self.id).first
@@ -48,7 +48,7 @@ class Challenge < ActiveRecord::Base
     # now dinamically call the method that validates the challenge
     method_name = "validate_#{self.kind}"
 
-    return  self.send(method_name, user, data)
+    return  self.send(method_name, session, user, data)
   end
 
   # Public: Validates a that a challenge of type like was completed by the
@@ -68,7 +68,7 @@ class Challenge < ActiveRecord::Base
   #   reason: string, // the reason for failure
   #   data: string // extra data when necesary
   # }
-  def validate_like user, data
+  def validate_like session, user, data
     #@api = Koala::Facebook::API.new("127174043311|F6mjALyN9OCelH8dE1UtPTPl_4k")
     #url = "100004040536236/likes/#{self.server_param}"
     #puts "#{url}?access_token=127174043311|F6mjALyN9OCelH8dE1UtPTPl_4k"
@@ -108,7 +108,19 @@ class Challenge < ActiveRecord::Base
   #   reason: string, // the reason for failure
   #   data: string // extra data when necesary
   # }
-  def validate_follow user, data
+  def validate_follow session, user, data
+    oauth = OAuth::Consumer.new(TW_KEY, TW_SECRET, {:site => 'https://twitter.com'})
+
+    # Perform action through a post call to the Twitter API
+    # See https://dev.twitter.com/docs/api/1/post/friendships/create
+    response = oauth.request(:post, '/friendships/create.json',
+                             session[:tw_access_token],
+                             {:scheme => :query_string},
+                             {:user_id => client_param})
+
+    # The response can be parsed to confirm the followed account
+    follow_info = JSON.parse(response.body)
+
     return {:success=> true}
   end
 
@@ -129,7 +141,7 @@ class Challenge < ActiveRecord::Base
   #   reason: string, // the reason for failure
   #   data: string // extra data when necesary
   # }
-  def validate_share user, data
+  def validate_share session, user, data
     @api = Koala::Facebook::API.new(user[:fb_access_token])
     result = @api.get_connections(data, "")
     client_param = ActiveSupport::JSON.decode(self.client_param)
@@ -164,7 +176,8 @@ class Challenge < ActiveRecord::Base
   #   reason: string, // the reason for failure
   #   data: string // extra data when necesary
   # }
-  def validate_invite user, data
+  def validate_invite session, user, data
+
     return {:success=> true}
   end
 
@@ -185,7 +198,16 @@ class Challenge < ActiveRecord::Base
   #   reason: string, // the reason for failure
   #   data: string // extra data when necesary
   # }
-  def validate_retweet user, data
+  def validate_retweet session, user, data
+    oauth = OAuth::Consumer.new(TW_KEY, TW_SECRET, {:site => 'https://twitter.com'})
+
+    # Perform action through a post call to the Twitter API
+    response = oauth.request(:get, "/statuses/show/#{data}.json",
+                             session[:tw_access_token],
+                             { :scheme => :query_string })
+    # The response can be parsed to confirm the retweeted id
+    tweet_info = JSON.parse(response.body)
+
     return {:success=> true}
   end
 
@@ -206,7 +228,7 @@ class Challenge < ActiveRecord::Base
   #   reason: string, // the reason for failure
   #   data: string // extra data when necesary
   # }
-  def validate_code user, data
+  def validate_code session, user, data
     if self[:server_param] == data
       return {:success=> true}
     else
@@ -214,13 +236,40 @@ class Challenge < ActiveRecord::Base
     end
   end
 
+  def update_retweet session
+    t = self.updated_at + 1.days
+    # if we need to update the tweet
+    if Time.now > t
+      params = {:site => 'https://twitter.com'}
+      oauth = OAuth::Consumer.new(TW_KEY, TW_SECRET, params)
+
+      # Perform action through a post call to the Twitter API
+      url = "/search.json?q=%23#{self.server_param}"
+      response = oauth.request(:get, url,
+                               session[:tw_access_token],
+                               { :scheme => :query_string })
+
+      # The response can be parsed to confirm the retweeted id
+      tweets_info = JSON.parse(response.body)
+      results = tweets_info["results"]
+      result = tweets_info["results"][0]
+      result = tweets_info["results"][0]
+      tweet_id = result["id_str"]
+      self.client_param = tweet_id
+      self.save()
+    end
+  end
+
   # Public: Returns a list of all challenges without the server_params value.
   # This is useful to send to the user without risks
   #
   # Returns an Array of Challenge objects
-  def self.all_without_server_params
+  def self.all_without_server_params session
     challenges = self.where('id > 1')
     for challenge in challenges
+      if challenge.kind == "retweet"
+        challenge.update_retweet(session)
+      end
       challenge[:server_param] = nil
     end
     return challenges
