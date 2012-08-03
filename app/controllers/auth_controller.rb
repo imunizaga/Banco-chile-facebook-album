@@ -96,7 +96,7 @@ class AuthController < ApplicationController
 
   def twitter
     oauth = OAuth::Consumer.new(TW_KEY, TW_SECRET, {:site => 'https://twitter.com'})
-    url = 'http://127.0.0.1:3000/auth/twitter/callback'  # TODO get dynamic domain
+    url = SITE_URL + '/auth/twitter/callback'
     request_token = oauth.get_request_token(:oauth_callback => url)
     # this values will be used during the callback
     session[:tw_token] = request_token.token
@@ -112,7 +112,8 @@ class AuthController < ApplicationController
 
     request_token = OAuth::RequestToken.new(oauth, session[:tw_token], session[:tw_secret])
     # TODO this value should be stored on the database
-    session[:tw_access_token] = request_token.get_access_token(:oauth_verifier => params[:oauth_verifier])
+    session[:tw_access_token] = request_token.get_access_token(
+      :oauth_verifier => params[:oauth_verifier])
     redirect_to root_url  # TODO return to the calling url
   end
 
