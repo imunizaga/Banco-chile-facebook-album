@@ -196,7 +196,6 @@ ul.links li {
 
 
 #fancybox-content {
-    height:310px !important;
 }
 #fancybox-frame {
     overflow-y:auto !important;
@@ -220,11 +219,10 @@ ul.links li {
 }
 .light-instrucciones {
     height: auto;
-    float: left;
-    width: 730px;
-    padding-bottom:10px;
-    text-align: left;
+    width: 850px;
+    padding: 20px;
     min-height: 400px;
+    height: 400px;
     color: white;
 }
 .light-bases {
