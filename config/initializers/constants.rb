@@ -1,6 +1,7 @@
 if Rails.env == 'development' || Rails.env == 'test'
   APP_ID='438204562857972'
   APP_SECRET='73c7a6460975064295113e316e6560c6'
+  FB_SITE_URL = 'http://127.0.0.1:3000'
   SITE_URL = 'http://127.0.0.1:3000'
   ACCESS_TOKEN = '438204562857972|Cd8pOrieoLVpbz-hWhmRy04sLjg'
 else
