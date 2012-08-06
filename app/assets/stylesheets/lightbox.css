@@ -219,11 +219,12 @@ ul.links li {
 }
 .light-instrucciones {
     height: auto;
-    width: 850px;
-    padding: 20px;
+    width: 710px;
+    padding: 0;
     min-height: 400px;
     height: 400px;
     color: white;
+    overflow-x:hidden;
 }
 .light-bases {
     height: auto;
