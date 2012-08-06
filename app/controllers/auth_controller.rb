@@ -114,7 +114,7 @@ class AuthController < ApplicationController
     # TODO this value should be stored on the database
     session[:tw_access_token] = request_token.get_access_token(
       :oauth_verifier => params[:oauth_verifier])
-    redirect_to root_url  # TODO return to the calling url
+    redirect_to FB_SITE_URL  # TODO return to the calling url
   end
 
   def twitter_retweet
