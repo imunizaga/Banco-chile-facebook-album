@@ -5,21 +5,11 @@ BancoChile::Application.routes.draw do
 
   resources :notifications
 
-  resources :challenges
-
-  resources :card_packs
-
-  resources :cards
-
-  resources :user_cards
-
   get "auth/facebook"
 
   get "static_pages/home"
 
   get "static_pages/help"
-
-  resources :users
 
   root :to => 'static_pages#home'
 
