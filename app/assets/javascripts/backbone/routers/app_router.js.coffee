@@ -84,4 +84,9 @@ class BancoChile.Routers.AppRouter extends Backbone.Router
 
   # google's page view tracking
   _trackPageview: ->
-    _gaq.push(['_trackPageview', "/#{Backbone.history.getFragment()}"]) if typeof _gaq isnt 'undefined'
+    if typeof _gaq isnt 'undefined'
+      console.log "si"
+      console.log "/#{Backbone.history.getFragment()}"
+      _gaq.push(['_trackPageview', "/#{Backbone.history.getFragment()}"])
+    else
+      console.log "no"
