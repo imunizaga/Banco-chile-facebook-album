@@ -63,6 +63,25 @@ class BancoChile.Routers.AppRouter extends Backbone.Router
     $container.html(@view.el)
     @view.render()
 
+  game: ->
+    ### renthers the game view ###
+    #
+    window.scrollTo(0,0)
+
+    # if the user is not authenticated
+    if not @user.isAuthenticated()
+      # go to the index view
+      @navigate('', trigger: true)
+    else
+      # render the game view
+      @view = new BancoChile.Views.Game.IndexView(
+        user: @user
+        ranking: @ranking
+      )
+      $container = $("#container")
+      $container.html(@view.el)
+      @view.render()
+
   # google's page view tracking
   _trackPageview: ->
     _gaq.push(['_trackPageview', "/#{Backbone.history.getFragment()}"]) if typeof _gaq isnt 'undefined'
