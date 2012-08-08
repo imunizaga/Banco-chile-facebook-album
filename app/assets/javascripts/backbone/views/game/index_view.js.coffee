@@ -52,5 +52,5 @@ class BancoChile.Views.Game.IndexView extends Backbone.View
     $(@el).find('.game-data').html(gameDataTemplate())
 
     $(@el).find(".como").fancybox()
-    $(@el).find(".bases").fancybox()
+    # $(@el).find(".bases").fancybox()
     return this
