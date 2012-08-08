@@ -18,5 +18,5 @@ BJFB_ID=''
 BJTW_ID='bancajoven'
 
 # Twitter OAuth
-TW_KEY = 'SoJMGFj6ijCkhz8nNJXCw'  # Consumer key
-TW_SECRET = 'hizZmNItjN7WyXfmIirG9YPDlIoQVNB88tXpkWOI4'  # Consumer secret
+TW_KEY = 'OVhry6VGCZBqhLYXfn6U4g'  # Consumer key
+TW_SECRET = 'n3k9f06TVbwqygfajfpthb4kb0f3tPWKDWS2v2iw'  # Consumer secret
