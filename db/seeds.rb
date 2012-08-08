@@ -163,7 +163,7 @@ Challenge.create(
 challenge_client_param = {
   'method' => 'feed',
   'link' => 'https://www.facebook.com/BancaJoven',
-  'picture' => 'http://www.voypormicuenta.cl/bch/templates/vxmc_home/images/top2.jpg',
+  'picture' => 'http://bancochilealbum.herokuapp.com/assets/iconoBanco.jpg',
   'name' => 'Banca Joven del Banco de Chile',
   'caption' => 'Rel&aacute;jate con la Banca Joven',
   'description' => 'Rel&aacute;jate y disfruta con un 30% de descuento en todos los tratamientos faciales y corporales en Mundo Curvas, pagando con las Tarjetas del Chile.'
@@ -190,7 +190,7 @@ Challenge.create(
 challenge_client_param = {
   'method' => 'feed',
   'link' => 'https://www.facebook.com/bancochile.cl',
-  'picture' => 'http://www.voypormicuenta.cl/bch/templates/vxmc_home/images/top2.jpg',
+  'picture' => 'http://bancochilealbum.herokuapp.com/assets/iconoBanco.jpg',
   'name' => 'Banco de Chile',
   'caption' => 'https://www.facebook.com/bancochile.cl',
   'description' => 'Renueva tu casa u oficina aprovechando hasta un 20% de dcto. en Carpenter con tus Tarjetas del Banco de Chile.'
