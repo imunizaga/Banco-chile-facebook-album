@@ -10,6 +10,7 @@ class BancoChile.Views.Challenges.ChallengeView extends Backbone.View
     notification = new BancoChile.Models.Notification(
       challenge_id: @challenge.get('id')
       data: data
+      description: @challenge.get('description')
     )
 
     notification.save({}

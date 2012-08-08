@@ -207,7 +207,7 @@ Challenge.create(
 Challenge.create(
   n_cards:1,
   kind: 'code',
-  description: "el estado del partido entre Chile y Colombia",
+  description: "el estadio del partido entre Chile y Colombia",
   client_param: '',
   server_param: 'Chile al mundial',
   set: '[25]',
