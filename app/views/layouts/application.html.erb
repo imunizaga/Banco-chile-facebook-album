@@ -12,8 +12,16 @@
     <meta property="og:url" content="http://bancochilealbum.herokuapp.com/" />
     <meta property="og:site_name" content="Banco Chile album"/>
     <meta property="fb:app_id" content="<%= APP_ID -%>"/>
+    
+
+<% if Rails.env.production? %>
+    <meta name="google-site-verification" content="ajVlkIAoKBIgQYPl33DvvpZ5pNawumkgVmTgjz4D_pQ" />
+<% elsif Rails.env.qa? %>
+    <meta name="google-site-verification" content="2x-ens8WEFKot-cHLCH0PI0LjNjJRwGrRGlHuL-xbss" />
+<% end %>
 
     <%= favicon_link_tag %>
+
 
     <!-- css files -->
     <link href='https://fonts.googleapis.com/css?family=Oswald:700,400,300' rel='stylesheet' type='text/css'>
@@ -25,6 +33,37 @@
     <!-- /js files -->
 
     <%= csrf_meta_tags %>
+    
+<% if Rails.env.production? %>
+    <script type="text/javascript">
+
+    var _gaq = _gaq || [];
+    _gaq.push(['_setAccount', 'UA-33981726-1']);
+    _gaq.push(['_trackPageview']);
+
+    (function() {
+     var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+     ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+     var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+    })();
+
+    </script>
+<% elsif Rails.env.qa? %>
+<script type="text/javascript">
+
+ var _gaq = _gaq || [];
+ _gaq.push(['_setAccount', 'UA-33966825-1']);
+ _gaq.push(['_trackPageview']);
+
+ (function() {
+   var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+   ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+   var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+ })();
+
+</script>
+<% end %>
+
   </head>
   <body>
     <div id="fb-root"></div>
