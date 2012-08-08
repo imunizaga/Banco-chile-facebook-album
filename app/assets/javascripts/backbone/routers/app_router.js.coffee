@@ -43,6 +43,7 @@ class BancoChile.Routers.AppRouter extends Backbone.Router
   routes:
     ""      : "index"
     "game"    : "game"
+    "games/:id"    : "games"
     "_=_"    : "goToIndex"
 
   goToIndex: ->
@@ -78,3 +79,18 @@ class BancoChile.Routers.AppRouter extends Backbone.Router
       $container = $("#container")
       $container.html(@view.el)
       @view.render()
+
+  games: (id) ->
+    u = new BancoChile.Collections.UsersCollection()
+    @user = u.get(id)
+    @view = new BancoChile.Views.Game.IndexView(
+        user: @user
+        ranking: @ranking
+      )
+    $container = $("#container")
+    $container.html(@view.el)
+    @view.render()
+
+  trimming: (str) ->
+    len = str.length
+    str.substr(1, len-2)
