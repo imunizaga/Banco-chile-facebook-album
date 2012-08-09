@@ -196,6 +196,27 @@ class Challenge < ActiveRecord::Base
   #   data: string // extra data when necesary
   # }
   def validate_retweet session, user, data
+    retweet_info = self.retweet(session, user, data)
+
+    is_retweet_info_valid = self.is_retweet_info_valid(retweet_info)
+
+    if is_retweet_info_valid[:success]
+      return is_retweet_info_valid
+    else
+      if retweet_info["errors"].class == Array
+        if retweet_info["errors"][0].include?("code")
+          if retweet_info["errors"][0]["code"] == 34
+            self.update_retweet(session, true)
+            retweet_info = self.retweet(session, user, data)
+            is_retweet_info_valid = self.is_retweet_info_valid(retweet_info)
+          end
+        end
+      end
+    end
+    return is_retweet_info_valid
+  end
+
+  def retweet session, user, data
     oauth = OAuth::Consumer.new(TW_KEY, TW_SECRET, {:site => 'https://twitter.com'})
 
     # Perform action through a post call to the Twitter API
@@ -205,16 +226,19 @@ class Challenge < ActiveRecord::Base
                              session[:tw_access_token],
                              { :scheme => :query_string })
     # The response can be parsed to confirm the retweeted id
-    retweet_info = JSON.parse(response.body)
+    return JSON.parse(response.body)
+  end
+
+  def is_retweet_info_valid retweet_info
     if retweet_info.include?("errors")
       error_text = "sharing is not permissable for this status (Share validations failed)\nsharing is not permissable for this status (Share validations failed)\nsharing is not permissable for this status (Share validations failed)"
-      if retweet_info["errors"]
+
+      if retweet_info["errors"] == error_text
         return {:success=> true}
       else
         return {:success=> false, :reason=>"invalid_tweet"}
       end
     end
-
     return {:success=> true}
   end
 
@@ -243,10 +267,10 @@ class Challenge < ActiveRecord::Base
     end
   end
 
-  def update_retweet session
+  def update_retweet session, force=false
     t = self.updated_at + 1.days
     # if we need to update the tweet
-    if Time.now > t
+    if Time.now > t or force
       params = {:site => 'https://twitter.com'}
       oauth = OAuth::Consumer.new(TW_KEY, TW_SECRET, params)
 
