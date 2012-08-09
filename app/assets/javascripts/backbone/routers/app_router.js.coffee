@@ -1,14 +1,14 @@
 class BancoChile.Routers.AppRouter extends Backbone.Router
   initialize: (@options) ->
-    ### The router is what we use to handle urls within our backbone app. 
-    Since it's central to the application, it's instance will be stored 
+    ### The router is what we use to handle urls within our backbone app.
+    Since it's central to the application, it's instance will be stored
     in window.app, and contains the main collections to render the page
 
     Note:
      To avoid calling the server many times, we will the window.db
      object to handle data data should not change
      Cards and challenges are static information, users may change
-     but it should be understood, that one should only take data from 
+     but it should be understood, that one should only take data from
      window.db that it's improbable to change, like de facebook_id
     ###
     window.db =
@@ -29,14 +29,21 @@ class BancoChile.Routers.AppRouter extends Backbone.Router
     # the ranking of the page
     @ranking = new BancoChile.Collections.UsersCollection(@options.ranking)
 
-    # the base url used 
+    # the base url used
     @site_url = "#{window.location.protocol}//#{window.location.host}"
 
     if @options.userChallenges
       for userChallenge in @options.userChallenges
         challenge = window.db.challenges.get(userChallenge.challenge_id)
         if challenge
-          challenge.set('completed', true)
+          today = new Date()
+          today.setHours(0,0,0,0)
+          updatedAt = new Date(userChallenge.updated_at)
+          if today < updatedAt
+            challenge.set('completed', true)
+
+    # bind google's page view tracking
+    @bind 'all', @_trackPageview
 
     return this
 
@@ -78,3 +85,8 @@ class BancoChile.Routers.AppRouter extends Backbone.Router
       $container = $("#container")
       $container.html(@view.el)
       @view.render()
+
+  # google's page view tracking
+  _trackPageview: ->
+    _gaq.push(['_trackPageview', "/#{Backbone.history.getFragment()}"]) if typeof _gaq isnt 'undefined'
+

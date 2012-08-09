@@ -1,9 +1,9 @@
 <% if(challenge.twitter_connected){ %>
-<a class="accion js-twitter-btn" href="https://twitter.com/intent/retweet?tweet_id=<%= challenge.client_param %>">
+<div class="accion js-twitter-btn">
   Retweet
-</a>
+</div>
 <% }else { %>
-<a class="accion" href="/auth/twitter" target="_blank">
+<a class="accion" href="/auth/twitter">
   Retweet
 </a>
 <% } %>

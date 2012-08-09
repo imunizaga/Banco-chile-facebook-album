@@ -22,3 +22,6 @@ pull_push.sh
 
 # npm modules
 node_modules
+
+config/database.yml
+.rvmrc

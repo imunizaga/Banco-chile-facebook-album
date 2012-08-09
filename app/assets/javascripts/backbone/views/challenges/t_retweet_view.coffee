@@ -30,19 +30,11 @@ class BancoChile.Views.Challenges.TwitterRetweetView extends BancoChile.Views.Ch
 
   twitterBtnClicked: ->
     ### Handles the click event of the twitter retweet button in the challenges
-    list, by creating a listener for the retweet event, and unbinding the event
-    when callback is called
+    list, by telling the server to create a new retweet for this user
 
     # ###
-    # we need a reference for this view
-    if not @buttonBinded
-      window.twttr.events.bind("retweet", @handleTwitterRetweet)
-      @buttonBinded = true
-
-      window.twttr.events.bind "retweet", (event) ->
-        tweet_id = event.data.source_tweet_id
-        console.log("re-tweeted!: " + tweet_id)
-
+    $(@el).find('.js-twitter-btn').hide()
+    @completeChallenge()
 
   render: ->
     $(@el).html(@template(challenge: @challenge.toJSON() ))

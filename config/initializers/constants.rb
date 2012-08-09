@@ -8,7 +8,7 @@ else
   APP_ID='127174043311'
   APP_SECRET='0305f7cb7bf84888cc313e9f163ab118'
   SITE_URL = 'http://bancochilealbum.herokuapp.com/'
-  FB_SITE_URL = 'https://apps.facebook.com/127174043311/'
+  FB_SITE_URL = 'http://bancochilealbum.herokuapp.com/'
   ACCESS_TOKEN = '127174043311|F6mjALyN9OCelH8dE1UtPTPl_4k'
 end
 
@@ -18,5 +18,5 @@ BJFB_ID=''
 BJTW_ID='bancajoven'
 
 # Twitter OAuth
-TW_KEY = 'SoJMGFj6ijCkhz8nNJXCw'  # Consumer key
-TW_SECRET = 'hizZmNItjN7WyXfmIirG9YPDlIoQVNB88tXpkWOI4'  # Consumer secret
+TW_KEY = 'OVhry6VGCZBqhLYXfn6U4g'  # Consumer key
+TW_SECRET = 'n3k9f06TVbwqygfajfpthb4kb0f3tPWKDWS2v2iw'  # Consumer secret
