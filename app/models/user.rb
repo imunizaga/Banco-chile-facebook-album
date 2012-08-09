@@ -198,6 +198,54 @@ class User < ActiveRecord::Base
     return trade
   end
 
+  # Public: denies a trade between the current user and another user
+  #
+  # sender_id  - The Integer number that represents the other user
+  # cards_in  - The String with the array of cards the sender was giving in
+  #             json
+  #
+  # Examples
+  #
+  #   user.deny_trade(sender_id, cards_in)
+  #   # => {:valid => true}
+  #   or
+  #   user.deny_trade(sender_id, cards_in)
+  #   # => {:valid => false, :reason => "no such trade"}
+  #
+  # Returns A hash with the cards to trade and if the trade if valid
+  def deny_trade sender_id, cards_in
+    # first decode the json strings we asume that only one card_id comes in
+    # each array
+    card_in_id = ActiveSupport::JSON.decode(cards_in)[0]
+
+    # fetch the card that will come in from the other user. We need to check
+    # they are locked since it's the user that locked a card to propose a
+    # trade
+    his_cards = UserCard.where(card_id: card_in_id,
+                               user_id: sender_id,
+                               locked: true)
+
+    # unlock the locked card
+    if his_cards.count > 0 then
+      his_card = his_cards[0]
+      his_card.locked = false
+      his_card.save()
+      sender = User.find(sender_id)
+      sender.set_album
+    end
+
+    notification = Notification.create(
+      description: " #{self.name} ha rechazado tu intercambio de cartas",
+      user_id: sender_id,
+      cards_out: cards_in
+    )
+
+    return {
+      :valid => true,
+      :reason => ""
+    }
+  end
+
   def self.ranking n = User.count
     options = {
       :select => 'id, facebook_id, name, cards_count',

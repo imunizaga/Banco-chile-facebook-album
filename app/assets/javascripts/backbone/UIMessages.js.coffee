@@ -4,6 +4,7 @@ BancoChile.UIMessages =
   TRADE_ERROR_NO_CARD: "Debes escoger la lámina que quieres cambiar"
   TRADE_REQUEST_SUCCESS: "¡Solicitud enviada!, ahora espera la respuesta de tu amigo"
   TRADE_SUCCESS: "¡Cambio aceptado!, ahora es tuya la lámina "
+  TRADE_DENIED: "Has negado la solicitud a intercambiar"
   TRADE_FAILED: "Ha ocurrido un problema, recarga la página e intenta nuevamente"
   INVITE_REQUEST_MESSAGE: "¡Invita a tus amigos y gana más láminas!"
   INVITE_REQUEST_SENT: "Ahora debes esperar a que tu amigo se registre utilizando tu invitación"

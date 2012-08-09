@@ -120,6 +120,7 @@ class NotificationsController < ApplicationController
   # One can only modify the status field from nil to 1(accepted) or 0
   # (rejected)
   def update
+
     # obtain the notification
     @notification = Notification.find(params[:id])
     # obtain the logged user
@@ -143,12 +144,19 @@ class NotificationsController < ApplicationController
       reason = "Invalid status"
     # if it's a trade
     elsif @notification.sender_id != nil
-      trade = @user.trade_card(@notification.sender_id, @notification.cards_in,
-                               @notification.cards_out)
-      valid = trade[:valid]
-      reason = trade[:reason]
+      if new_status == 1
+        trade = @user.trade_card(@notification.sender_id,
+                                 @notification.cards_in,
+                                 @notification.cards_out)
+        valid = trade[:valid]
+        reason = trade[:reason]
+      elsif new_status == 0
+        denied_trade = @user.deny_trade(@notification.sender_id,
+                                        @notification.cards_in)
+        valid = denied_trade[:valid]
+        reason = denied_trade[:reason]
+      end
     elsif @notification.challenge_id != nil
-      print "SUPER CHALLENGE"
     end
 
     respond_to do |format|

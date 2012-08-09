@@ -1,0 +1,11 @@
+<img src="<%= user.profile_image %>" alt="name user" />
+<h4>Intercambio Rechazado</h4>
+<p>
+    <%= notification.description %>!
+</p>
+<% if (!notification.status){ %>
+    <a class="accion js-notification-accept-btn">Ok</a>
+<% } %>
+<p>
+  Ahora es tuya la lámina
+</p>

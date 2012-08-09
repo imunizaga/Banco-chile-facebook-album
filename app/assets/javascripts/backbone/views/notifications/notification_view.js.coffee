@@ -22,7 +22,10 @@ class BancoChile.Views.Notifications.NotificationView extends Backbone.View
       @template = JST["backbone/templates/notifications/trade"]
       @sender = window.db.users.get(@model.get('sender_id'))
     else # it's a message
-      @template = JST["backbone/templates/notifications/receive"]
+      if @model.get('cards_in')
+        @template = JST["backbone/templates/notifications/receive"]
+      else
+        @template = JST["backbone/templates/notifications/denied"]
     @model.bind('change', @render, this)
 
   render: =>
@@ -52,10 +55,19 @@ class BancoChile.Views.Notifications.NotificationView extends Backbone.View
             # tell the user everything went ok
             toast(BancoChile.UIMessages.TRADE_SUCCESS + @model.get('cards_in'), 'user')
           else
-            toast(BancoChile.UIMessages.TRADE_FAILED)
+            toast(BancoChile.UIMessages.TRADE_FAILED, 'user')
       error: =>
-        toast(BancoChile.UIMessages.TRADE_FAILED)
+        toast(BancoChile.UIMessages.TRADE_FAILED, 'user')
 
   denyBtnClicked: ->
-    ### not implemented yet ###
-    toast("denied", "user")
+    ### handles the deny-button-clicked event
+    it sets the status to 2 (denied) and then posts to the server.
+
+    ###
+    @model.set('status', 0)
+    @model.save {},
+      success: =>
+        toast(BancoChile.UIMessages.TRADE_DENIED, 'user')
+        $(@el).removeClass("nueva")
+      error: =>
+        toast(BancoChile.UIMessages.TRADE_FAILED, 'user')
