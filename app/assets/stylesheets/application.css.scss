@@ -564,8 +564,11 @@ ul.pruebas {
 	overflow-x:hidden;
 	border-left:1px solid #2A3C16 !important;
 	background:transparent !important;
+	padding:0;
 }
-
+#tabs #tabs-2 ul.pruebas {
+	padding:0;
+}
 ul.pruebas li {
 	float: left;
 	width:235px;
@@ -598,9 +601,13 @@ ul.pruebas li img {
 ul.pruebas li h4 {
 	font-size:13px;
 	color:#69751F;
+    float: left;
+	height: 45px;
+    line-height: 45px;
 	text-transform:uppercase;
 	font-family: 'OSWALD', sans-serif;
 	font-weight:500 !important;
+	width: 185px;
 }
 ul.pruebas li p {
 	font-size:11px;
@@ -614,12 +621,7 @@ ul.pruebas li.nueva {
 }
 ul.pruebas li.nueva h4 {
     color: #FFFFFF;
-    float: left;
     font-weight: normal;
-    height: 45px;
-    line-height: 45px;
-    text-transform: uppercase;
-    width: 185px;
 }
 ul.pruebas li.nueva p {
 	color:#fff;
