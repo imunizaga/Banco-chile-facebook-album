@@ -36,8 +36,9 @@ BancoChile.UIMessages =
     retweet: "Retweet"
     share: "Compartir"
   CHALLENGE_FAILED:
-    default: "Ha ocurrido un problema, recarga la página e intenta nuevamente",
-    invalid: "Ha ocurrido un problema, recarga la página e intenta nuevamente",
+    default: "Ha ocurrido un problema, recarga la página e intenta nuevamente"
+    invalid: "Ha ocurrido un problema, recarga la página e intenta nuevamente"
     completed: "No puedes completar este desarfío pues ya lo realizaste"
     invalid_code: "El código que ingresaste es incorrecto"
+    invalid_tweet: "No se pudo validar el retweet, por favor recarga la página e intenta de nuevo"
     wait: "Ya completaste el desafío este día, debes esperar hasta mañana."

@@ -28,12 +28,9 @@ class Challenge < ActiveRecord::Base
 
       # see if the challenge is repeatable
       if self.repeatable
-        # calculate the time when the challenge is free to be completed again
-        free_at = user_challenge.updated_at + 1.days
-
-        # if the challenge is still "lockded"
-        if free_at > Time.now
-          wait_time = free_at - Time.now
+        # if the challenge is still "locked"
+        if user_challenge.updated_at < Date.today()
+          wait_time = Date.tomorrow.to_time - user_challenge.updated_at
           return {:success=>false, :reason=>"wait", :data=>wait_time}
         end
       else
@@ -202,11 +199,21 @@ class Challenge < ActiveRecord::Base
     oauth = OAuth::Consumer.new(TW_KEY, TW_SECRET, {:site => 'https://twitter.com'})
 
     # Perform action through a post call to the Twitter API
-    response = oauth.request(:get, "/statuses/show/#{data}.json",
+    # See https://dev.twitter.com/docs/api/1/post/statuses/retweet/%3Aid
+    response = oauth.request(:post,
+                             "/statuses/retweet/#{self.client_param}.json",
                              session[:tw_access_token],
                              { :scheme => :query_string })
     # The response can be parsed to confirm the retweeted id
-    tweet_info = JSON.parse(response.body)
+    retweet_info = JSON.parse(response.body)
+    if retweet_info.include?("errors")
+      error_text = "sharing is not permissable for this status (Share validations failed)\nsharing is not permissable for this status (Share validations failed)\nsharing is not permissable for this status (Share validations failed)"
+      if retweet_info["errors"]
+        return {:success=> true}
+      else
+        return {:success=> false, :reason=>"invalid_tweet"}
+      end
+    end
 
     return {:success=> true}
   end
