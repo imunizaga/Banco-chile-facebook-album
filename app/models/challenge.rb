@@ -282,12 +282,12 @@ class Challenge < ActiveRecord::Base
 
       # The response can be parsed to confirm the retweeted id
       tweets_info = JSON.parse(response.body)
-      results = tweets_info["results"]
-      result = tweets_info["results"][0]
-      result = tweets_info["results"][0]
-      tweet_id = result["id_str"]
-      self.client_param = tweet_id
-      self.save()
+      if tweets_info["results"].length > 0
+        result = tweets_info["results"][0]
+        tweet_id = result["id_str"]
+        self.client_param = tweet_id
+        self.save()
+      end
     end
   end
 
