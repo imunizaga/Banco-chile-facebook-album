@@ -36,7 +36,11 @@ class BancoChile.Routers.AppRouter extends Backbone.Router
       for userChallenge in @options.userChallenges
         challenge = window.db.challenges.get(userChallenge.challenge_id)
         if challenge
-          challenge.set('completed', true)
+          today = new Date()
+          today.setHours(0,0,0,0)
+          updatedAt = new Date(userChallenge.updated_at)
+          if today < updatedAt
+            challenge.set('completed', true)
 
     # bind google's page view tracking
     @bind 'all', @_trackPageview
