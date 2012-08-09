@@ -29,7 +29,7 @@ class Challenge < ActiveRecord::Base
       # see if the challenge is repeatable
       if self.repeatable
         # if the challenge is still "locked"
-        if user_challenge.updated_at < Date.today()
+        if user_challenge.updated_at > Date.today()
           wait_time = Date.tomorrow.to_time - user_challenge.updated_at
           return {:success=>false, :reason=>"wait", :data=>wait_time}
         end
