@@ -8,6 +8,9 @@ class BancoChile.Views.Game.IndexView extends Backbone.View
   template: JST["backbone/templates/game/index"]
 
   initialize: () ->
+    unless app.user.isAuthenticated()
+      @navigate('', trigger: true)
+
     ### Set the user whoose album we are going to show and the ranking we 
     want to display at the bottom
 

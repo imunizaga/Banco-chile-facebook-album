@@ -23,6 +23,7 @@ window.initSocialApps = (app_id) ->
             user.set "facebook_id", facebookId
         else
           user.set "login_status", response.status
+          app.navigate('', trigger: true)
 
   # Load the SDK Asynchronously
   ((d) ->

@@ -34,8 +34,6 @@ class BancoChile.Views.Users.RankingView extends Backbone.View
           data: 
             offset: @ranking.models.length
           success: =>
-            console.log("hola")
-            debugger
             @ranking.add(newUsers.models)
             @fetching = false
             @render()
