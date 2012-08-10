@@ -21,14 +21,14 @@ BancoChile.UIMessages =
     invite: "Invitar a "
     code: "Ingresar el código que se encuentra en "
     retweet: "Retweet a "
-    share: "Compartir un mensaje de "
+    share: "Compartir un mensaje en facebook"
   NOTIFICATION_DESCRIPTIONS:
     like: 'Dar un "Me gusta" a '
     follow: "Seguir a "
     invite: "Invitar a un amigo"
     code: "Ingresar el código de "
     retweet: "Hacer un Retweet a "
-    share: "Compartir un mensaje de "
+    share: "Compartir un mensaje facebook"
   CHALLENGE_ACTIONS:
     like: "Like"
     follow: "Seguir"
