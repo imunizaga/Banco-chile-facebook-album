@@ -54,9 +54,9 @@ class StaticPagesController < ApplicationController
       @user[:request_ids] = params[:request_ids]
       request_id = params[:request_ids]
       if request_id
-        @api = Koala::Facebook::API.new(ACCESS_TOKEN)
+        @api = Koala::Facebook::API.new(session[:access_token])
         url = request_id
-        params = "?access_token=#{ACCESS_TOKEN}"
+        params = "?access_token=#{session[:access_token]}"
         result = @api.get_connections(url, params)
 
         if result
