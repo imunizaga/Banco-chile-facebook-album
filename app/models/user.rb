@@ -246,17 +246,24 @@ class User < ActiveRecord::Base
     }
   end
 
-  def self.ranking n = User.count
+  def self.ranking offset = 0, n = User.count
+    if n > 32
+      n = 32
+    end
+
     options = {
       :select => 'id, facebook_id, name, cards_count',
       :order => '-cards_count',
       :limit => n,
+      :offset => offset,
     }
+
     top_users = User.find(:all, options)
+    print top_users
     ranking=[]
-    (0..n-1).each do |rank|
+    (0..top_users.count-1).each do |rank|
       user_info = {
-        :rank => rank+1,
+        :rank => rank+1+offset,
         :user_id => top_users[rank].id,
         :unique_cards_count => top_users[rank].cards_count,
         :name => top_users[rank].name,

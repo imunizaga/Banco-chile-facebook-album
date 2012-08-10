@@ -9,11 +9,17 @@ class FacebookController < ApplicationController
       session[:return] = '/'
       redirect_to '/auth/facebook' and return
     end
+    print session[:access_token]
     @api = Koala::Facebook::API.new(session[:access_token])
     begin
       @user = @api.get_object("me")
       @user['img'] = 'https://graph.facebook.com/' + @user['id'] + '/picture?type=square'
-      rescue Exception=>ex
+    rescue Exception=>ex
+      session[:access_token] = nil
+      session[:id] = nil
+      session[:return] = '/'
+      redirect_to '/auth/facebook' and return
     end
+    redirect_to '/auth/facebook' and return
   end
 end

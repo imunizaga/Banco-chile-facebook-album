@@ -5,6 +5,8 @@ BancoChile::Application.routes.draw do
 
   resources :notifications
 
+  resources :users
+
   get "auth/facebook"
 
   get "static_pages/home"

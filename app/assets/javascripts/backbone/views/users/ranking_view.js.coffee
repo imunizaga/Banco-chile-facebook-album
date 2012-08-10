@@ -10,6 +10,9 @@ class BancoChile.Views.Users.RankingView extends Backbone.View
   initialize: () ->
     @ranking = @options.ranking
     @from = 1
+    @ranking.bind('reset', @render, this)
+    @offset = 0
+    @fetching = false
 
   forward: () ->
     ### moves the ranking 8 places to the right as long as it can ###
@@ -22,6 +25,21 @@ class BancoChile.Views.Users.RankingView extends Backbone.View
       @from = max_from
       if @from < 1
         @from = 1
+
+    if max_from > @ranking.models.length - 8
+      if not @fetching
+        @fetching = true
+        newUsers = new BancoChile.Collections.UsersCollection()
+        newUsers.fetch(
+          data: 
+            offset: @ranking.models.length
+          success: =>
+            console.log("hola")
+            debugger
+            @ranking.add(newUsers.models)
+            @fetching = false
+            @render()
+        )
     @render()
 
   backward: () ->

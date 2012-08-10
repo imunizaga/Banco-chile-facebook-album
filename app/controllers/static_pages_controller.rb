@@ -15,6 +15,9 @@ class StaticPagesController < ApplicationController
 
         # obtain the facebook friends
         @api = Koala::Facebook::API.new(session[:access_token])
+        print "aaaaaaaaaaaaaa"
+        print @api
+        print "bbbbbbbbbbbb"
 
         if @api != nil
           friends_using_app = @api.fql_query("
