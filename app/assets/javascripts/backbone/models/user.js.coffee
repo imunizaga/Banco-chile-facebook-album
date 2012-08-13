@@ -45,7 +45,7 @@ class BancoChile.Models.User extends Backbone.Model
 
   updateData: ()->
     now = new Date()
-    if (now.getTime() - @updatedAt.getTime()) < 10000
+    if (now.getTime() - @updatedAt.getTime()) < 60000
       return 
     if not @updating
       @updating = true
