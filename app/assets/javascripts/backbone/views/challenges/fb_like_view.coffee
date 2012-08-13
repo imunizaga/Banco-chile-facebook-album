@@ -4,10 +4,10 @@ class BancoChile.Views.Challenges.FacebookLikeView extends BancoChile.Views.Chal
   template: JST["backbone/templates/challenges/fb_like"]
 
   initialize: (@challenge) ->
-    super()
+    super(@challenge)
     @binded = false
 
-  render: ->
+  render: =>
     $(@el).html(@template(challenge: @challenge.toJSON()))
 
     FB.XFBML.parse(document.getElementById('challenge-lightbox'))

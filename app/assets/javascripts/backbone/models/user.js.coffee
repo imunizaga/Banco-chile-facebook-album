@@ -11,21 +11,21 @@ class BancoChile.Models.User extends Backbone.Model
   # the collection of generic cards
   initialize: (@options) ->
     @url = "/users/#{@id}"
-    @updateRelationships()
+    @updateRelationships(@options)
 
-  updateRelationships: ()->
-    if @get('notifications')
+  updateRelationships: (options)->
+    if options['notifications']
       notifications = new BancoChile.Collections.NotificationsCollection(
-        @get('notifications'))
+        options['notifications'])
       @set('notifications', notifications)
 
-    if @get('album')
+    if options['album']
       #create a duplicate of the cards
       myCards = new BancoChile.Collections.CardsCollection(
         window.db.cards.toJSON())
 
       # fill the cards with my own data
-      for myCardData in @get('album')
+      for myCardData in options['album']
         myCard = myCards.filter(myCardData['card_id'])
         myCard.set(myCardData)
 
@@ -34,13 +34,8 @@ class BancoChile.Models.User extends Backbone.Model
       myCards.bind('reset', @updateUniqueCardCount, this)
       myCards.bind('change', @updateUniqueCardCount, this)
 
-    friends = new BancoChile.Collections.UsersCollection(@get('friends'))
+    friends = new BancoChile.Collections.UsersCollection(options['friends'])
     @set('friends', friends)
-
-  fetch: ()->
-    super(success:()=>
-      @updateRelationships()
-    )
 
   getCard: (card_id) ->
     return @get('cards').filter(card_id)

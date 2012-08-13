@@ -1,5 +1,5 @@
 <img src="<%= user.profile_image %>" alt="<%= user.name %>" title="Cartas: <%= user.unique_cards_count %>/50"/>
 <% if (typeof(user.rank) != "undefined") { %>
-    <h4><a href="#games/<%= user.user_id %>"><%= user.rank %></a></h4>
+    <h4><%= user.rank %></h4>
 <% } %>
 <p><%= user.unique_cards_count %> lám.</p>
