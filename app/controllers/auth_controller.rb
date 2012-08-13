@@ -110,10 +110,22 @@ class AuthController < ApplicationController
   def twitter_callback
     oauth = OAuth::Consumer.new(TW_KEY, TW_SECRET, {:site => 'https://twitter.com'})
 
-    request_token = OAuth::RequestToken.new(oauth, session[:tw_token], session[:tw_secret])
+    request_token = OAuth::RequestToken.new(oauth,
+                                            session[:tw_token],
+                                            session[:tw_secret])
+
     # TODO this value should be stored on the database
     session[:tw_access_token] = request_token.get_access_token(
       :oauth_verifier => params[:oauth_verifier])
+
+    token_hash = {
+      :oauth_token => session[:tw_token],
+      :oauth_token_secret => session[:tw_secret]
+    }
+    json_token_hash = ActiveSupport::JSON.encode(token_hash)
+    @user = User.find_by_id(session[:id])
+    @user.tw_access_token = json_token_hash
+    @user.save()
     redirect_to FB_SITE_URL  # TODO return to the calling url
   end
 

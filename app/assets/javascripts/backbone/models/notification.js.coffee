@@ -10,7 +10,8 @@ class BancoChile.Models.Notification extends Backbone.Model
     challenge_id = @get('challenge_id')
     if challenge_id
       challenge = window.db.challenges.get(challenge_id)
-      kind = challenge.get('kind')
+      if challenge
+        kind = challenge.get('kind')
 
   paramRoot: 'notification'
 

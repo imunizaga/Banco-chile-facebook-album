@@ -106,12 +106,23 @@ class Challenge < ActiveRecord::Base
   #   data: string // extra data when necesary
   # }
   def validate_follow session, user, data
-    oauth = OAuth::Consumer.new(TW_KEY, TW_SECRET, {:site => 'https://twitter.com'})
+    oauth = OAuth::Consumer.new(TW_KEY, TW_SECRET,
+                                {
+                                  :site => 'https://twitter.com',
+                                  :scheme => :header
+                                })
+
+    if session[:tw_access_token]
+      tw_access_token = session[:tw_access_token]
+    else
+      token_hash = JSON.parse(user.tw_access_token)
+      tw_access_token = OAuth::AccessToken.from_hash(oauth, token_hash)
+    end
 
     # Perform action through a post call to the Twitter API
     # See https://dev.twitter.com/docs/api/1/post/friendships/create
     response = oauth.request(:post, '/friendships/create.json',
-                             session[:tw_access_token],
+                             tw_access_token,
                              {:scheme => :query_string},
                              {:user_id => client_param})
 
@@ -196,7 +207,20 @@ class Challenge < ActiveRecord::Base
   #   data: string // extra data when necesary
   # }
   def validate_retweet session, user, data
-    retweet_info = self.retweet(session, user, data)
+    oauth = OAuth::Consumer.new(TW_KEY, TW_SECRET,
+                                {
+                                  :site => 'https://twitter.com',
+                                  :scheme => :header
+                                })
+
+    if session[:tw_access_token]
+      tw_access_token = session[:tw_access_token]
+    else
+      token_hash = JSON.parse(user.tw_access_token)
+      tw_access_token = OAuth::AccessToken.from_hash(oauth, token_hash)
+    end
+
+    retweet_info = self.retweet(tw_access_token, oauth)
 
     is_retweet_info_valid = self.is_retweet_info_valid(retweet_info)
 
@@ -207,7 +231,7 @@ class Challenge < ActiveRecord::Base
         if retweet_info["errors"][0].include?("code")
           if retweet_info["errors"][0]["code"] == 34
             self.update_retweet(session, true)
-            retweet_info = self.retweet(session, user, data)
+            retweet_info = self.retweet(tw_access_token, oauth)
             is_retweet_info_valid = self.is_retweet_info_valid(retweet_info)
           end
         end
@@ -216,14 +240,12 @@ class Challenge < ActiveRecord::Base
     return is_retweet_info_valid
   end
 
-  def retweet session, user, data
-    oauth = OAuth::Consumer.new(TW_KEY, TW_SECRET, {:site => 'https://twitter.com'})
-
+  def retweet tw_access_token, oauth
     # Perform action through a post call to the Twitter API
     # See https://dev.twitter.com/docs/api/1/post/statuses/retweet/%3Aid
     response = oauth.request(:post,
                              "/statuses/retweet/#{self.client_param}.json",
-                             session[:tw_access_token],
+                             tw_access_token,
                              { :scheme => :query_string })
     # The response can be parsed to confirm the retweeted id
     return JSON.parse(response.body)
@@ -296,7 +318,26 @@ class Challenge < ActiveRecord::Base
   #
   # Returns an Array of Challenge objects
   def self.all_without_server_params session
-    challenges = self.where('id > 1')
+    to = 14
+    today = Date.today
+    september10 = Date.new(2012,9,10)
+    if today > september10
+      # cut the game
+      return []
+    else
+      august29 = Date.new(2012,8,29)
+      if today >= august29
+        # every challenge except the last one
+        to = 13
+      else
+        august15 = Date.new(2012,8,15)
+        if today <= august15
+          # only show up to challenge 7
+          to = 7
+        end
+      end
+    end
+    challenges = self.where("id > 1 AND id <= #{to}")
     for challenge in challenges
       if challenge.kind == "retweet"
         challenge.update_retweet(session)
