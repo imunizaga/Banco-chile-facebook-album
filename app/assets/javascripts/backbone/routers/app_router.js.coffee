@@ -52,7 +52,12 @@ class BancoChile.Routers.AppRouter extends Backbone.Router
     # bind google's page view tracking
     @bind 'all', @_trackPageview
 
+    @tabIndex = 0
+
     return this
+
+  updateData: (@tabIndex)->
+    @user.updateData()
 
   routes:
     ""      : "index"

@@ -12,6 +12,8 @@ class BancoChile.Models.User extends Backbone.Model
   initialize: (@options) ->
     @url = "/users/#{@id}"
     @updateRelationships(@options)
+    @updating = false
+    @updatedAt = new Date()
 
   updateRelationships: (options)->
     if options['notifications']
@@ -34,11 +36,26 @@ class BancoChile.Models.User extends Backbone.Model
       myCards.bind('reset', @updateUniqueCardCount, this)
       myCards.bind('change', @updateUniqueCardCount, this)
 
-    friends = new BancoChile.Collections.UsersCollection(options['friends'])
-    @set('friends', friends)
+    if options['friends']
+      friends = new BancoChile.Collections.UsersCollection(options['friends'])
+      @set('friends', friends)
 
   getCard: (card_id) ->
     return @get('cards').filter(card_id)
+
+  updateData: ()->
+    now = new Date()
+    if (now.getTime() - @updatedAt.getTime()) < 10000
+      return 
+    if not @updating
+      @updating = true
+      user = new BancoChile.Models.User({id: @id})
+      user.fetch(
+        success: ()=>
+          @updating = false
+          @updateRelationships(user.toJSON())
+          @updatedAt = new Date()
+      )
 
   hasCard: (card) ->
     myCard = @getCard(card.get('card_id'))

@@ -1,11 +1,11 @@
 <ul>
     <li>
-        <a href="#tabs-2">
+        <a href="#tabs-2" onclick="window.app.updateData(0)">
             Consigue láminas <span class="numero"><%= user.challengeCount %></span>
         </a>
     </li>
     <li>
-        <a href="#tabs-1" onclick="window.app.user.get('notifications').fetch()">
+        <a href="#tabs-1" onclick="window.app.updateData(1)">
             Notificaciones <span class="numero js-notifications-length"></span>
         </a>
     </li>

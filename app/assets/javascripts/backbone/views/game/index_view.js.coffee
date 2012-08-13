@@ -49,7 +49,8 @@ class BancoChile.Views.Game.IndexView extends Backbone.View
     $tabs = $(@el).find('#tabs')
     $tabs.append(tabsView.el)
     tabsView.render()
-    $tabs.tabs(event: "click")
+    debugger
+    $tabs.tabs(event: "click", selected: app.tabIndex )
 
     gameDataTemplate = JST["backbone/templates/home/game_data"]
     $(@el).find('.game-data').html(gameDataTemplate())

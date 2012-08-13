@@ -17,7 +17,7 @@ class UsersController < ApplicationController
   # GET /users/1.json
   def show
     @user = User.find(session['id'])
-    @user.prepare_to_send session
+    @user.prepare_to_send session, false
 
 
     respond_to do |format|
