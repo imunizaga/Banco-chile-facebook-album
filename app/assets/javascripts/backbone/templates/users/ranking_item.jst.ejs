@@ -1,5 +1,5 @@
 <img src="<%= user.profile_image %>" alt="<%= user.name %>" />
 <% if (typeof(user.rank) != "undefined") { %>
-    <h4><%= user.rank %></h4>
+    <h4><a href="#games/<%= user.user_id %>"><%= user.rank %></a></h4>
 <% } %>
 <p><%= user.unique_cards_count %> lám.</p>
