@@ -66,7 +66,10 @@ class BancoChile.Views.Game.TabsView extends Backbone.View
       challengeView = new BancoChile.Views.Challenges.ChallengeItemView(
         'challenge': challenge
       )
-      $(@el).find('#tabs-2 ul').append(challengeView.render().el)
+      if challenge.get('kind') == 'share'
+        $(@el).find('#tabs-2 ul').prepend(challengeView.render().el)
+      else
+        $(@el).find('#tabs-2 ul').append(challengeView.render().el)
       challengeView.bind('challengeActionClicked', @renderChallengeLightBox)
 
     return this
