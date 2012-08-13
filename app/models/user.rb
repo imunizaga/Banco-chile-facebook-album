@@ -7,6 +7,41 @@ class User < ActiveRecord::Base
   before_create :set_empty_album
   after_create :assign_first_card
 
+  # Public: Prepares a user object to be sended to the browser
+  def prepare_to_send session
+    if self.id
+      self[:notifications] = self.notifications
+      self[:login_status] = 'connected'
+
+      if self.tw_access_token
+        self[:twitter_connected] = true
+      else
+        self[:twitter_connected] = false
+      end
+
+      # obtain the facebook friends
+      @api = Koala::Facebook::API.new(session[:access_token])
+      if @api != nil
+        friends_using_app = @api.fql_query("
+            SELECT uid, name, is_app_user, pic_square
+            FROM user
+            WHERE uid
+            IN (
+              SELECT uid2
+              FROM friend
+              WHERE uid1 = me())
+              AND is_app_user = 1"
+        )
+        # obtain the ruby users
+        friends_fids = friends_using_app.map {|fb_friend| fb_friend['uid'] }
+        friends = User.where(facebook_id: friends_fids)
+
+        # adds the friends to the user
+        self['friends'] = friends
+      end
+    end
+  end
+
   # Public: Creates a string representation of the album of the user, to
   # avoid doing user_cards queries
   def set_album

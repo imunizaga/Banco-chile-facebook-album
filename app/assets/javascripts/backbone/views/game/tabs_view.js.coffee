@@ -11,7 +11,10 @@ class BancoChile.Views.Game.TabsView extends Backbone.View
     @user = @options.user
     # we take the list of challenges from our local db
     @challenges = window.db.challenges
-    @user.get('notifications').bind('add', @renderNofications, this)
+
+    notifications = @user.get('notifications')
+    notifications.bind('add', @renderNofications, this)
+    notifications.bind('reset', @renderNofications, this)
 
   renderNofications: ->
     ### Renders the notifications of the user in the '#tabs-1 ul' element ###

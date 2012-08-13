@@ -1,4 +1,16 @@
 class NotificationsController < ApplicationController
+  # GET /notifications
+  # GET /notifications.json
+  def index
+    @user=User.find(session['id'])
+
+    @notifications = @user.notifications
+
+    respond_to do |format|
+      format.json { render json: @notifications }
+    end
+  end
+
   # POST /notifications
   # POST /notifications.json
   def create

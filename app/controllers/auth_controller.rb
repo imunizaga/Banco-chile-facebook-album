@@ -30,12 +30,14 @@ class AuthController < ApplicationController
       # if the user does not exist in our database
       fb_id = @user['id']
       if User.where(facebook_id:fb_id).count == 0
-        #check whether we have a request_id in our session
+        # check whether we have an invite request_id in our session
         request_id = session[:request_id]
         if request_id
-
-          # get the facebook_id of the user that made the request
-          from_id = session[:from_id]
+          # obtain the user who sent the request
+          @api = Koala::Facebook::API.new(session[:access_token])
+          params = "?access_token=#{session[:access_token]}"
+          result = @api.get_connections(request_id, params)
+          from_id = result['from']['id']
 
           # it should not be possible, but check if the from user is not the
           # same as the current user
@@ -45,32 +47,32 @@ class AuthController < ApplicationController
             if User.where(facebook_id:from_id).count == 1
 
               # finnaly check if it's a valid facebook request
-              url = "#{request_id}_#{fb_id}"
               params = "?access_token=#{session[:access_token]}"
-              result = @api.get_connections(url, params)
+              result = @api.get_connections("#{request_id}_#{fb_id}", params)
 
               # if it's a valid result
               if result and from_id == result['from']['id']
                 # reward the user
                 from_user = User.where(facebook_id:from_id).first
-                card_pack = CardPack.create(challenge_id:6, user_id: from_user.id)
+                card_pack = CardPack.create(challenge_id:7, user_id: from_user.id)
 
                 # create a notification to the from user
                 notification = Notification.new()
                 notification[:status] = nil
                 notification[:user_id] = from_user.id
-                notification[:challenge_id] = 6
+                notification[:challenge_id] = card_pack.challenge_id
+                notification[:description] = "invitar a un nuevo amigo"
                 json_card_ids = ActiveSupport::JSON.encode(card_pack[:card_ids])
                 notification.cards_in = json_card_ids
                 notification.save
-
-                #delete request
-                delete_success = @api.delete_object(request_id)
               end
             end
           end
+          #delete request
+          delete_success = @api.delete_object(request_id)
         end
       end
+
       session[:request_id] = nil
       session[:from_id] = nil
 

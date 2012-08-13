@@ -12,4 +12,16 @@ class UsersController < ApplicationController
       format.json { render json: @users }
     end
   end
+
+  # GET /users/1
+  # GET /users/1.json
+  def show
+    @user = User.find(session['id'])
+    @user.prepare_to_send session
+
+
+    respond_to do |format|
+      format.json { render json: @user }
+    end
+  end
 end

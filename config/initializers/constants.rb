@@ -3,7 +3,7 @@ if Rails.env == 'development' || Rails.env == 'test'
   APP_SECRET='73c7a6460975064295113e316e6560c6'
   FB_SITE_URL = 'http://127.0.0.1:3000'
   SITE_URL = 'http://127.0.0.1:3000'
-elsif false #heroku
+elsif true #heroku
   APP_ID='127174043311'
   APP_SECRET='0305f7cb7bf84888cc313e9f163ab118'
   SITE_URL = 'http://bancochilealbum.herokuapp.com/'
