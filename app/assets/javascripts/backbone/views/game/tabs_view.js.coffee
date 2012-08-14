@@ -63,11 +63,18 @@ class BancoChile.Views.Game.TabsView extends Backbone.View
 
       challenge.set('twitter_connected', twitter_connected)
 
-      challengeView = new BancoChile.Views.Challenges.ChallengeItemView(
-        'challenge': challenge
-      )
+      if challenge.get('kind') == 'invite'
+        challengeView = new BancoChile.Views.Challenges.FacebookInviteView(
+          'challenge': challenge
+        )
+      else
+        challengeView = new BancoChile.Views.Challenges.ChallengeItemView(
+          'challenge': challenge
+        )
       if challenge.get('kind') == 'share'
         $(@el).find('#tabs-2 ul').prepend(challengeView.render().el)
+      if challenge.get('kind') == 'invite'
+        $(@el).find('#tabs-2').prepend(challengeView.render().el)
       else
         $(@el).find('#tabs-2 ul').append(challengeView.render().el)
       challengeView.bind('challengeActionClicked', @renderChallengeLightBox)

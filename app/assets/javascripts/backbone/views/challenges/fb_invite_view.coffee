@@ -2,11 +2,14 @@ BancoChile.Views.Challenges ||= {}
 
 class BancoChile.Views.Challenges.FacebookInviteView extends BancoChile.Views.Challenges.ChallengeView
   template: JST["backbone/templates/challenges/fb_invite"]
-  renderAsButton: true
+  className: "fb-invite"
+
+  initialize: (options) ->
+    @challenge = options.challenge
+    super()
 
   render: ->
-    $(@el).html(@template(challenge: @challenge.toJSON() ))
-
+    $(@el).html(@template())
     return this
 
   events:
