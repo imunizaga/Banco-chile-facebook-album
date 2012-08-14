@@ -4,11 +4,11 @@ if Rails.env == 'development' || Rails.env == 'test'
   FB_SITE_URL = 'http://127.0.0.1:3000'
   SITE_URL = 'http://127.0.0.1:3000'
 #heroku
-#elsif true
-#  APP_ID='127174043311'
-#  APP_SECRET='0305f7cb7bf84888cc313e9f163ab118'
-#  SITE_URL = 'http://bancochilealbum.herokuapp.com/'
-#  FB_SITE_URL = 'http://bancochilealbum.herokuapp.com/'
+elsif true
+  APP_ID='127174043311'
+  APP_SECRET='0305f7cb7bf84888cc313e9f163ab118'
+  SITE_URL = 'http://bancochilealbum.herokuapp.com/'
+  FB_SITE_URL = 'http://bancochilealbum.herokuapp.com/'
 else
   APP_ID='446490652062870'
   APP_SECRET='bd7f578368ec1f015a4acbfcb85ac7f4'
