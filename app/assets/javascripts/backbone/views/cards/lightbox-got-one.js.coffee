@@ -4,5 +4,5 @@ class BancoChile.Views.Cards.LightboxGotOneView extends BancoChile.Views.Cards.L
   template: JST["backbone/templates/cards/lightbox-got-one"]
 
   render: ->
-    @friends = @user.friendsWithCard(@card)
+    @friends = @user.friendsWithoutCard(@card)
     return super()
