@@ -15,14 +15,12 @@
     <ul class="pruebas"></ul>
 </div>
 <div id="tabs-2">
-  <% if(!user.twitter_connected){ %>
-  <div class="tw-connect">
+  <ul class="pruebas">
+    <% if(!user.twitter_connected){ %>
     <a href="/auth/twitter">
         <img src="/assets/connectTwitter.png"/>
     </a>
-  </div>
-  <% } %>
-  <ul class="pruebas">
+    <% } %>
   </ul>
 </div>
 <div class="hidden">
