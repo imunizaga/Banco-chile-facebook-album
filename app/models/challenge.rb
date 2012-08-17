@@ -325,7 +325,7 @@ class Challenge < ActiveRecord::Base
       # cut the game
       return []
     else
-      openLastCard = Date.new(2012,9,10)
+      allCardsOpenDate = Date.new(2012,9,10)
       if today <= allCardsOpenDate
         # every challenge except the last one
         to = 13
