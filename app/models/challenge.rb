@@ -320,18 +320,18 @@ class Challenge < ActiveRecord::Base
   def self.all_without_server_params session
     to = 14
     today = Date.today
-    september10 = Date.new(2012,9,10)
-    if today > september10
+    closingDate = Date.new(2012,9,15)
+    if today > closingDate
       # cut the game
       return []
     else
-      august29 = Date.new(2012,8,29)
-      if today >= august29
+      openLastCard = Date.new(2012,9,10)
+      if today <= allCardsOpenDate
         # every challenge except the last one
         to = 13
       else
-        august15 = Date.new(2012,8,15)
-        if today <= august15
+        openSecondCardGroupDate = Date.new(2012,8,17)
+        if today <= openSecondCardGroupDate
           # only show up to challenge 7
           to = 7
         end
