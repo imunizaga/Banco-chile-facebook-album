@@ -330,7 +330,7 @@ class Challenge < ActiveRecord::Base
         # every challenge except the last one
         to = 13
       else
-        openSecondCardGroupDate = Date.new(2012,8,17)
+        openSecondCardGroupDate = Date.new(2012,8,27)
         if today <= openSecondCardGroupDate
           # only show up to challenge 7
           to = 7
