@@ -10,6 +10,7 @@ class User < ActiveRecord::Base
   # Public: Prepares a user object to be sended to the browser
   def prepare_to_send session, send_friends=true
     if self.id
+      self[:ranking] = self.ranking
       self[:notifications] = self.notifications
       self[:login_status] = 'connected'
 
@@ -283,6 +284,12 @@ class User < ActiveRecord::Base
     }
   end
 
+  def ranking
+    #find the number of users that have more cards than I do
+    top_users_count = User.where('cards_count > ?', self.cards_count).count()
+    return top_users_count + 1
+  end
+
   def self.ranking offset = 0, n = User.count
     if n > 32
       n = 32
@@ -296,15 +303,24 @@ class User < ActiveRecord::Base
     }
 
     top_users = User.find(:all, options)
-    print top_users
+    if top_users.length > 0
+      top_user = top_users[0]
+      current_ranking = top_user.ranking
+      current_count = top_user.cards_count
+    end
     ranking=[]
     (0..top_users.count-1).each do |rank|
+      current_user = top_users[rank]
+      if current_count != current_user.cards_count
+        current_ranking = rank+1+offset
+        current_count = current_user.cards_count
+      end
       user_info = {
-        :rank => rank+1+offset,
-        :user_id => top_users[rank].id,
-        :unique_cards_count => top_users[rank].cards_count,
-        :name => top_users[rank].name,
-        :facebook_id => top_users[rank].facebook_id
+        :rank => current_ranking,
+        :user_id => current_user.id,
+        :unique_cards_count => current_user.cards_count,
+        :name => current_user.name,
+        :facebook_id => current_user.facebook_id
       }
       ranking.append(user_info)
     end

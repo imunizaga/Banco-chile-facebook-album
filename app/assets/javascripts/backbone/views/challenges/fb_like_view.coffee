@@ -12,6 +12,7 @@ class BancoChile.Views.Challenges.FacebookLikeView extends BancoChile.Views.Chal
 
     FB.XFBML.parse(document.getElementById('challenge-lightbox'))
 
+    console.log("going to bind, binded: #{@binded}")
     if not @binded
       @binded = true
       FB.Event.subscribe('edge.create', (response) =>
