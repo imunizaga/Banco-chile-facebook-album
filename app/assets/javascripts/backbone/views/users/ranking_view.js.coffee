@@ -54,7 +54,9 @@ class BancoChile.Views.Users.RankingView extends Backbone.View
     $ranking = $el.find('.ranking')
 
     count = 0
-    users = @ranking.models.slice(@from -1, @from + 7)
+    from = @from - 1
+    to = @from + 7
+    users = @ranking.models.slice(from, to)
     for user in users
       rankingItem = new BancoChile.Views.Users.RankingItemView(
         user: user
