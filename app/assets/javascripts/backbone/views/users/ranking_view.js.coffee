@@ -31,7 +31,7 @@ class BancoChile.Views.Users.RankingView extends Backbone.View
         @fetching = true
         newUsers = new BancoChile.Collections.UsersCollection()
         newUsers.fetch(
-          data: 
+          data:
             offset: @ranking.models.length
           success: =>
             @ranking.add(newUsers.models)
@@ -54,12 +54,8 @@ class BancoChile.Views.Users.RankingView extends Backbone.View
     $ranking = $el.find('.ranking')
 
     count = 0
-    for user in @ranking.models
-      if user.get('rank') < @from
-        continue
-      count++
-      if count > 8
-        break
+    users = @ranking.models.slice(@from -1, @from + 7)
+    for user in users
       rankingItem = new BancoChile.Views.Users.RankingItemView(
         user: user
         class: 'primero'

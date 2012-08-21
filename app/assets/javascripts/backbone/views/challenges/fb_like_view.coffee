@@ -16,9 +16,13 @@ class BancoChile.Views.Challenges.FacebookLikeView extends BancoChile.Views.Chal
     if not @binded
       @binded = true
       FB.Event.subscribe('edge.create', (response) =>
-        @binded = false
-        FB.Event.unsubscribe('edge.create', this)
+        console.log("like clicked!")
+        console.log(response)
+        console.log(@challenge.toJSON())
         if response == @challenge.get('client_param')
+          # unsubscribe from the like event
+          FB.Event.unsubscribe('edge.create', this)
+          @binded = false
           # notify the server the challenge is complete
           @completeChallenge()
       )
