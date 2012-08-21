@@ -46,7 +46,7 @@ class BancoChile.Models.User extends Backbone.Model
   updateData: ()->
     now = new Date()
     if (now.getTime() - @updatedAt.getTime()) < 60000
-      return 
+      return
     if not @updating
       @updating = true
       user = new BancoChile.Models.User({id: @id})
@@ -64,6 +64,12 @@ class BancoChile.Models.User extends Backbone.Model
   hasCardRepeated: (card) ->
     myCard = @getCard(card.get('card_id'))
     return myCard.get('count') > 1
+
+  hasRepeatedCards: () ->
+    for card in @get('cards').models
+      if card.get('count') > 1
+        return true
+    return false
 
   updateUniqueCardCount: () ->
     uniqueCardsCount = 0
@@ -113,7 +119,7 @@ class BancoChile.Models.User extends Backbone.Model
   friendsWithoutCard: (card) ->
     friendsWithoutCard = []
     for friend in @get('friends').models
-      if not friend.hasCard(card)
+      if not friend.hasCard(card) and friend.hasRepeatedCards()
         friendsWithoutCard.push(friend)
     return friendsWithoutCard
 
