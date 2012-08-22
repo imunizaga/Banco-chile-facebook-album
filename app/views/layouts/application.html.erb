@@ -14,6 +14,13 @@
     <meta property="og:site_name" content="Banco Chile album"/>
     <meta property="fb:app_id" content="<%= APP_ID -%>"/>
 
+    <script type="text/javascript">
+        if (top === self) {
+        } else {
+            window.location = "<%= SITE_URL -%>"
+        }
+    </script>
+
 
     <% if Rails.env.production? %>
         <meta name="google-site-verification" content="ajVlkIAoKBIgQYPl33DvvpZ5pNawumkgVmTgjz4D_pQ" />

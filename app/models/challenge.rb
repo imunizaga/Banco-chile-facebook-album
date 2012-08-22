@@ -80,9 +80,11 @@ class Challenge < ActiveRecord::Base
     # check that we got a valid result
     if result
       like =  result[0]
-      # check that this user is the one that emited the share
-      if self.server_param == like['id']
-        return {:success=> true}
+      if like
+        # check that this user is the one that emited the share
+        if self.server_param == like['id']
+          return {:success=> true}
+        end
       end
     end
     return {:success=> false, :reason=>"invalid"}

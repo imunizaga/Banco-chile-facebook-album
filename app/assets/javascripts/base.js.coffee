@@ -39,7 +39,7 @@ window.initSocialApps = (app_id) ->
   ) document
 
   # Twitter events
-  # First, load the widgets.js file asynchronously 
+  # First, load the widgets.js file asynchronously
   window.twttr = ((d, s, id) ->
     console.log "In twttr definition"
     t = undefined

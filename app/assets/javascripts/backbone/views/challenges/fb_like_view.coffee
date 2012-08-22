@@ -7,24 +7,36 @@ class BancoChile.Views.Challenges.FacebookLikeView extends BancoChile.Views.Chal
     super(@challenge)
     @binded = false
 
+  events:
+    "click .js-fb-like-button": "likeButtonClicked"
+
+  likeButtonClicked: =>
+    @completeChallenge()
+
   render: =>
+    # check if the challenge is completed when opening the like box
+    #@completeChallenge()
+
     $(@el).html(@template(challenge: @challenge.toJSON()))
 
     FB.XFBML.parse(document.getElementById('challenge-lightbox'))
 
-    console.log("going to bind, binded: #{@binded}")
     if not @binded
       @binded = true
       FB.Event.subscribe('edge.create', (response) =>
-        console.log("like clicked!")
-        console.log(response)
-        console.log(@challenge.toJSON())
-        if response == @challenge.get('client_param')
-          # unsubscribe from the like event
-          FB.Event.unsubscribe('edge.create', this)
-          @binded = false
-          # notify the server the challenge is complete
-          @completeChallenge()
+        # unsubscribe from the like event
+        FB.Event.unsubscribe('edge.create', this)
+        @binded = false
+        # notify the server the challenge is complete
+        @completeChallenge()
+      )
+
+      FB.Event.subscribe('edge.remove', (response) =>
+        # unsubscribe from the like event
+        FB.Event.unsubscribe('edge.remove', this)
+        @binded = false
+        # notify the server the challenge is complete
+        @completeChallenge()
       )
 
     return this
