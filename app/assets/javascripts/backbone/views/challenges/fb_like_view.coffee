@@ -7,15 +7,9 @@ class BancoChile.Views.Challenges.FacebookLikeView extends BancoChile.Views.Chal
     super(@challenge)
     @binded = false
 
-  events:
-    "click .js-fb-like-button": "likeButtonClicked"
-
-  likeButtonClicked: =>
-    @completeChallenge()
-
   render: =>
     # check if the challenge is completed when opening the like box
-    #@completeChallenge()
+    @completeChallenge()
 
     $(@el).html(@template(challenge: @challenge.toJSON()))
 
