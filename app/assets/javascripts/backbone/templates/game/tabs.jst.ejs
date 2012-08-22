@@ -16,7 +16,13 @@
 </div>
 <div id="tabs-2">
   <ul class="pruebas">
-    <% if(!user.twitter_connected){ %>
+    <% if(user.challengeCount == 1){%>
+    <li class="nueva">
+      <img src="/assets/iconoBanco.jpg" alt="" />
+      <h4>"¡Ya completaste las pruebas!</h4>
+      <p>Pronto tendras nuevos desafíos para seguir ganando láminas.</p>
+    </li>
+    <% }else if(!user.twitter_connected){ %>
     <a href="/auth/twitter">
         <img src="/assets/connectTwitter.png"/>
     </a>
