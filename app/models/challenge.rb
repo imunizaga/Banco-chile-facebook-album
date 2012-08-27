@@ -323,6 +323,7 @@ class Challenge < ActiveRecord::Base
     to = 7
     today = Date.today
     openSecondCardGroupDate = Date.new(2012,8,27)
+    challengeEightReleaseDate = Date.new(2012,9,3)
     allCardsOpenDate = Date.new(2012,9,10)
     closingDate = Date.new(2012,9,15)
 
@@ -337,7 +338,11 @@ class Challenge < ActiveRecord::Base
     if today >= allCardsOpenDate
       to = 14
     end
-    challenges = self.where("id > 1 AND id <= #{to}")
+    if today >= challengeEightReleaseDate
+      challenges = self.where("id > 1 AND id <= #{to}")
+      else
+      challenges = self.where("id > 1 AND id <= #{to} AND id <> 8")
+    end
     for challenge in challenges
       if challenge.kind == "retweet"
         challenge.update_retweet(session)
