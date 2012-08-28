@@ -292,26 +292,30 @@ class Challenge < ActiveRecord::Base
   end
 
   def update_retweet session, force=false
-    t = self.updated_at + 1.days
-    # if we need to update the tweet
-    if Time.now > t or force
-      params = {:site => 'https://twitter.com'}
-      oauth = OAuth::Consumer.new(TW_KEY, TW_SECRET, params)
+    begin
+      t = self.updated_at + 1.days
+      # if we need to update the tweet
+      if Time.now > t or force
+        params = {:site => 'https://twitter.com'}
+        oauth = OAuth::Consumer.new(TW_KEY, TW_SECRET, params)
 
-      # Perform action through a post call to the Twitter API
-      url = "/search.json?q=%23#{self.server_param}"
-      response = oauth.request(:get, url,
-                               session[:tw_access_token],
-                               { :scheme => :query_string })
+        # Perform action through a post call to the Twitter API
+        url = "/search.json?q=%23#{self.server_param}"
+        response = oauth.request(:get, url,
+                                 session[:tw_access_token],
+                                 { :scheme => :query_string })
 
-      # The response can be parsed to confirm the retweeted id
-      tweets_info = JSON.parse(response.body)
-      if tweets_info["results"].length > 0
-        result = tweets_info["results"][0]
-        tweet_id = result["id_str"]
-        self.client_param = tweet_id
-        self.save()
+        # The response can be parsed to confirm the retweeted id
+        tweets_info = JSON.parse(response.body)
+        if tweets_info["results"].length > 0
+          result = tweets_info["results"][0]
+          tweet_id = result["id_str"]
+          self.client_param = tweet_id
+          self.save()
+        end
       end
+    rescue Exception=>ex
+      #
     end
   end
 
