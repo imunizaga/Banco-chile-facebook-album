@@ -1,4 +1,4 @@
-<img src="<%= user.profile_image %>" alt="<%= user.name %>" title="Láminas únicas: <%= user.unique_cards_count %>/50"/>
+<img class="js-user-image" src="<%= user.profile_image %>" alt="<%= user.name %>" title="<%=user.name%><br>Láminas únicas: <%= user.unique_cards_count %>/50"/>
 <% if (typeof(user.rank) != "undefined") { %>
     <h4><%= user.rank %></h4>
 <% } %>

@@ -9,6 +9,8 @@ class BancoChile.Views.Users.RankingItemView extends Backbone.View
     @className = @options.class
 
   render: =>
-    $(@el).html(@template(user: @user.toJSON()))
-    $(@el).addClass(@className)
+    $el = $(@el)
+    $el.html(@template(user: @user.toJSON()))
+    $el.addClass(@className)
+    $el.find(".js-user-image").tipTip()
     return this
