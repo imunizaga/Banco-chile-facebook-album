@@ -284,7 +284,7 @@ class Challenge < ActiveRecord::Base
   #   data: string // extra data when necesary
   # }
   def validate_code session, user, data
-    if self[:server_param] == data
+    if self[:server_param].casecmp(data) == 0
       return {:success=> true}
     else
       return {:success=> false, :reason=>"invalid_code"}

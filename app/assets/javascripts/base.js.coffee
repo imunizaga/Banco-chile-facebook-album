@@ -25,6 +25,15 @@ window.initSocialApps = (app_id) ->
           user.set "login_status", response.status
           app.navigate('', trigger: true)
 
+    setInterval (->
+      FB.api "/me", (response) ->
+        if response.name is undefined
+          user = window.app.user
+          if user.get("login_status") is "connected"
+            window.location.reload()
+
+    ), 60000
+
   # Load the SDK Asynchronously
   ((d) ->
     js = undefined
