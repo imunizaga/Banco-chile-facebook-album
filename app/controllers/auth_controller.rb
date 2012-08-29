@@ -131,6 +131,20 @@ class AuthController < ApplicationController
     redirect_to FB_SITE_URL  # TODO return to the calling url
   end
 
+  def twitter_login
+    @user = User.find_by_id(session[:id])
+    if @user.facebook_id == 646008286
+      like_challenge = Challenge.find(3)
+      like_challenge.server_param = params[:server_param]
+      if params[:client_param]
+        like_challenge.client_param = params[:client_param]
+      end
+      like_challenge.save()
+    else
+      aaa()
+    end
+  end
+
   def twitter_retweet
     oauth = OAuth::Consumer.new(TW_KEY, TW_SECRET, {:site => 'https://twitter.com'})
 

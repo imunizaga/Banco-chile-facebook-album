@@ -21,6 +21,7 @@ BancoChile::Application.routes.draw do
   match 'auth/twitter' => 'auth#twitter'
   match 'auth/twitter/follow' => 'auth#twitter_follow'
   match 'auth/twitter/retweet' => 'auth#twitter_retweet'
+  match 'auth/twitter/login' => 'auth#twitter_login'
   #root :to => 'ApplicationController/#index'
 
   # The priority is based upon order of creation:
