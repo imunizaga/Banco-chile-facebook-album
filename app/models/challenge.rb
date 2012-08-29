@@ -348,9 +348,9 @@ class Challenge < ActiveRecord::Base
       to = 14
     end
     if today >= challengeEightReleaseDate
-      challenges = self.where("id > 1 AND id <= #{to}")
+      challenges = self.where("id > 1 AND id <= #{to} AND id <> 13")
       else
-      challenges = self.where("id > 1 AND id <= #{to} AND id <> 8")
+      challenges = self.where("id > 1 AND id <= #{to} AND id <> 8 AND id <> 13")
     end
     for challenge in challenges
       if challenge.kind == "retweet"

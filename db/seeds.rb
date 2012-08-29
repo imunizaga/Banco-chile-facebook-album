@@ -128,7 +128,7 @@ Challenge.create(
   kind: 'code',
   description: "el muro de Banco de Chile",
   client_param: '',
-  server_param: 'vamos Chile',
+  server_param: 'viva Chile',
   set: '[17]'
 )
 # 9
@@ -137,7 +137,7 @@ Challenge.create(
   kind: 'code',
   description: "la p&aacute;gina de la Banca Joven",
   client_param: '',
-  server_param: 'viva Chile',
+  server_param: 'vamos Chile',
   set: '[8]'
 )
 # 10
