@@ -12,8 +12,8 @@ elsif true
 else
   APP_ID='446490652062870'
   APP_SECRET='bd7f578368ec1f015a4acbfcb85ac7f4'
-  SITE_URL = 'http://www.elequipodetodos.cl'
-  FB_SITE_URL = 'http://www.elequipodetodos.cl'
+  SITE_URL = 'http://www.elequipodetodos.cl/'
+  FB_SITE_URL = 'http://www.elequipodetodos.cl/'
 end
 
 BCHFB_ID='57173152417'
