@@ -18,7 +18,11 @@ class BancoChile.Views.Challenges.ChallengeView extends Backbone.View
         # since we need to parse the reason, then we need the notification
         # contain the success response
         if notification.get('success') == false
-          if @challenge.get('kind') != 'like'
+          if @challenge.get('kind') == 'share'
+            reason = notification.get('reason')
+            if reason == 'unauthorized'
+              window.location = "/facebook/login"
+          else if @challenge.get('kind') != 'like'
             type = notification.get('reason')
             reason = BancoChile.UIMessages.CHALLENGE_FAILED[type]
             toast(reason, 'user')

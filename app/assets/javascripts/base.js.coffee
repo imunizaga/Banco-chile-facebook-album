@@ -19,8 +19,12 @@ window.initSocialApps = (app_id) ->
           unless user.get("login_status") is "connected"
             window.location = "/facebook/login"
           else
+            userFacebookId = user.get "facebook_id"
             facebookId = parseInt(response.authResponse.userID)
-            user.set "facebook_id", facebookId
+            if userFacebookId and userFacebookId != facebookId
+              window.location = "/facebook/login"
+            else
+              user.set "facebook_id", facebookId
         else
           user.set "login_status", response.status
           app.navigate('', trigger: true)
@@ -30,7 +34,7 @@ window.initSocialApps = (app_id) ->
         if response.name is undefined
           user = window.app.user
           if user.get("login_status") is "connected"
-            window.location.reload()
+            window.location = "/facebook/login"
 
     ), 60000
 

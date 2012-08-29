@@ -165,6 +165,11 @@ class Challenge < ActiveRecord::Base
           return {:success=> true}
         end
       end
+    else
+      permissions = @api.get_connections('me','permissions')
+      if not permissions[0]['read_stream']
+        return {:success=> false, :reason=> "unauthorized"}
+      end
     end
     return {:success=> false, :reason=> "invalid"}
   end

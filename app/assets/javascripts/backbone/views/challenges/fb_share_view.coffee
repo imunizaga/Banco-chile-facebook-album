@@ -16,4 +16,6 @@ class BancoChile.Views.Challenges.FacebookShareView extends BancoChile.Views.Cha
 
   render: ->
     $(@el).html(@template(challenge: @challenge.toJSON() ))
+
+    @delegateEvents()
     return this

@@ -84,8 +84,8 @@ Challenge.create(
   n_cards:1,
   kind: 'like',
   description: "Este Album",
-  client_param: 'http://apps.facebook.com/bancochilealbum/',
-  server_param: '185738041556931',
+  client_param: 'http://bancochilealbum.herokuapp.com/',
+  server_param: '478302348854060',
   set: '[33]'
 )
 # 4
