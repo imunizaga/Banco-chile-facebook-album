@@ -16,7 +16,7 @@ else
   FB_SITE_URL = 'http://www.elequipodetodos.cl/'
 end
 
-CLOSING_DATE = Date.new(2012,9,20)
+CLOSING_DATE = Date.new(2012,9,6)
 
 BCHFB_ID='57173152417'
 BCHTW_ID='bancoodechile'
