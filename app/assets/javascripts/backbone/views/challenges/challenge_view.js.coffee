@@ -24,6 +24,8 @@ class BancoChile.Views.Challenges.ChallengeView extends Backbone.View
               window.location = "/facebook/login"
           else if @challenge.get('kind') != 'like'
             type = notification.get('reason')
+            if type == 'mayor_fail'
+              window.location = "/auth/twitter"
             reason = BancoChile.UIMessages.CHALLENGE_FAILED[type]
             toast(reason, 'user')
         else

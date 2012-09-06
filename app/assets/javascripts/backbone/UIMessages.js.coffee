@@ -43,3 +43,4 @@ BancoChile.UIMessages =
     invalid_code: "El código que ingresaste es incorrecto"
     invalid_tweet: "No se pudo validar el retweet, por favor recarga la página e intenta de nuevo"
     wait: "Ya completaste el desafío este día, debes esperar hasta mañana."
+    mayor_fail: "Debes volver a conectarte con twitter"

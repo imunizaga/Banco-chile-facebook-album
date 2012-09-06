@@ -234,7 +234,10 @@ class Challenge < ActiveRecord::Base
     if is_retweet_info_valid[:success]
       return is_retweet_info_valid
     else
-      if retweet_info["errors"].class == Array
+      if is_retweet_info_valid[:reason] == "mayor_fail"
+        user.tw_access_token = nil
+        user.save()
+      elsif retweet_info["errors"].class == Array
         if retweet_info["errors"][0].include?("code")
           if retweet_info["errors"][0]["code"] == 34
             self.update_retweet(session, true)
@@ -259,6 +262,9 @@ class Challenge < ActiveRecord::Base
   end
 
   def is_retweet_info_valid retweet_info
+    if retweet_info.include?("error")
+      return {:success=> false, :reason=>"mayor_fail"}
+    end
     if retweet_info.include?("errors")
       error_text = "sharing is not permissable for this status (Share validations failed)\nsharing is not permissable for this status (Share validations failed)\nsharing is not permissable for this status (Share validations failed)"
 
@@ -334,9 +340,9 @@ class Challenge < ActiveRecord::Base
     openSecondCardGroupDate = Date.new(2012,8,27)
     challengeEightReleaseDate = Date.new(2012,9,3)
     allCardsOpenDate = Date.new(2012,9,10)
-    closingDate = Date.new(2012,9,15)
+    closingDate = CLOSING_DATE
 
-    if today > closingDate
+    if today >= closingDate
       # cut the game
       return []
     end

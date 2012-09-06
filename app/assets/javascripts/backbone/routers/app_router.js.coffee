@@ -54,6 +54,13 @@ class BancoChile.Routers.AppRouter extends Backbone.Router
 
     @tabIndex = 0
 
+    closingDate = new Date(options.closingDate.split("-").join("/"))
+    today = new Date()
+    if today >= closingDate
+      @closed = true
+    else
+      @closed = false
+
     return this
 
   updateData: (@tabIndex)->
@@ -81,11 +88,11 @@ class BancoChile.Routers.AppRouter extends Backbone.Router
 
   game: ->
     ### renthers the game view ###
-    #
+
     window.scrollTo(0,0)
 
     # if the user is not authenticated
-    if not @user.isAuthenticated()
+    if not @user.isAuthenticated() or @closed
       # go to the index view
       @navigate('', trigger: true)
     else

@@ -8,7 +8,8 @@
       ranking: <%= @ranking.to_json.html_safe -%>,
       cards: <%= @cards.to_json.html_safe -%>,
       challenges: <%= @challenges.to_json.html_safe -%>,
-      userChallenges: <%= @user_challenges.to_json.html_safe -%>
+      userChallenges: <%= @user_challenges.to_json.html_safe -%>,
+      closingDate: '<%= CLOSING_DATE -%>'
     });
     Backbone.history.start();
   });

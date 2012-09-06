@@ -65,6 +65,14 @@ class User < ActiveRecord::Base
       album[card[0]-1][:count] = card[1].to_i
     end
 
+    self.cards_count = 0
+    album.each do |card|
+      if card[:count] > 0
+        self.cards_count += 1
+      end
+    end
+
+
     self.save
     return self.album
   end

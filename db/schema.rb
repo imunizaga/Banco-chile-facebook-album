@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120829203518) do
+ActiveRecord::Schema.define(:version => 20120905203155) do
 
   create_table "card_packs", :force => true do |t|
     t.integer  "challenge_id"

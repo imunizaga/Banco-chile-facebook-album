@@ -1,7 +1,7 @@
 BancoChile.Views.Home ||= {}
 
 class BancoChile.Views.Home.IndexView extends Backbone.View
-  ### The index view is where the user can see the prizes, mainly used as 
+  ### The index view is where the user can see the prizes, mainly used as
   a presentation for the game view
 
    There are 2 templates appart from the main one, (logged, and not_logged).
@@ -10,6 +10,7 @@ class BancoChile.Views.Home.IndexView extends Backbone.View
 
   ###
   template: JST["backbone/templates/home/index"]
+  endedTemplate: JST["backbone/templates/home/ended"]
   loggedTemplate: JST["backbone/templates/home/logged"]
   notLoggedTemplate: JST["backbone/templates/home/not_logged"]
 
@@ -31,21 +32,32 @@ class BancoChile.Views.Home.IndexView extends Backbone.View
 
     # login status is the status that facebook responded
     if loginStatus is 'connected'
-      $(@el).find('#mainContainer').append(@loggedTemplate(
-        user: @user.toJSON()
-      ))
-      rankingView = new BancoChile.Views.Users.RankingView(
-        user: @user
-        ranking: @ranking
-      )
-      $(@el).find('.ranking-list').append(rankingView.render().el)
+      #check if the app is closed
+      if app.closed
+        if @user.get('unique_cards_count') == 50
+          banner = "bannerFinalCompleto.jpg"
+        else
+          banner = "bannerFinalMedio.jpg"
+        $(@el).html(@endedTemplate(banner: banner))
+      else
+        # if we reach this point, the user is connected and the app is not
+        # closed
+        $(@el).find('#mainContainer').append(@loggedTemplate(
+          user: @user.toJSON()
+        ))
+        rankingView = new BancoChile.Views.Users.RankingView(
+          user: @user
+          ranking: @ranking
+        )
+        $(@el).find('.ranking-list').append(rankingView.render().el)
     else if loginStatus
+      # if we reach this point, loginStatus is not defined, and that means that
+      # facebook has responded that the user is not logged
       $(@el).find('#mainContainer').append(@notLoggedTemplate())
 
     gameDataTemplate = JST["backbone/templates/home/game_data"]
     $(@el).find('.game-data').html(gameDataTemplate())
 
     $(@el).find(".como").fancybox()
-    # $(@el).find(".bases").fancybox()
 
     return this
