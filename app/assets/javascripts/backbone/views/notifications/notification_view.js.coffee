@@ -21,6 +21,15 @@ class BancoChile.Views.Notifications.NotificationView extends Backbone.View
     if @model.get('sender_id')
       @template = JST["backbone/templates/notifications/trade"]
       @sender = window.db.users.get(@model.get('sender_id'))
+      if not @sender
+        @sender = new BancoChile.Models.User(
+          id: @model.get('sender_id')
+        )
+        @sender.fetch(
+          success:()=>
+            window.db.users.add(@sender)
+            @render()
+        )
     else # it's a message
       if @model.get('cards_in')
         @template = JST["backbone/templates/notifications/receive"]
@@ -36,6 +45,8 @@ class BancoChile.Views.Notifications.NotificationView extends Backbone.View
     # if the sender is set, set the "sender" param
     if @sender
       params['sender'] = @sender.toJSON()
+    else
+      params['sender'] = {}
 
     $(@el).html(@template(params))
     return this
